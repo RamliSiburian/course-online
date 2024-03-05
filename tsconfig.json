@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@afx/components/*": ["./src/components/*"],
+      "@afx/controllers/*": ["./src/controllers/*"],
+      "@afx/interfaces/*": ["./src/interfaces/*"],
+      "@afx/views/*": ["./src/views/*"],
+      "@afx/utils/*": ["./src/utilities/*"],
+      "@afx/services/*": ["./src/services/*"],
+      "@lynx/models/*": ["./src/models/configs/*"],
+      "@lynx/model-reg": ["./src/models/registry.model.tsx"],
+      "@lynx/store/core": ["./src/models/main.provider.tsx"],
+      "@lynx/fonts/*": ["./src/assets/fonts/*"],
+      "@lynx/images/*": ["./src/assets/images/*"],
+      "@lynx/icons/*": ["./src/assets/icons/*"],
+      "@lynx/mock-data/*": ["./src/data-mock/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "dist/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

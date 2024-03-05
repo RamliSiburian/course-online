@@ -1,0 +1,129 @@
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.hideScroll,
+.bg-page {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// body {
+//   display: block;
+//   overflow-x: hidden;
+//   /* color: rgb(var(--foreground-rgb)); */
+//   background: linear-gradient(
+//       110.15deg,
+//       #ff00b8 26.8%,
+//       #e61cbd 60.3%,
+//       #dc27c0 72.21%,
+//       #a169cd 106.84%
+//     ),
+//     linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
+// }
+
+.bg-page {
+  height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(56, 60, 126);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(56, 60, 126);
+}
+
+.ant-btn-primary {
+  background-color: #51b15c;
+}
+
+.ant-btn-primary:hover {
+  background-color: #51b15c;
+  opacity: 0.95;
+}
+
+.ant-switch {
+  background-color: rgb(145, 141, 158);
+}
+
+.ant-switch-checked {
+  background-color: #51b15c;
+}
+
+:where(.css-dev-only-do-not-override-6mg2wg).ant-card .ant-card-body {
+  padding: 10px;
+  box-shadow: 1.33px 2px 3.525px rgba(0, 0, 3, 0.13);
+}
+
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  .ant-table-title,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  .ant-table-footer,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  .ant-table-thead
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  .ant-table-tbody
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  .ant-table-tbody
+  > tr
+  > td,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  tfoot
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-6mg2wg).ant-table-wrapper
+  .ant-table.ant-table-small
+  tfoot
+  > tr
+  > td {
+  color: rgb(2, 2, 14);
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
