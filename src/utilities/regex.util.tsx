@@ -15,6 +15,6 @@ export default abstract class RegexText {
   }
 
   static phoneNumber() {
-    return new RegExp(`\+?([ -]?\d+)+|\(\d+\)([ -]\d+)`)
+    return new RegExp('+?([ -]?d+)+|(d+)([ -]d+)')
   }
 }
