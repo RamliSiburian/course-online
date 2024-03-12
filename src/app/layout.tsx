@@ -3,8 +3,8 @@ import './font.css'
 import './style.scss'
 import { lazy } from 'react'
 
-const HomePage = lazy(
-  () => import('@afx/views/index.layout')
+const ValidationView = lazy(
+  () => import('@afx/views/auth/validation/index.layout')
 )
 
 export const metadata = {
@@ -19,8 +19,7 @@ export default async function MainLayout({
   return (
     <html lang="en">
       <body>
-        <HomePage  />
-
+        <ValidationView>{children}</ValidationView>
       </body>
     </html>
   )

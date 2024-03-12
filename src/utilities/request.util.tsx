@@ -27,7 +27,7 @@ export default async function request<T = any, R = any>({
   headers = {},
   data
 }: IRequestPayloads<R>): Promise<IResponsePayloads<T>> {
-  const [token] = LynxStorages.getItem('RIDINEIN@UTOKEN').data
+  const [token] = LynxStorages.getItem('ADZKIA@UTOKEN').data
 
   let extendedItems: any = {}
 
