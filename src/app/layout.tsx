@@ -3,7 +3,9 @@ import './font.css'
 import './style.scss'
 import { lazy } from 'react'
 
-const HomePage = lazy(() => import('@afx/views/main.layout'))
+const HomePage = lazy(
+  () => import('@afx/views/index.layout')
+)
 
 export const metadata = {
   title: 'Course Online'
@@ -17,7 +19,8 @@ export default async function MainLayout({
   return (
     <html lang="en">
       <body>
-        <HomePage />
+        <HomePage  />
+
       </body>
     </html>
   )

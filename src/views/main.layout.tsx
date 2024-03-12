@@ -66,6 +66,7 @@ function HomePage() {
     <div>test</div>
     <button onClick={storeData}>store</button>
     <br />
+
     <button onClick={getData}>get data</button>
     </>
   )
