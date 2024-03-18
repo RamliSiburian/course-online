@@ -1,0 +1,1841 @@
+{
+	"info": {
+		"_postman_id": "993e7918-4415-4483-933c-31e081e7f579",
+		"name": "Bimbel Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12171583"
+	},
+	"item": [
+		{
+			"name": "RPC",
+			"item": [
+				{
+					"name": "Stages",
+					"item": [
+						{
+							"name": "Get All Stages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/stages",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stages"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Subjects",
+					"item": [
+						{
+							"name": "Get All Subjects",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/subject-types",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"subject-types"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exam",
+					"item": [
+						{
+							"name": "Get Questions List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/get-questions/{{QUESTION_BANK_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"get-questions",
+										"{{QUESTION_BANK_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Purchase",
+					"item": [
+						{
+							"name": "Get All Purchase",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{UserID}}",
+											"disabled": true
+										},
+										{
+											"key": "all",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "deleted",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Purchase Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase-status?user_id={{UserID}}&tutoring_package_id={{TUTORING_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase-status"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{UserID}}"
+										},
+										{
+											"key": "tutoring_package_id",
+											"value": "{{TUTORING_UUID}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Purchase",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": \"{{UserID}}\",\n    \"tutoring_package_id\": \"{{TUTORING_UUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verifying",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"purchase_id\": \"{{PURCHASE_UUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase/verifying",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase",
+										"verifying"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verified",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"purchase_id\": \"{{PURCHASE_UUID}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase/verified",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase",
+										"verified"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"purchase_id\": \"{{PURCHASE_UUID}}\"\n}   ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase/cancel",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase",
+										"cancel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Purchase",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/purchase/{{PURCHASE_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchase",
+										"{{PURCHASE_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Rest",
+			"item": [
+				{
+					"name": "Tutoring Packages",
+					"item": [
+						{
+							"name": "Get All Tutoring Packages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "stage",
+											"value": "sma",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Row By UUID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Row By UUID Copy",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Tutoring Package",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Kelas Eksekutif STIS 2023",
+											"type": "default"
+										},
+										{
+											"key": "stage_slug",
+											"value": "sma",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan paket bimbel Kelas Eskekutif STIS 2023",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "4500000",
+											"type": "default"
+										},
+										{
+											"key": "thumbnail",
+											"type": "file",
+											"src": "/home/personna/Downloads/foto sma-min.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Tutoring Package",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Kelas EKSEKUTIF STAN 2023 Gelombang 2",
+											"type": "default"
+										},
+										{
+											"key": "stage_slug",
+											"value": "sma",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan paket bimbel isi disini",
+											"type": "default"
+										},
+										{
+											"key": "price",
+											"value": "5000000",
+											"type": "default"
+										},
+										{
+											"key": "thumbnail",
+											"type": "file",
+											"src": "/home/personna/Downloads/PTG151.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tutoring Package",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Courses",
+					"item": [
+						{
+							"name": "Get All Courses",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Row By UUID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Course",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Kursus 1\",\n    \"description\": \"Keterangan kursus pertama\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Kursus Update\",\n    \"description\": \"Keterangan kursus pertama\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Course",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Course Sections",
+					"item": [
+						{
+							"name": "Get All Course Sections",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Row Course Section By UUID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Course Section",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Judul sesi\",\n    \"description\": null,\n    \"is_sequentially\": false,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Course Section",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Judul sesi pertama\",\n    \"description\": \"Keterangan sesi pertama disini\",\n    \"is_sequentially\": false,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Course Section",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Subjects",
+					"item": [
+						{
+							"name": "Get All Subjects",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject?client",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject"
+									],
+									"query": [
+										{
+											"key": "client",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Row Subject",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Subject",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subject_type\": \"video\",\n    \"subject_type_id\": \"{{VIDEO_UUID}}\",\n    \"title\": \"Pre-test 1\",\n    \"description\": \"Ujian Pembukaan\",\n    \"score\": 0,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Subject",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subject_type\": \"exam\",\n    \"subject_type_id\": \"a74ffb98-61ad-4aee-b48c-0acb447a09c7\",\n    \"title\": \"Pre-test\",\n    \"description\": \"Ujian Pembukaan\",\n    \"score\": 50,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Subject",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Question Bank",
+					"item": [
+						{
+							"name": "Get All Question Bank",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Question Bank",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Question Bank",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Judul Bank Soal\",\n    \"code\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Question Bank",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Judul Bank Soal\",\n    \"code\": \"12346\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Question Bank",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Question",
+					"item": [
+						{
+							"name": "Get All Question",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Question",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Question",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\": \"Soal No. 1\",\n    \"discussion\": null,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Question",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question\": \"Soal No. 1\",\n    \"discussion\": \"Ada diskusi nya\",\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Question",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Question Options",
+					"item": [
+						{
+							"name": "Get All Question Option",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}/option",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}",
+										"option"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Question Option",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}/option/{{QUESTION_OPT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}",
+										"option",
+										"{{QUESTION_OPT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Question Option",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"option_value\": \"Jawaban No. 1\",\n    \"is_correct\": false,\n    \"order_no\": 1,\n    \"quality\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}/option",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}",
+										"option"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Question",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"option_value\": \"Jawaban No. 1\",\n    \"is_correct\": false,\n    \"order_no\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}/option/{{QUESTION_OPT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}",
+										"option",
+										"{{QUESTION_OPT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Question",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/question-bank/{{QUESTION_BANK_UUID}}/question/{{QUESTION_UUID}}/option/{{QUESTION_OPT_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"question-bank",
+										"{{QUESTION_BANK_UUID}}",
+										"question",
+										"{{QUESTION_UUID}}",
+										"option",
+										"{{QUESTION_OPT_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Infographics",
+					"item": [
+						{
+							"name": "Get All Infograpics",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/infographic",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"infographic"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Infograpic",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/infographic/{{INFOGRAPHIC_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"infographic",
+										"{{INFOGRAPHIC_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Infographic",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Testing Result",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan Infografis",
+											"type": "default"
+										},
+										{
+											"key": "order_no",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "infographic",
+											"type": "file",
+											"src": "/home/personna/Downloads/akreditasi-min.jpg",
+											"disabled": true
+										},
+										{
+											"key": "attachments[]",
+											"type": "file",
+											"src": "/home/personna/Pictures/buku.jpeg"
+										},
+										{
+											"key": "summaries[]",
+											"value": "Buku baru",
+											"type": "default"
+										},
+										{
+											"key": "attachments[]",
+											"type": "file",
+											"src": "/home/personna/Pictures/think_meme.jpeg"
+										},
+										{
+											"key": "summaries[]",
+											"value": "Let me think it first",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/infographic",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"infographic"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Infographic",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Testing Result",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan Infografis",
+											"type": "default"
+										},
+										{
+											"key": "order_no",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "infographic",
+											"type": "file",
+											"src": "/home/personna/Downloads/akreditasi-min.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/infographic/{{INFOGRAPHIC_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"infographic",
+										"{{INFOGRAPHIC_UUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Infograpic",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/infographic/{{INFOGRAPHIC_UUID}}",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"infographic",
+										"{{INFOGRAPHIC_UUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Material Video",
+					"item": [
+						{
+							"name": "Get All Material Videos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/material-video",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"material-video"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Material Video",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Material Video",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Judul Video Materi",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan video mater dapat diisi disini",
+											"type": "default"
+										},
+										{
+											"key": "presented_by",
+											"value": "Fauzi Maulana",
+											"type": "default"
+										},
+										{
+											"key": "quality",
+											"value": "9.5",
+											"type": "default"
+										},
+										{
+											"key": "order_no",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "video",
+											"type": "file",
+											"src": "/home/personna/Downloads/2023-03-07 09-26-43.mp4"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/material-video",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"material-video"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exam",
+					"item": [
+						{
+							"name": "Form",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Result",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam/{{USER_EXAM_UUID}}/result",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam",
+										"{{USER_EXAM_UUID}}",
+										"result"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Answer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam/{{USER_EXAM_UUID}}/answer",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam",
+										"{{USER_EXAM_UUID}}",
+										"answer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Start",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam/{{USER_EXAM_UUID}}/start",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam",
+										"{{USER_EXAM_UUID}}",
+										"start"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finish",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam/{{USER_EXAM_UUID}}/finish",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam",
+										"{{USER_EXAM_UUID}}",
+										"finish"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Answer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question_id\": \"834c7535-dad4-46bb-8ac9-3b1e4a9af90b\",\n    \"option_id\": \"714eed9e-a5dc-4c88-9ece-e877b985b29e\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/v1/tutoring-package/{{TUTORING_UUID}}/course/{{COURSE_UUID}}/section/{{SECTION_UUID}}/subject/{{SUBJECT_UUID}}/exam/{{USER_EXAM_UUID}}/answer",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tutoring-package",
+										"{{TUTORING_UUID}}",
+										"course",
+										"{{COURSE_UUID}}",
+										"section",
+										"{{SECTION_UUID}}",
+										"subject",
+										"{{SUBJECT_UUID}}",
+										"exam",
+										"{{USER_EXAM_UUID}}",
+										"answer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
