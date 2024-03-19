@@ -2,6 +2,7 @@ import axios from 'axios'
 import LynxStorages from './storage.util'
 // import LynxStorages from './storage.util'
 
+
 interface IRequestPayloads<T = any> {
   url: string
   method: 'GET' | 'PUT' | 'DELETE' | 'PATCH' | 'POST'
@@ -48,7 +49,8 @@ export default async function request<T = any, R = any>({
         headers: {
           'Content-Type': 'application/json;charset=UTF-8',
           'Access-Control-Allow-Origin': '*',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          'X-User-Key': ''
         },
         method,
         ...extendedItems
