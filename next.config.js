@@ -25,7 +25,7 @@ const nextConfig = {
   env: {
     STORAGE_ENCRYPTION_KEY: 'adZkiAToken331',
     ENCRYPTION_PREF_KEY: 'prefadZkiAToken331',
-    BASE_URL: 'api.personna.id'
+    BASEURL: 'https://api.personna.id/'
   },
   async rewrites() {
     return {}
