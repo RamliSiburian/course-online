@@ -1,7 +1,9 @@
 import axios from 'axios'
 import LynxStorages from './storage.util'
 import { useRouter } from 'next/navigation'
+import { notification } from 'antd'
 // import LynxStorages from './storage.util'
+
 
 const router = useRouter()
 interface IRequestPayloads<T = any> {
@@ -35,10 +37,11 @@ export default async function request<T = any, R = any>({
 
 
   if (!token) {
-    return Promise.reject('test')
+    router.replace('/auth/login')
+    return Promise.reject()
   } else {
     try {
-      const validation = await axios
+      await axios
         .request({
           url: `${baseUrl}${service}/api/v1/token-validation`,
           headers: {
@@ -51,9 +54,16 @@ export default async function request<T = any, R = any>({
           data: JSON.stringify(data)
         })
 
+
+
+
     }
-    catch (e) {
-      router.replace('/')
+    catch (e: any) {
+      notification.warning({
+        message: 'Failed to load data',
+        description: e?.response?.data?.messages
+      })
+      router.replace('/auth/login')
       return Promise.reject()
     }
 
