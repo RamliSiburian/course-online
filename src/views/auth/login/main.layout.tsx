@@ -7,6 +7,8 @@ import { LynxCards } from '@afx/components/common/card/card'
 import { LynxForm, LynxFormItem } from '@afx/components/common/form/form'
 import LynxInput from '@afx/components/common/input/input'
 import { EyeOutlined, UserOutlined } from '@ant-design/icons'
+import { signIn } from 'next-auth/react'
+
 export default function LoginPage(): React.JSX.Element {
     const router = useRouter()
     const handleLogin = () => {
@@ -64,7 +66,7 @@ export default function LoginPage(): React.JSX.Element {
                                     </LynxFormItem>
                                 </Col>
                                 <Col span={24}>
-                                    <LynxButtons title="masuk" style={{ width: '100%' }} size='large' />
+                                    <LynxButtons onClick={() => signIn()} title="masuk" style={{ width: '100%' }} size='large' />
                                 </Col>
                             </Row>
                         </LynxForm>
