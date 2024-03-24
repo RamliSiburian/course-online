@@ -1,0 +1,658 @@
+{
+	"info": {
+		"_postman_id": "a7cedd9a-bb89-468b-b257-babf67899893",
+		"name": "Payment Service Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12171583"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/purchases",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"purchases"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{UserID}}",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "order_by",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "process",
+									"disabled": true
+								},
+								{
+									"key": "from_date",
+									"value": "2023-12-09",
+									"disabled": true
+								},
+								{
+									"key": "until_date",
+									"value": "2023-12-10",
+									"disabled": true
+								},
+								{
+									"key": "timezone",
+									"value": "%2B7",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/purchases",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchases"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{UserID}}",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "20",
+											"disabled": true
+										},
+										{
+											"key": "order_by",
+											"value": "desc",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "process",
+											"disabled": true
+										},
+										{
+											"key": "from_date",
+											"value": "2023-12-09",
+											"disabled": true
+										},
+										{
+											"key": "until_date",
+											"value": "2023-12-10",
+											"disabled": true
+										},
+										{
+											"key": "timezone",
+											"value": "%2B7",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:32:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "190"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=mbo4FBpk8Aq7TRc1FQsJHzyojLebK8RQRWJ%2F0BpQ7hsvNfZMH%2B9Qvb4Ssf6h3yRgk8yjjIEZm4WKiwBMmGeZEropmNmCmOkYL2gZFFdDj2hVHqWhWkwidg8JO5cLR%2Bg0wRM%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661cfeaa87c84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"current_page\": 1,\n        \"last_page\": 12,\n        \"per_page\": 20,\n        \"total\": 229,\n        \"data\": [\n            {\n                \"id\": \"7a79b90e-5436-4b01-b0eb-238c343f38cd\",\n                \"user_id\": \"9b8d210c-85cb-489a-9451-760aa2518809\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 08:43:39\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 08:43:39\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"8f43ac71-ab72-440a-ac68-9f7b76885224\",\n                \"user_id\": \"9b8d210c-4255-4cf7-9c6b-1f77bd281335\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 07:34:27\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 07:34:27\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"1dd2b500-86ca-4357-a09b-88059d20d66e\",\n                \"user_id\": \"9b8d210c-4255-4cf7-9c6b-1f77bd281335\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 07:31:28\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 07:31:28\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"330893d9-3797-41c5-9d0e-0ed8bb510f36\",\n                \"user_id\": \"9b8d210c-4255-4cf7-9c6b-1f77bd281335\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 07:14:07\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 07:14:07\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"7e7d581e-8220-48c6-9efc-ee4df2c78da1\",\n                \"user_id\": \"9b8d210c-4255-4cf7-9c6b-1f77bd281335\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 07:12:39\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 07:12:39\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"84d1db5c-4c50-4b51-8af3-d7d9381fb313\",\n                \"user_id\": \"9b8d210c-4255-4cf7-9c6b-1f77bd281335\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 07:12:10\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 07:12:10\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"48a40972-4821-45ce-aadc-089940c61e40\",\n                \"user_id\": \"99da7de9-2e21-4624-853b-673a9bfc9a5a\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"item_type\": \"ebook\",\n                \"item_type_id\": \"e3e37a89-8e08-4f70-b59f-4c29315f62cc\",\n                \"name\": \"Jurnal\",\n                \"description\": \"Jurnal Pendidikan\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 06:21:56\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 06:21:56\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"febd42b0-4f8f-4f7f-b135-04a3282654c7\",\n                \"user_id\": \"9b8d210b-f8f8-4417-bbcd-56feadd1deda\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 04:40:14\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 04:40:14\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"ef6c95f0-dd27-4b55-998d-d80c9ede296b\",\n                \"user_id\": \"9b8d210b-02a1-4f25-ba5c-8a029a3411a6\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 04:17:07\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 04:17:07\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"10ff46b8-0aec-4568-a81a-c6ce6dd62a24\",\n                \"user_id\": \"9b8d210a-ba2e-4939-ad05-bb587ae1c02c\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 04:12:52\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 04:12:52\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"65aca0c2-6312-4511-ac34-93d51b7e3b83\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:25:40\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:25:40\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"ae1c165b-3b5d-4bb1-8dd6-4ed2265a8583\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:22:55\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:22:55\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"f6457509-a90d-4500-8f5f-fdc3f111e358\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:22:23\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:22:23\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"05c1f0bc-dd7a-4304-9196-3e0f8970b685\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:22:08\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:22:08\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"423e8ca6-6102-4f0c-9f65-d1a859dc5db4\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:21:55\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:21:55\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"c09ec757-51fd-4375-946c-f78e69f07539\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:20:15\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:20:15\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"8c22840f-e3fc-457a-a51f-9ad32d31fb63\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:20:06\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:20:06\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"1c24fd0f-6d14-4d69-9c88-7096cd2e35bc\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:19:58\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:19:58\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"c59a74ae-1c39-4656-a930-9937ddbb7ad6\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:19:51\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:19:51\",\n                \"updated_at\": null\n            },\n            {\n                \"id\": \"03b7ad18-2551-4794-9eb1-8e4463284b15\",\n                \"user_id\": \"9b8d210a-6fd2-4ced-bb5e-019627709c14\",\n                \"community_id\": \"99ce7ad6-1dde-4b77-bc1c-19107bb9cdf0\",\n                \"community_group_id\": \"99f18ccd-347d-4243-823d-a46d17d3c675\",\n                \"item_type\": \"tryout\",\n                \"item_type_id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"name\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"price\": 0,\n                \"purchase_datetime\": \"2024-03-16 03:19:42\",\n                \"purchase_via\": \"system\",\n                \"status\": \"claim\",\n                \"created_at\": \"2024-03-16 03:19:42\",\n                \"updated_at\": null\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "808c2637-42eb-4584-b57d-6137a041fce8",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "{{UserID}}",
+									"type": "text"
+								},
+								{
+									"key": "community_id",
+									"value": "{{CommunityID}}",
+									"type": "text"
+								},
+								{
+									"key": "community_group_id",
+									"value": "{{GroupID}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "bimbel",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Kelas Eksekutif STIS 2023",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Keterangan paket bimbel Kelas Eskekutif STIS 2023",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/purchases",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"purchases"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "808c2637-42eb-4584-b57d-6137a041fce8",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "{{UserID}}",
+											"type": "text"
+										},
+										{
+											"key": "community_id",
+											"value": "{{CommunityID}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "community_group_id",
+											"value": "{{GroupID}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "bimbel",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Kelas Eksekutif STIS 2023",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Keterangan paket bimbel Kelas Eskekutif STIS 2023",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "4500000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/purchases",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"purchases"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:34:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "198"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "4153"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=KslVqGyueWhZA%2FitFb3INusMn7DDsyc%2BCuf3A6%2FKW1Ac0iRSa3DEuQe7UXdGTIL9NoL39EIg2hgD%2FAtWHMoUtzEYd0ZgyjspJbKsVxlBLWWClQy5kx%2BFKaXd%2BqAXvrR4%2FTI%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661d24a0fd384bd-HKG"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"created\",\n    \"status_code\": 201,\n    \"data\": {\n        \"id\": \"87ba6c1d-c487-4d43-9269-ec71c14340c0\",\n        \"redirect_uri\": \"https://app.sandbox.midtrans.com/snap/v3/redirection/f45a453c-b49d-4b28-8219-a45464d0a180\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Claim",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "{{UserID}}",
+									"type": "text"
+								},
+								{
+									"key": "community_id",
+									"value": "{{CommunityID}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "community_group_id",
+									"value": "{{GroupID}}",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "ebook",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "CPNS 02",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "cpns description",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/claim",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"claim"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Claim",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "{{UserID}}",
+											"type": "text"
+										},
+										{
+											"key": "community_id",
+											"value": "{{CommunityID}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "community_group_id",
+											"value": "{{GroupID}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "ebook",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "CPNS 02",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "cpns description",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/claim",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"claim"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:38:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "456"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "172"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=6GiOd1%2F%2FrKQCRY3BU%2BUmvC1yEgY1zWuOD1xVI9heEzb1SRRe4EHGB3CE53ChRwEJWmklFvBM0gh2RdP5VVTJ5oLFOkV1%2FS%2B6wE9Gs4JJ53GiZvzoBA706arlZPu0jwR27Lg%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661d869bcae84bd-HKG"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"created\",\n    \"status_code\": 201,\n    \"data\": {\n        \"id\": \"3b20f6dc-d3ad-4fc7-80a2-bc8a44a8bc89\",\n        \"user_id\": \"99da7de9-2e21-4624-853b-673a9bfc9a5a\",\n        \"community_id\": null,\n        \"community_group_id\": null,\n        \"item_type\": \"ebook\",\n        \"item_type_id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n        \"name\": \"CPNS 02\",\n        \"description\": \"cpns description\",\n        \"price\": 0,\n        \"purchase_datetime\": \"2024-03-18 02:38:14\",\n        \"purchase_via\": \"system\",\n        \"status\": \"claim\",\n        \"created_at\": \"2024-03-18 02:38:14\",\n        \"updated_at\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

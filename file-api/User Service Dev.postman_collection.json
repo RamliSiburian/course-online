@@ -1,0 +1,2467 @@
+{
+	"info": {
+		"_postman_id": "0fd2309b-b207-4858-8bde-5582469f1ee8",
+		"name": "User Service Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12171583"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/login",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"234251434534\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/login-with-google",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"login-with-google"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:28:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "6952"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "8"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=LenxG7EO7BEJ8%2FrvR1CibeSoeg9GEqQS0ljI3DgxVM%2F3WNv%2F71VkRcz0tT2yoA%2FlvcXbWAo29ZghDOoH2HsW0OUpCpluCGiEXqODijaDLWfYX5CqfNrMEk6kW5Tewwn4ack%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661c9d98dfa84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n        \"username\": \"google_1695955028\",\n        \"role\": [\n            {\n                \"id\": \"9a3f07b3-917d-43ef-8baf-9d338b67237f\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            },\n            {\n                \"id\": \"9a4f3c9b-6b74-48a5-a9ec-f3941ac69c13\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"PT. X\",\n                \"community_id\": \"99c680ec-7113-4d85-944f-c63a53a9cde7\",\n                \"community_group_id\": \"99c68119-1971-4b2b-b8b0-9b1f69316c20\",\n                \"community_group_name\": \"Teknis 1\",\n                \"community_member_id\": \"9a4f3c9b-24ee-47e1-912f-d8b0889d29cd\",\n                \"role\": \"member\",\n                \"is_default\": false,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjlhM2YwN2IzLTgxZTAtNDVjZC1hOTU1LTM4NjA4MDRiODAxZCIsInVzZXJuYW1lIjoiZ29vZ2xlXzE2OTU5NTUwMjgiLCJjb21tdW5pdHlfaWQiOm51bGwsImNvbW11bml0eV9ncm91cF9pZCI6bnVsbCwiY29tbXVuaXR5X21lbWJlcl9pZCI6bnVsbCwicm9sZSI6ImNvbW1vbiIsImlhdCI6MTcxMDcyODkwMiwiZXhwIjoxNzQyMjY0OTAyfQ.WiO-abJy7s0kG3Uq1EDzbORf_I4kFALQ6G5mUe1nbk-EWoqMtaYkeBPk1ASbKg1qS1SW2_xXBiKqZGg_N7CprFUIhWZXkSSId1NGM-lXeBGQEyHyyZDLissgrMl9Nu6rPxbnS6C4eidsuhPOVuL0nW8uBNUXu6IoELJrl6DWfu0\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login With Apple",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/login-with-apple",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login-with-apple"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login With Apple",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"234251434534\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/login-with-google",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"login-with-google"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:28:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "6952"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "8"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=LenxG7EO7BEJ8%2FrvR1CibeSoeg9GEqQS0ljI3DgxVM%2F3WNv%2F71VkRcz0tT2yoA%2FlvcXbWAo29ZghDOoH2HsW0OUpCpluCGiEXqODijaDLWfYX5CqfNrMEk6kW5Tewwn4ack%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661c9d98dfa84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n        \"username\": \"google_1695955028\",\n        \"role\": [\n            {\n                \"id\": \"9a3f07b3-917d-43ef-8baf-9d338b67237f\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            },\n            {\n                \"id\": \"9a4f3c9b-6b74-48a5-a9ec-f3941ac69c13\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"PT. X\",\n                \"community_id\": \"99c680ec-7113-4d85-944f-c63a53a9cde7\",\n                \"community_group_id\": \"99c68119-1971-4b2b-b8b0-9b1f69316c20\",\n                \"community_group_name\": \"Teknis 1\",\n                \"community_member_id\": \"9a4f3c9b-24ee-47e1-912f-d8b0889d29cd\",\n                \"role\": \"member\",\n                \"is_default\": false,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjlhM2YwN2IzLTgxZTAtNDVjZC1hOTU1LTM4NjA4MDRiODAxZCIsInVzZXJuYW1lIjoiZ29vZ2xlXzE2OTU5NTUwMjgiLCJjb21tdW5pdHlfaWQiOm51bGwsImNvbW11bml0eV9ncm91cF9pZCI6bnVsbCwiY29tbXVuaXR5X21lbWJlcl9pZCI6bnVsbCwicm9sZSI6ImNvbW1vbiIsImlhdCI6MTcxMDcyODkwMiwiZXhwIjoxNzQyMjY0OTAyfQ.WiO-abJy7s0kG3Uq1EDzbORf_I4kFALQ6G5mUe1nbk-EWoqMtaYkeBPk1ASbKg1qS1SW2_xXBiKqZGg_N7CprFUIhWZXkSSId1NGM-lXeBGQEyHyyZDLissgrMl9Nu6rPxbnS6C4eidsuhPOVuL0nW8uBNUXu6IoELJrl6DWfu0\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login With Google",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/login-with-google",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login-with-google"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login With Google",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"234251434534\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/login-with-google",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"login-with-google"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:28:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "6952"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "8"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=LenxG7EO7BEJ8%2FrvR1CibeSoeg9GEqQS0ljI3DgxVM%2F3WNv%2F71VkRcz0tT2yoA%2FlvcXbWAo29ZghDOoH2HsW0OUpCpluCGiEXqODijaDLWfYX5CqfNrMEk6kW5Tewwn4ack%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661c9d98dfa84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n        \"username\": \"google_1695955028\",\n        \"role\": [\n            {\n                \"id\": \"9a3f07b3-917d-43ef-8baf-9d338b67237f\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            },\n            {\n                \"id\": \"9a4f3c9b-6b74-48a5-a9ec-f3941ac69c13\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"types\": \"PT. X\",\n                \"community_id\": \"99c680ec-7113-4d85-944f-c63a53a9cde7\",\n                \"community_group_id\": \"99c68119-1971-4b2b-b8b0-9b1f69316c20\",\n                \"community_group_name\": \"Teknis 1\",\n                \"community_member_id\": \"9a4f3c9b-24ee-47e1-912f-d8b0889d29cd\",\n                \"role\": \"member\",\n                \"is_default\": false,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjlhM2YwN2IzLTgxZTAtNDVjZC1hOTU1LTM4NjA4MDRiODAxZCIsInVzZXJuYW1lIjoiZ29vZ2xlXzE2OTU5NTUwMjgiLCJjb21tdW5pdHlfaWQiOm51bGwsImNvbW11bml0eV9ncm91cF9pZCI6bnVsbCwiY29tbXVuaXR5X21lbWJlcl9pZCI6bnVsbCwicm9sZSI6ImNvbW1vbiIsImlhdCI6MTcxMDcyODkwMiwiZXhwIjoxNzQyMjY0OTAyfQ.WiO-abJy7s0kG3Uq1EDzbORf_I4kFALQ6G5mUe1nbk-EWoqMtaYkeBPk1ASbKg1qS1SW2_xXBiKqZGg_N7CprFUIhWZXkSSId1NGM-lXeBGQEyHyyZDLissgrMl9Nu6rPxbnS6C4eidsuhPOVuL0nW8uBNUXu6IoELJrl6DWfu0\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test001@example.com\",\n    \"password\": \"secret\",\n    \"confirmation_password\": \"secret\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/register",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test001@example.com\",\n    \"password\": \"secret\",\n    \"confirmation_password\": \"secret\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/register",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:29:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "3643"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=JfPVJzLyO3q2HYw32tik9HH%2F9A%2BhAZKpvuhoqG2lsivs28CQUm7H5jpRDaakrZaw%2BlNwkw%2F0Sdk4BJ2TAgh2xtMl7iKGnQSUZH9gMJcqKR8KWgVQTQ1ndiutzzflWSTSAf0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661cbe02b6b84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n        \"username\": \"test001_1710728982\",\n        \"role\": [\n            {\n                \"id\": \"9b970355-6696-474d-9672-ac1950f38422\",\n                \"user_id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjliOTcwMzU1LTVhNGMtNDc5Mi04OTVjLTI0NDE2NzQ0NmI4MCIsInVzZXJuYW1lIjoidGVzdDAwMV8xNzEwNzI4OTgyIiwiY29tbXVuaXR5X2lkIjpudWxsLCJjb21tdW5pdHlfZ3JvdXBfaWQiOm51bGwsImNvbW11bml0eV9tZW1iZXJfaWQiOm51bGwsInJvbGUiOiJjb21tb24iLCJpYXQiOjE3MTA3Mjg5ODQsImV4cCI6MTc0MjI2NDk4NH0.eA4ybSaWefLd5fOa0GR9Hosxt3QntKkyjTk05Ku8hdAPNbQ26xHNysNI40pDC0wmw3AAofJbsXYkI9YtUBwegmH9iQMLH-U5Rt9oUMO3hxGnc0YgfXtES-TH3IP9JwEhtPP6jfC5gIL7SJE99Ldb1DDybMj4yMxhmco0ssrI7Ss\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register With Apple",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"\",\n    \"email\": \"\",\n    \"name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/register-with-apple",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register-with-apple"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register With Apple",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test001@example.com\",\n    \"password\": \"secret\",\n    \"confirmation_password\": \"secret\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/register",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:29:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "3643"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=JfPVJzLyO3q2HYw32tik9HH%2F9A%2BhAZKpvuhoqG2lsivs28CQUm7H5jpRDaakrZaw%2BlNwkw%2F0Sdk4BJ2TAgh2xtMl7iKGnQSUZH9gMJcqKR8KWgVQTQ1ndiutzzflWSTSAf0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661cbe02b6b84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n        \"username\": \"test001_1710728982\",\n        \"role\": [\n            {\n                \"id\": \"9b970355-6696-474d-9672-ac1950f38422\",\n                \"user_id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjliOTcwMzU1LTVhNGMtNDc5Mi04OTVjLTI0NDE2NzQ0NmI4MCIsInVzZXJuYW1lIjoidGVzdDAwMV8xNzEwNzI4OTgyIiwiY29tbXVuaXR5X2lkIjpudWxsLCJjb21tdW5pdHlfZ3JvdXBfaWQiOm51bGwsImNvbW11bml0eV9tZW1iZXJfaWQiOm51bGwsInJvbGUiOiJjb21tb24iLCJpYXQiOjE3MTA3Mjg5ODQsImV4cCI6MTc0MjI2NDk4NH0.eA4ybSaWefLd5fOa0GR9Hosxt3QntKkyjTk05Ku8hdAPNbQ26xHNysNI40pDC0wmw3AAofJbsXYkI9YtUBwegmH9iQMLH-U5Rt9oUMO3hxGnc0YgfXtES-TH3IP9JwEhtPP6jfC5gIL7SJE99Ldb1DDybMj4yMxhmco0ssrI7Ss\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register With Google",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);",
+									"pm.globals.set('UserID', data.data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"\",\n    \"email\": \"\",\n    \"name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/register-with-google",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register-with-google"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register With Google",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test001@example.com\",\n    \"password\": \"secret\",\n    \"confirmation_password\": \"secret\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/register",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:29:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "799"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "3643"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=JfPVJzLyO3q2HYw32tik9HH%2F9A%2BhAZKpvuhoqG2lsivs28CQUm7H5jpRDaakrZaw%2BlNwkw%2F0Sdk4BJ2TAgh2xtMl7iKGnQSUZH9gMJcqKR8KWgVQTQ1ndiutzzflWSTSAf0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661cbe02b6b84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n        \"username\": \"test001_1710728982\",\n        \"role\": [\n            {\n                \"id\": \"9b970355-6696-474d-9672-ac1950f38422\",\n                \"user_id\": \"9b970355-5a4c-4792-895c-244167446b80\",\n                \"types\": \"Bimbel\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"community_group_name\": null,\n                \"community_member_id\": null,\n                \"role\": \"common\",\n                \"is_default\": true,\n                \"is_blocked\": false,\n                \"note\": null\n            }\n        ],\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjliOTcwMzU1LTVhNGMtNDc5Mi04OTVjLTI0NDE2NzQ0NmI4MCIsInVzZXJuYW1lIjoidGVzdDAwMV8xNzEwNzI4OTgyIiwiY29tbXVuaXR5X2lkIjpudWxsLCJjb21tdW5pdHlfZ3JvdXBfaWQiOm51bGwsImNvbW11bml0eV9tZW1iZXJfaWQiOm51bGwsInJvbGUiOiJjb21tb24iLCJpYXQiOjE3MTA3Mjg5ODQsImV4cCI6MTc0MjI2NDk4NH0.eA4ybSaWefLd5fOa0GR9Hosxt3QntKkyjTk05Ku8hdAPNbQ26xHNysNI40pDC0wmw3AAofJbsXYkI9YtUBwegmH9iQMLH-U5Rt9oUMO3hxGnc0YgfXtES-TH3IP9JwEhtPP6jfC5gIL7SJE99Ldb1DDybMj4yMxhmco0ssrI7Ss\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/logout",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Switch Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/switch-account/{{AccountID}}",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"switch-account",
+								"{{AccountID}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Switch Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{BaseAuth}}/api/v1/switch-account/{{AccountID}}",
+									"host": [
+										"{{BaseAuth}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"switch-account",
+										"{{AccountID}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:31:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.1.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "800"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "798"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "2616"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=UKU2WHbxbeZ%2BV5gOzjXUqnxCSBUtaeuoGGpI%2FeYYXtqf0TA5%2BUtkix%2B2tz8BQcYlXGk2jiKk%2F%2ByYWkZQ7TLPvWiQI9qUj3o7UV883yD%2F6VdMTm%2BsOIjhEvx4CqxCH437yPU%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661ce5d8fcc84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjlhM2YwN2IzLTgxZTAtNDVjZC1hOTU1LTM4NjA4MDRiODAxZCIsInVzZXJuYW1lIjoiZ29vZ2xlXzE2OTU5NTUwMjgiLCJjb21tdW5pdHlfaWQiOiI5OWM2ODBlYy03MTEzLTRkODUtOTQ0Zi1jNjNhNTNhOWNkZTciLCJjb21tdW5pdHlfZ3JvdXBfaWQiOiI5OWM2ODExOS0xOTcxLTRiMmItYjhiMC05YjFmNjkzMTZjMjAiLCJjb21tdW5pdHlfbWVtYmVyX2lkIjoiOWE0ZjNjOWItMjRlZS00N2UxLTkxMmYtZDhiMDg4OWQyOWNkIiwicm9sZSI6Im1lbWJlciIsImlhdCI6MTcxMDcyOTA4MywiZXhwIjoxNzQyMjY1MDgzfQ.VPwM-EbVG_jAJHp9eqaqH7UMWpE8ywhFUH_M0wnJiyL3qS5DXjKnuKpLMpC5gNpvwC1U-ndhI370AWw5o4_pvGN5UYhwYOhEvFD6_DKMqyJxi23R5i7BmjrdcFICH8sc2Ao-8hpayYoIYrZAUXXn1eViFWgm2kBuPUCNkgxaNEw\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Check Validate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.globals.set('Token', data.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BaseAuth}}/api/v1/token-validation",
+							"host": [
+								"{{BaseAuth}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"token-validation"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Banner",
+					"item": [
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/banner",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"banner"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/banner",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"banner"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.21.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.1.10"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Jul 2023 02:46:48 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "55"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"99a4254d-3d5e-423c-a106-32379a4bae25\",\n            \"name\": \"banner1\",\n            \"community_id\": null,\n            \"url\": \"https://facebook.com\",\n            \"type\": \"users\",\n            \"type_id\": \"99a4249f-e0c3-4e82-81f4-bcb905da3a5c\",\n            \"data\": \"{data: 'new data'}\",\n            \"description\": \"description\",\n            \"published_at\": \"2023-06-17 05:10:00\"\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Menu",
+					"item": [
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/menu",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"menu"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/menu",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"menu"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "nginx/1.21.6"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.1.10"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 14 Jul 2023 02:47:09 GMT"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "60"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "59"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"999e3bd9-b76c-439d-892b-e01ead0108b1\",\n            \"name\": \"Communities\",\n            \"slug\": \"communities\",\n            \"detail\": null,\n            \"is_default\": true,\n            \"is_enable\": true\n        },\n        {\n            \"id\": \"999e3bd9-bde7-4fcb-9aa5-06b0d0c00ae3\",\n            \"name\": \"Banners\",\n            \"slug\": \"banners\",\n            \"detail\": null,\n            \"is_default\": false,\n            \"is_enable\": true\n        },\n        {\n            \"id\": \"999e3bd9-bed8-4c66-ad51-eda461a168e6\",\n            \"name\": \"Users\",\n            \"slug\": \"users\",\n            \"detail\": null,\n            \"is_default\": false,\n            \"is_enable\": true\n        },\n        {\n            \"id\": \"999e3bd9-bf90-4270-b60b-bee9f126cb17\",\n            \"name\": \"Menus\",\n            \"slug\": \"menus\",\n            \"detail\": null,\n            \"is_default\": false,\n            \"is_enable\": true\n        },\n        {\n            \"id\": \"999e3bd9-c07c-447d-9db1-aa0fb3799177\",\n            \"name\": \"Tryout\",\n            \"slug\": \"tryout\",\n            \"detail\": null,\n            \"is_default\": true,\n            \"is_enable\": true\n        },\n        {\n            \"id\": \"999e3bd9-c130-4da6-991f-cc91a0e72c0c\",\n            \"name\": \"Bimbel\",\n            \"slug\": \"bimbel\",\n            \"detail\": null,\n            \"is_default\": true,\n            \"is_enable\": true\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Avatar",
+							"item": [
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/avatar",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"avatar"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Upload",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/avatar",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"avatar"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Profile",
+							"item": [
+								{
+									"name": "Profile",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/profile",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"profile"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Profile",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/profile",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"profile"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:47:27 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "57"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"user_id\": \"999e3bda-7658-4354-adb1-e3f0b58b4432\",\n        \"name\": \"personna\",\n        \"email\": \"admin@personna.id\",\n        \"email_verified_at\": null,\n        \"contact_number\": \"081212121212\",\n        \"contact_number_verified_at\": null,\n        \"gender\": \"male\",\n        \"place_of_birth\": \"Pasar Gunung\",\n        \"date_of_birth\": \"1988-05-08\",\n        \"religion\": \"Islam\",\n        \"address\": \"Islam\",\n        \"city\": \"Deli Serdang\",\n        \"postal_code\": \"20185\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "Simple",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/profile/simple",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"profile",
+												"simple"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Simple",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/profile/simple",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"profile",
+														"simple"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:47:38 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "56"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"999e3bda-7658-4354-adb1-e3f0b58b4432\",\n        \"username\": \"personna\",\n        \"name\": \"personna\",\n        \"email\": \"admin@personna.id\",\n        \"avatar\": \"/user-service/api/v1/user/avatar\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "Profile",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"banggi\",\n    \"gender\": \"male\",\n    \"place_of_birth\": \"djakarta\",\n    \"date_of_birth\": \"2020-02-20\",\n    \"religion\": \"islam\",\n    \"address\": \"address\",\n    \"city\": \"city\",\n    \"postal_code\": \"23323\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/profile",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"profile"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Email",
+							"item": [
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/email",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"email"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/email",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"email"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:49:51 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "59"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"email\": \"admin@personna.id\",\n        \"verified_at\": \"2023-07-14 02:49:34\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"mail\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/email",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"email"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Contact",
+							"item": [
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/contact",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"contact"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/contact",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"contact"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:50:16 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "57"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"contact_number\": \"081212121212\",\n        \"verified_at\": \"2023-07-14 02:50:13\"\n    }\n}"
+										}
+									]
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/contact",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Social Media",
+							"item": [
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/social-media",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"social-media"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/social-media",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"social-media"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:51:46 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "54"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"99a426c8-b3d7-4947-abaf-4e5194e57bbd\",\n            \"vendor_name\": \"apple\",\n            \"vendor_value\": \"apple*****@apple.com\",\n            \"verified_at\": \"2023-07-14 02:50:43\"\n        }\n    ]\n}"
+										}
+									]
+								},
+								{
+									"name": "Bind Apple",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var data = pm.response.json();",
+													"pm.environment.set('SocialBindID', data.data.token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"23442044344\",\n    \"email\": \"apple_admin@apple.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/social-media/apple",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"social-media",
+												"apple"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Bind Google",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var data = pm.response.json();",
+													"pm.environment.set('SocialBindID', data.data.token);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"123459593422\",\n    \"email\": \"google_admin@google.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/social-media/google",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"social-media",
+												"google"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Unbind",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/social-media/{{SocialBindID}}",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"social-media",
+												"{{SocialBindID}}"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Account",
+							"item": [
+								{
+									"name": "Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/accounts",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"accounts"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Get",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BaseURL}}/api/v1/user/accounts",
+													"host": [
+														"{{BaseURL}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"accounts"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Server",
+													"value": "nginx/1.21.6"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.1.10"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "Date",
+													"value": "Fri, 14 Jul 2023 02:53:16 GMT"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "58"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"999e3bda-7df6-4db1-b60d-159c4931bf2c\",\n            \"user_id\": \"999e3bda-7658-4354-adb1-e3f0b58b4432\",\n            \"types\": \"Bimbel\",\n            \"community_id\": null,\n            \"community_group_id\": null,\n            \"community_group_name\": null,\n            \"community_member_id\": null,\n            \"role\": \"owner\",\n            \"is_default\": true,\n            \"is_blocked\": false,\n            \"note\": null\n        },\n        {\n            \"id\": \"99a427a2-92c9-4aa2-8370-388859adaac1\",\n            \"user_id\": \"999e3bda-7658-4354-adb1-e3f0b58b4432\",\n            \"types\": \"community 1\",\n            \"community_id\": \"99a42471-7258-44e5-a325-afd33bab7f49\",\n            \"community_group_id\": \"99a4247a-7eef-4715-b246-09672536b54e\",\n            \"community_group_name\": \"group 1\",\n            \"community_member_id\": \"99a427a2-89db-4bf1-8d2e-2d0de9332c9d\",\n            \"role\": \"member\",\n            \"is_default\": false,\n            \"is_blocked\": false,\n            \"note\": null\n        }\n    ]\n}"
+										}
+									]
+								},
+								{
+									"name": "Join To Course",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/join-course",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"join-course"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Set Default",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/user/accounts/{{AccountID}}/default",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"accounts",
+												"{{AccountID}}",
+												"default"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Security Account",
+			"item": [
+				{
+					"name": "Request Email Verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/security-account/request-email-verification",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"security-account",
+								"request-email-verification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Contact Verification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contact_number\": \"344353454\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/security-account/request-contact-verification",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"security-account",
+								"request-contact-verification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Code",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contact-number\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/security-account/verify-code/{{SecurityAccountCode}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"security-account",
+								"verify-code",
+								"{{SecurityAccountCode}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"google_1691466377\",\n    \"email\": \"google@google.com\",\n    \"timezone\" : \"+07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/security-account/request-delete",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"security-account",
+								"request-delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// pm.request.headers.add({ ",
+					"//     key: \"X-User-Key\",",
+					"//     value: \"{{X-User-Key-Android}}\" ",
+					"// });",
+					"",
+					"pm.request.headers.add({ ",
+					"    key: \"X-User-Key\",",
+					"    value: \"{{X-User-Key-Web}}\" ",
+					"});",
+					"",
+					"pm.request.headers.add({ ",
+					"    key: \"X-User-Property\",",
+					"    value: \"{{X-User-Property}}\" ",
+					"});",
+					"",
+					"pm.request.headers.add({ ",
+					"    key: \"X-User-Device\",",
+					"    value: \"{{X-User-Device}}\" ",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
