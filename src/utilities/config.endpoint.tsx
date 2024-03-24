@@ -1,6 +1,6 @@
 export const services = {
-    auth: '/auth',
-    bimbel: '/bimbel-service'
+    auth: 'auth',
+    bimbel: 'bimbel-service'
 }
 
 export const endpoint = {

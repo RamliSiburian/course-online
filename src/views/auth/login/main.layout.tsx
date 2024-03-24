@@ -1,4 +1,4 @@
-import { Button, Col, Row } from 'antd'
+import { Col, Divider, Form, notification, Row } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import Logo from '@lynx/images/logo.png'
@@ -8,16 +8,41 @@ import { LynxForm, LynxFormItem } from '@afx/components/common/form/form'
 import LynxInput from '@afx/components/common/input/input'
 import { EyeOutlined, UserOutlined } from '@ant-design/icons'
 import { signIn } from 'next-auth/react'
+import { Icons } from '@afx/components/common/icons'
+import { useLynxStore } from '@lynx/store/core'
+import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model'
+import { IReqLogin } from '@afx/interfaces/auth/auth.iface'
 
 export default function LoginPage(): React.JSX.Element {
     const router = useRouter()
+    const { useActions, isLoading } = useLynxStore<IStateAuth, IActionAuth>('auth')
+
+    const [forms] = Form.useForm<IReqLogin>()
+
+    const loading = isLoading('login') || false
+
+
     const handleLogin = () => {
-        localStorage.setItem('ADZKIA@UTOKEN', 'eyJhbGciOiJSUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpZCI6IjliOTcwMzU1LTVhNGMtNDc5Mi04OTVjLTI0NDE2NzQ0NmI4MCIsInVzZXJuYW1lIjoidGVzdDAwMV8xNzEwNzI4OTgyIiwiY29tbXVuaXR5X2lkIjpudWxsLCJjb21tdW5pdHlfZ3JvdXBfaWQiOm51bGwsImNvbW11bml0eV9tZW1iZXJfaWQiOm51bGwsInJvbGUiOiJjb21tb24iLCJpYXQiOjE3MTEwMTA4MDEsImV4cCI6MTc0MjU0NjgwMX0.B2gzmHUYN5b_YRwEw_0fVQl3p0JXy636tZ7gFUF76pjaF4sUr_EMeQNsWwSnoAxknSXXTcSPlIyLZGlbaq_1933_cw3DXL9kr5hsn5NBu87sIs0_qitmYZos1qr7mOKf7jjv-T1AAlnc1O_i-ffLsiXxZSFcgE-wbEPbsgkQS6c')
-        router.push('/dashboard')
+        return forms.validateFields().then(values => {
+            useActions<'login'>('login', [values, (status: number, user: string) => {
+                if (status == 200) {
+                    notification.success({
+                        description: `Wellcome ${user}`,
+                        message: 'Login berhasil',
+                        duration: 2
+                    })
+                }
+            }], true)
+        }).catch(err => {
+            // notification.warning({
+            //     description: 'Some field is required ',
+            //     message: err?.errorFields?.[0]?.errors
+            // })
+        })
     }
     return (
         <div className='bg-[#FFF] h-screen'>
-            <Row className='px-24 py-5 '>
+            <Row className='px-6 sm:px-10 xl:px-24 py-5 '>
                 <Col span={24} >
                     <div className='flex justify-between'>
                         <div className='flex gap-2 items-center text-base text-[#ED7020]'>
@@ -30,25 +55,25 @@ export default function LoginPage(): React.JSX.Element {
                             />
                             <p>Klik Adzkia</p>
                         </div>
-                        <LynxButtons title='Daftar' size='large' style={{ borderRadius: '100px', padding: '4px 24px' }} />
+                        <LynxButtons onClick={() => router.replace('/auth/register')} title='Daftar' size='large' style={{ borderRadius: '100px', padding: '4px 24px' }} />
                     </div>
                 </Col>
 
-                <Col xl={16} className='mt-[140px]'>
+                <Col span={0} sm={0} md={0} xl={12} xxl={16} className='mt-[140px]'>
                     <p className='text-[22px] font-bold text-[#2D4379]'>Masuk Sekarang</p>
                     <p className='text-lg font-normal text-[#4A5C87]'> Kamu sudah punya akun? kalau belum, yuk daftar dulu <span className='font-bold'>di sini !</span> </p>
                 </Col>
-                <Col xl={8} className='mt-10'>
-                    <LynxCards className='!w-[440px]'>
+                <Col sm={24} md={24} xl={12} xxl={8} className='mt-10 flex justify-center'>
+                    <LynxCards className='!w-[440px] py-5'>
                         <div className='flex flex-col items-center'>
                             <p className='font-semibold text-[#2D4379] text-[32px]'>Masuk</p>
                             <p className='text-sm text-[#4A5C87]'> Ayo bergabung bersama siswa yang lainnya </p>
                         </div>
 
-                        <LynxForm name='validateOnly' layout='vertical' className='tracking-normal mt-10' autoComplete='off'>
-                            <Row gutter={[0, 10]}>
+                        <LynxForm name='validateOnly' layout='vertical' className='tracking-normal mt-10' autoComplete='off' form={forms}>
+                            <Row gutter={[0, 15]}>
                                 <Col span={24}>
-                                    <LynxFormItem name="usename" >
+                                    <LynxFormItem name="username" rules={[{ required: true, message: 'username is required' }]}>
                                         <LynxInput
                                             prefix={<UserOutlined className="site-form-item-icon" />}
                                             placeholder="Username"
@@ -57,16 +82,44 @@ export default function LoginPage(): React.JSX.Element {
                                     </LynxFormItem>
                                 </Col>
                                 <Col span={24}>
-                                    <LynxFormItem name="password" >
+                                    <LynxFormItem name="password" rules={[{ required: true, message: 'password is required' }]} >
                                         <LynxInput
                                             prefix={<EyeOutlined className="site-form-item-icon" />}
                                             placeholder="Password"
                                             standart={false}
+                                            type="password"
                                         />
                                     </LynxFormItem>
                                 </Col>
+                                <Col span={24} className='mt-4'>
+                                    <LynxButtons disabled={loading} onClick={handleLogin} title="masuk" style={{ width: '100%' }} size='large' />
+                                </Col>
                                 <Col span={24}>
-                                    <LynxButtons onClick={() => signIn()} title="masuk" style={{ width: '100%' }} size='large' />
+                                    <Divider><p className='text-[#888FA5] text-xs'>atau masuk dengan</p></Divider>
+                                </Col>
+                                <Col span={24}>
+                                    <div className='flex justify-center items-center gap-8'>
+                                        <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(237,112,32,1)] cursor-pointer flex justify-center items-center'>
+                                            <Image
+                                                src={Logo}
+                                                alt="Adzkia"
+                                                width={20}
+                                                height={20}
+                                            />
+                                        </div>
+                                        <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(0,0,255,1)] cursor-pointer flex justify-center items-center'>
+                                            <Icons size={20} type='FacebookFilled' />
+                                        </div>
+                                        <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-blue-300 cursor-pointer flex justify-center items-center'>
+                                            <Icons size={20} type='GoogleOutlined' />
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col span={24}>
+                                    <div className='flex flex-col items-center gap-3 mt-5'>
+                                        <p>Lupa <span className='text-[#ED7020] cursor-pointer'>Kata Sandi ?</span></p>
+                                        <p>Belum punya akun ? <span className='text-[#275ECE] cursor-pointer' onClick={() => router.replace('/auth/register')}>Daftar di sini.</span></p>
+                                    </div>
                                 </Col>
                             </Row>
                         </LynxForm>

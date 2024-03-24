@@ -5,7 +5,7 @@ import { notification } from 'antd'
 
 export type IStateAuth = {}
 export type IActionAuth = {
-    login: (data: IReqLogin) => void
+    login: (data: IReqLogin, callback: (status: number, user: string) => void) => void
 }
 
 const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
@@ -13,18 +13,17 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
     model: (put, getState, useActions) => ({
         state: {},
         actions: {
-            async login(data) {
+            async login(data, callback) {
                 try {
                     const res = await Login(data)
-                    console.log({ res });
-
+                    callback(res?.status_code, res?.data?.username)
                 } catch (err: any) {
                     console.log({ err });
                     notification.warning({
                         message: 'Failed to load data',
                         description: err?.messages,
                         duration: 2,
-                        key: 'FUNC-VALIDATION'
+                        key: 'FUNC-LOGIN'
                     })
                 }
             }

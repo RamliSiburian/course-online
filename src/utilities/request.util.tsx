@@ -17,6 +17,7 @@ interface IRequestPayloads<T = any> {
 interface IResponsePayloads<T = any> {
   data: T
   meta: { success: boolean; code: string | number; message: string }
+  status_code: number
 }
 
 const getQueryByName = (name: string, url: string) => {
@@ -36,10 +37,7 @@ export default async function request<T = any, R = any>({
   const baseUrl = process.env.BASEURL
 
 
-  if (!token) {
-    router.replace('/auth/login')
-    return Promise.reject()
-  } else {
+  if (token) {
     try {
       await axios
         .request({
@@ -53,10 +51,6 @@ export default async function request<T = any, R = any>({
           method,
           data: JSON.stringify(data)
         })
-
-
-
-
     }
     catch (e: any) {
       notification.warning({

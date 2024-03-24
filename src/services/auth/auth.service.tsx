@@ -4,9 +4,9 @@ import request from '@afx/utils/request.util';
 
 export function Login(data: IReqLogin) {
     return request<any>({
-        url: '/login',
+        url: 'login',
+        data,
         service: services?.auth,
-        method: 'POST',
-        data
+        method: 'POST'
     })
 }
