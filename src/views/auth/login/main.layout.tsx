@@ -6,16 +6,18 @@ import { LynxButtons } from '@afx/components/common/button/button'
 import { LynxCards } from '@afx/components/common/card/card'
 import { LynxForm, LynxFormItem } from '@afx/components/common/form/form'
 import LynxInput from '@afx/components/common/input/input'
-import { EyeOutlined, UserOutlined } from '@ant-design/icons'
+import { EyeInvisibleOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
 import { signIn } from 'next-auth/react'
 import { Icons } from '@afx/components/common/icons'
 import { useLynxStore } from '@lynx/store/core'
 import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model'
 import { IReqLogin } from '@afx/interfaces/auth/auth.iface'
+import { useState } from 'react'
 
 export default function LoginPage(): React.JSX.Element {
     const router = useRouter()
     const { useActions, isLoading } = useLynxStore<IStateAuth, IActionAuth>('auth')
+    const [typePass, setTypePass] = useState<string>('password')
 
     const [forms] = Form.useForm<IReqLogin>()
 
@@ -84,10 +86,10 @@ export default function LoginPage(): React.JSX.Element {
                                 <Col span={24}>
                                     <LynxFormItem name="password" rules={[{ required: true, message: 'password is required' }]} >
                                         <LynxInput
-                                            prefix={<EyeOutlined className="site-form-item-icon" />}
+                                            prefix={typePass === 'password' ? <EyeOutlined className="site-form-item-icon" onClick={() => setTypePass('text')} /> : <EyeInvisibleOutlined className="site-form-item-icon" onClick={() => setTypePass('password')} />}
                                             placeholder="Password"
                                             standart={false}
-                                            type="password"
+                                            type={typePass}
                                         />
                                     </LynxFormItem>
                                 </Col>

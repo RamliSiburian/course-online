@@ -80,7 +80,7 @@ export default function LoginPage(): React.JSX.Element {
                                 <Col span={24}>
                                     <LynxFormItem name="re_password" >
                                         <LynxInput
-                                            prefix={<UserOutlined className="text-[#ED7020] site-form-item-icon" />}
+                                            prefix={<UnlockFilled className="text-[#ED7020] site-form-item-icon" />}
                                             placeholder="Ulangi Kata Sandi"
                                             standart={false}
                                             type="password"
