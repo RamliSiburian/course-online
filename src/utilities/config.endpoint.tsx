@@ -9,5 +9,4 @@ export const endpoint = {
         register: '',
         validation: ''
     }
-
 }
