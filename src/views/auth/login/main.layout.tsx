@@ -112,7 +112,7 @@ export default function LoginPage(): React.JSX.Element {
                                         <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(0,0,255,1)] cursor-pointer flex justify-center items-center'>
                                             <Icons size={20} type='FacebookFilled' />
                                         </div>
-                                        <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-blue-300 cursor-pointer flex justify-center items-center' onClick={() => console.log('sd')}>
+                                        <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-blue-300 cursor-pointer flex justify-center items-center' onClick={() => signIn('google')}>
                                             <Icons size={20} type='GoogleOutlined' />
                                         </div>
                                     </div>

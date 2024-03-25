@@ -17,6 +17,8 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                 try {
                     const res = await Login(data)
                     callback(res?.status_code, res?.data?.username)
+                    console.log({ res });
+
                 } catch (err: any) {
                     console.log({ err });
                     notification.warning({
