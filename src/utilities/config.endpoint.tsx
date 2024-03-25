@@ -1,7 +1,12 @@
+export const services = {
+    auth: 'auth',
+    bimbel: 'bimbel-service'
+}
+
 export const endpoint = {
-    Auth :{
-        Login:'',
-        register:'',
+    auth: {
+        login: '',
+        register: '',
         validation: ''
     }
 }

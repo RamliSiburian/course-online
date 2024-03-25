@@ -1,0 +1,1339 @@
+{
+	"info": {
+		"_postman_id": "9b5a3cbc-9f37-4386-b18c-28519790a11d",
+		"name": "Exam Service Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12171583"
+	},
+	"item": [
+		{
+			"name": "Stage",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/stages",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stages"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/stages",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"stages"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:39:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "122"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=2GIgBkuYPbtF%2FJmNjw6JY4%2ByBT6xQbT8MBXz0A9XaGkcJoCun%2By1l7W03SonuwxgIoAXeCo%2BGL8hJ0KWmgCoPuDvRBiwch%2FQ2rA961RNIaEDhKsuwVoV5ZuhipVnFxE3idk%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661da8aea0884bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"cpns\": \"CPNS\",\n        \"kedinasan\": \"Kedinasan\",\n        \"pppk\": \"PPPK\",\n        \"sma\": \"SMA\",\n        \"smp\": \"SMP\",\n        \"tni_polri\": \"TNI/Polri\",\n        \"utbk\": \"UTBK\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "Stream",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/attachment/{{attachmentID}}",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attachment",
+								"{{attachmentID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/attachment/{{attachmentID}}/download",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"attachment",
+								"{{attachmentID}}",
+								"download"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Schedule",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/list?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"list"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/list?timezone=%2B7",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"list"
+											],
+											"query": [
+												{
+													"key": "timezone",
+													"value": "%2B7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:39:52 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "174"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "3"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=UlhXiezP0d7N%2FusdtHxT2YCxPUEa7BnsUgamg%2BBxGQV%2Bp%2Fk6y8lPdfFG4WS0qnjn885Wo7j4EpTYJy%2B8qHOQbzaapeepNUfaIw1UXw40G7NIWK6ivhEVLGurfxrMHYQUiXQ%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661dad1a80884bd-HKG"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"c6018aa5-52b7-419b-9f41-c5893600587d\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 61\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-03-05 11:36:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 10000,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-03-05 11:35:25\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"1439ad8a-ce64-4e89-883a-3faea89db90d\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 60\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-03-05 11:36:50\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 10000,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-03-05 11:35:05\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"49d55317-3e16-4ab7-bcdf-e0ef4b2b5dd3\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 59\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-26 14:02:50\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 10000,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-26 14:01:45\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"cdc8eb97-2af6-4640-ad34-916e769b8573\",\n                \"question_group_id\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 58\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-26 12:21:20\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 10000,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-26 12:21:00\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"c7307eb8-a72e-4b55-a60a-5c04fb02cd27\",\n                \"question_group_id\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 57\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-25 10:32:50\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-25 10:32:14\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"5f356623-b539-4d00-9ce7-5bd4af0d972f\",\n                \"question_group_id\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 56\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-25 10:26:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": null,\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-25 10:25:18\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"128901ad-fdb7-4bd6-84ed-b4fa3aec03ae\",\n                \"question_group_id\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 55\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-13 14:59:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 20000,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-13 14:58:55\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"2c167e27-a23c-4cf4-8100-edd7fa9f71f9\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 54\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-12 11:22:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 20000,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-12 11:21:51\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"aac86728-566a-43ad-bc36-f5160ea52036\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 53\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-06 22:50:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-06 22:49:45\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"ee812842-d34a-4316-af51-014f9513015e\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 52\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-06 15:05:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-06 15:04:30\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"55c41da7-b01c-45ab-92a8-8fa6058c4fe1\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 51\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-06 15:02:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 20000,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-06 15:00:57\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"8c6a548d-3f1f-49db-9446-65f1e6e60a42\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 50\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:17\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"101eb19e-f7ef-483f-bc6c-f606c237cd49\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 49\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:14\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"f3b56981-966a-4030-a073-079715c0c650\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 48\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:13\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"be0d5757-b2d1-46d2-a184-9364f3d717c7\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 47\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:11\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"5ce8ca72-850d-43c9-bdb2-3c9741c4ff0c\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 46\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:08\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"70b26e0c-dee5-4edc-b3fd-f5cd254341b7\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 45\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:06\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"4343beb8-be95-4ca7-a660-99171ff2da28\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 44\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:05\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"4d99685d-2a53-41de-bbc0-9b885f0b1178\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 43\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:02\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"af2c0bc4-c32e-48ca-93a6-f365fb2f417b\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 42\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:00\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            }\n        ],\n        \"current_page\": 1,\n        \"last_page\": 4,\n        \"per_page\": 20,\n        \"total\": 66\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Owned",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/owned?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"owned"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get Owned",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/owned?timezone=%2B7",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"owned"
+											],
+											"query": [
+												{
+													"key": "timezone",
+													"value": "%2B7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:40:05 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "37"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "2"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=nTei2kBH03oVrmaIrmej6kG1AP7Z%2Fq36ONMVXUS6UWKZsuTz9v9oVfB4fMJ3XqIMJQ7cbvbXnPbqwITtIza55uQ37uaArfb%2BpzzbgWITPCRZu061JB1VLeqH6iqGhsXwqUI%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661db22e98b84bd-HKG"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"data\": [\n            {\n                \"id\": \"c6018aa5-52b7-419b-9f41-c5893600587d\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 61\",\n                \"status\": \"finish\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-03-05 11:36:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 10000,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-03-05 11:35:25\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"c7307eb8-a72e-4b55-a60a-5c04fb02cd27\",\n                \"question_group_id\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 57\",\n                \"status\": \"verified\",\n                \"description\": \"Description\",\n                \"open_from\": \"2024-02-25 10:32:50\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": null,\n                \"quota\": 1,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"948c888e-130e-4df8-8a97-d96b3a65b682\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2024-02-25 10:32:14\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            },\n            {\n                \"id\": \"8c6a548d-3f1f-49db-9446-65f1e6e60a42\",\n                \"question_group_id\": \"f17c4f6e-cfe3-4641-94dd-6747ed4fa806\",\n                \"type\": \"cpns\",\n                \"title\": \"Schedule Short Questions 50\",\n                \"status\": \"verified\",\n                \"description\": \"Description\",\n                \"open_from\": \"2023-10-13 16:55:00\",\n                \"open_until\": \"2029-12-12 20:00:00\",\n                \"price\": 200,\n                \"quota\": 100,\n                \"is_private\": false,\n                \"certificate\": false,\n                \"person_in_charge\": \"afefqas-asfasdf\",\n                \"is_discussion\": true,\n                \"has_ranking\": false,\n                \"randomize\": false,\n                \"repeatable\": true,\n                \"created_at\": \"2023-10-13 16:52:17\",\n                \"updated_at\": null,\n                \"thumbnail\": {\n                    \"id\": null,\n                    \"filename\": \"schedule_banner_placeholder.png\",\n                    \"type\": \"\",\n                    \"ext\": \".png\",\n                    \"size\": 38082,\n                    \"mime_type\": \"image/png\",\n                    \"media_type\": \"\",\n                    \"url\": \"localhost/media?placeholder=schedule_banner_placeholder.png\"\n                }\n            }\n        ],\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 20,\n        \"total\": 3\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Form Register",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/form-register?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"form-register"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Form Register",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/form-register?timezone=%2B7",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"{{ScheduleID}}",
+												"form-register"
+											],
+											"query": [
+												{
+													"key": "timezone",
+													"value": "%2B7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:40:23 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "404"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "2"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=o%2BR0tyJwkCqdvbD58cA0cIz1KxVV78bXYVrVwauyb7po2AOpwEVniYrfJYHr%2Fdtl0VkmfjEYhC2MRkt3i3Zfwa770SegUy4FcOy%2BWxA96xZdiq0M1aJXSwCG9pgmvK%2FkrVE%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661db92ead884bd-HKG"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"c6018aa5-52b7-419b-9f41-c5893600587d\",\n        \"quota\": 10000,\n        \"total_registered\": 6,\n        \"repeatable\": true,\n        \"total_question\": 9,\n        \"duration\": 6,\n        \"exam\": {\n            \"id\": \"263c721d-fc90-4d6f-a0e0-bb4e2d8032d7\",\n            \"status\": \"finish\",\n            \"latest_section\": \"fe29cf31-143b-41eb-a723-def9589f9679\",\n            \"remaind_duration\": 0,\n            \"remaind_section_duration\": 0,\n            \"expired_at\": null\n        },\n        \"feature\": {\n            \"section\": true,\n            \"vintage\": true\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json();",
+											"",
+											"pm.environment.set('RegisterID', data.data.id);",
+											"pm.environment.set('ReferralCode', data.data.referral_code);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/registration",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"registration"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Exam",
+					"item": [
+						{
+							"name": "Questions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/question",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"question"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Questions",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/question",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"{{ScheduleID}}",
+												"exam",
+												"{{RegisterID}}",
+												"question"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:40:43 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "984"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "3"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=VfQXKcNRop60j8WmRRKKJcs8sg6RSOETO7n2yEJO2vJb415bS8sxH6UkczTJXw0MhUguMHds4vojdxGvzjpEiwJb0nwbHsC4kJIshXU1mck%2BF%2FN4S383xKFXME0H%2FtqPOv0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661dc09cbb384bd-HKG"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n        \"total_question\": 9,\n        \"duration\": 6,\n        \"sections\": [\n            {\n                \"id\": \"e0beee6b-c87a-4266-bbf2-b3db56ea775d\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"name\": \"Wawasan Kebangsaan\",\n                \"duration\": 3,\n                \"total_question\": 3,\n                \"scoring_type\": \"question_base\",\n                \"passing_grade\": 10,\n                \"vintages\": [\n                    {\n                        \"id\": \"9bed248c-1ced-45d2-a753-abdb1c4dc214\",\n                        \"question_section_id\": \"e0beee6b-c87a-4266-bbf2-b3db56ea775d\",\n                        \"order_no\": 1,\n                        \"content\": \"<h1>KANCIL DAN BUAYA</h1>\\\\\\\\r\\\\\\\\n<p>Disebuah hutan belantara yang luas, tinggal beraneka ragam satwa. Salah satunya seekor kancil. Kancil yang satu ini dikenal memiliki kecerdikan yang luar biasa. Tak hanya cerdik, kancil pun dikenal sebagai satwa yang ramah akan sesama.</p>\\\\\\\\r\\\\\\\\n<p>Seperti suatu pagi, ia melihat seekor induk bebek yang tengah berenang bersama anaknya. Kancil pun yang sedang berjalan menelusuri hutan menyapa bebek tersebut, “Hai bebek! Asik sekali kamu berenang.”</p>\",\n                        \"questions\": [\n                            {\n                                \"id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                \"question_vintage_id\": \"9bed248c-1ced-45d2-a753-abdb1c4dc214\",\n                                \"order_no\": 1,\n                                \"question\": \"Kau tau Kancil?\",\n                                \"point\": 5,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 1 secton 1 vintage 1\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"050ff2d0-bfdb-4b9a-b5f5-d27eb78e55eb\",\n                                        \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"929962e2-93db-4f5d-8172-032a4da7522f\",\n                                        \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"e60b7f57-775f-47e1-9e39-9bb38c17bbe2\",\n                                        \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"a670c6ee-4810-471c-a3be-c5c50ab8f9ac\",\n                                        \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"d790464b-ba96-468f-a885-698da98295f6\",\n                                        \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            },\n                            {\n                                \"id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                \"question_vintage_id\": \"9bed248c-1ced-45d2-a753-abdb1c4dc214\",\n                                \"order_no\": 2,\n                                \"question\": \"Seriusan tidka tau ?\",\n                                \"point\": 5,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 2 secton 1 vintage 1\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"5a098630-1b61-46cb-95c0-08330765bcd9\",\n                                        \"question_id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"fb65bcf9-bf8c-4667-ab28-bd29ed9a6288\",\n                                        \"question_id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"8f0ba789-faf6-4727-a105-9bc63f5ae380\",\n                                        \"question_id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"c82eed6f-0d81-4b3b-923f-1db452d52e64\",\n                                        \"question_id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"1b720928-7497-42fd-ab26-f368d2cb0d79\",\n                                        \"question_id\": \"69bc265a-df7c-49f0-b393-47bfcd74c289\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            }\n                        ],\n                        \"attachment\": null\n                    },\n                    {\n                        \"id\": \"586a695a-3049-45b5-ae66-581603e08630\",\n                        \"question_section_id\": \"e0beee6b-c87a-4266-bbf2-b3db56ea775d\",\n                        \"order_no\": 2,\n                        \"content\": null,\n                        \"questions\": [\n                            {\n                                \"id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                \"question_vintage_id\": \"586a695a-3049-45b5-ae66-581603e08630\",\n                                \"order_no\": 1,\n                                \"question\": \"Laptop dulunya berawal dari calculaotr yang telah di kembangkan oleh peneliti pada zaman dahulu\",\n                                \"point\": 5,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 2 secton 1 vintage 1\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"b0a77073-9a8f-4fc8-b7a7-1c1883e775de\",\n                                        \"question_id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"411bedaf-52ab-4a3a-9a53-ec4a3fc6ac64\",\n                                        \"question_id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"1d1aff42-af04-44ea-b186-39b8dd01ff24\",\n                                        \"question_id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"50cfa00f-e9c8-44f2-82d3-a71b44ae5a66\",\n                                        \"question_id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"a67fbddb-d252-4da7-bc16-0eda4e8fa1cd\",\n                                        \"question_id\": \"6e5efc95-3b37-4c0f-a4f3-128c0b81c898\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": null,\n                                        \"point\": null,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            }\n                        ],\n                        \"attachment\": null\n                    }\n                ]\n            },\n            {\n                \"id\": \"fe29cf31-143b-41eb-a723-def9589f9679\",\n                \"question_group_id\": \"d9ee8cbb-9065-4278-94d0-00abdba29e72\",\n                \"name\": \"Karakteristik Pribadi\",\n                \"duration\": 3,\n                \"total_question\": 6,\n                \"scoring_type\": \"option_base\",\n                \"passing_grade\": 10,\n                \"vintages\": [\n                    {\n                        \"id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                        \"question_section_id\": \"fe29cf31-143b-41eb-a723-def9589f9679\",\n                        \"order_no\": 1,\n                        \"content\": null,\n                        \"questions\": [\n                            {\n                                \"id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 1,\n                                \"question\": \"apa yang seharusnya dilakukan ketika ada seorang nenek berdiri di pinggir jalan ?\",\n                                \"point\": 9,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 1 secton 2 vintage null\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"8abce048-284b-4692-ad0c-5ebb0852c525\",\n                                        \"question_id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": \"<p>iuiuiuiui</p>\",\n                                        \"point\": 5,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"900696db-1dc1-49a6-bfcf-0adbba1f8ba5\",\n                                        \"question_id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": \"<p>aaaaaaaaaaa</p>\",\n                                        \"point\": 4,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"90104ac8-0383-4d19-b9c4-baa12486e3c9\",\n                                        \"question_id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": \"<p><strong>rererererererere</strong></p>\",\n                                        \"point\": 3,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"22c1c3d7-22da-4a4c-805a-3d50bf347c5d\",\n                                        \"question_id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": \"<p>6fftyjfyfk. yfyuftyeye</p>\",\n                                        \"point\": 2,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"67311eda-b6e9-4c95-b646-3e93f63823e1\",\n                                        \"question_id\": \"f5e4b1eb-c664-41c7-9fbb-80f078f76f8b\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": \"<p>hghjkffh</p>\",\n                                        \"point\": 1,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            },\n                            {\n                                \"id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 2,\n                                \"question\": \"<p>Cita-Cita sang Putri</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Saat pagi hari seorang gadis yang bernama Putri sudah bangun dari tidurnya dan mulai membantu ibunya beres-beres rumah. Putri merupakan anak perempuan cantik kesayangan orang tuanya yang memiliki sejuta mimpi di dinding kamar miliknya.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Purti gadis periang yang hidup di keluarga yang bisa dikatakan kaya raya. Meskipun terlahir dari keluarga yang kaya raya, tidak membuat Putri menjadi anak yang sombong. Di sekolah dia juga merupakan siswa yang berprestasi, tidak heran dia menjadi kesayangan guru dan teman-temannya.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Sejak ia kecil, Putri selalu menuliskan cita-citanya di dinding kamarnya. Mulai dari dia duduk di bangku SD hingga kini SMA, dia selalu menuliskan apa cita-citanya. Banyaknya cita-cita yang Putri tulis, membuat dinding kamarnya hampir penuh dengan kertas tempelan yang berisi cita-citanya.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Setelah membantu ibunya, Putri siap-siap berangkat ke sekolah. Sepanjang perjalanan Putri hanya duduk dan diam merenung. Sesampainya di sekolah, Putri pun lebih banyak diam seperti sedang memikirkan sesuatu.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Saat sudah pulang sekolah, ia bergegas masuk ke kamarnya dan memandangi dinding kamarnya dengan seksama. Ia mulai membaca satu persatu cita-cita yang ia tuliskan dari kecil. Ia terus memandangi dan merenung.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>\\\\\\\\\\\\\\\"Putri, ada apa?\\\\\\\\\\\\\\\" Tiba-tiba ibu masuk ke dalam kamar Putri. Ibu memandangi wajah anaknya yang terlihat sedih. \\\\\\\\\\\\\\\"Bu sekarang dara sudah SMA, tapi sampai sekarang Putri gatau cita-cita Putri apa\\\\\\\\\\\\\\\" ucap Putri pada Ibu.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>\\\\\\\\\\\\\\\"Sayang, Putri kan baru saja masuk SMA, cita-cita akan datang seiring berjalannya waktu. Saat ini Putri fokus saja belajar dan lakukan apa yang Putri sukai. Dengan begitu, Putri akan tau apa cita-cita Putri\\\\\\\\\\\\\\\" Ucap Ibu</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Mendengar ucapan Ibu, membuat Putri lebih fokus belajar dan melakukan banyak hal yang dia sukai. Di sekolah dia rajin bertanya ke guru-guru dan selalu mengikuti lomba yang diadakan oleh sekolah. Dia juga aktif mengikuti berbagai macam kegiatan di sekolah seperti kepramukaan, osis dan bela diri.</p>\\\\\\\\r\\\\\\\\n<p><br></p>\\\\\\\\r\\\\\\\\n<p>Di sekolah Putri ters mengembangkan bakatnya, hingga suatu hari ia menyadari apa cita-cita yang diinginkan. Putri ingin menjadi seseorang yang berguna bagi bangsa dan negara. Ia memutuskan ingin menjadi TNI dan mengabdi pada negeri.</p>\",\n                                \"point\": null,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 1 secton 2 vintage null\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"01bbb15b-3145-44b6-a2fd-ee827dcb0cdd\",\n                                        \"question_id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": null,\n                                        \"point\": 5,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"ecf6387b-0aee-4c08-996a-64c193ce450a\",\n                                        \"question_id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": null,\n                                        \"point\": 4,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"7e7d13b7-56d4-46c2-892c-0bd838a49bf3\",\n                                        \"question_id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": null,\n                                        \"point\": 3,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"7987904b-226c-463d-98ab-a90f30cd36db\",\n                                        \"question_id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": null,\n                                        \"point\": 2,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"d7f1c963-b296-4407-9f69-29f6bac0feed\",\n                                        \"question_id\": \"d6e1ab1e-5ce3-4d41-a9a2-9412bc869849\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": null,\n                                        \"point\": 1,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            },\n                            {\n                                \"id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 3,\n                                \"question\": \"<p>rumus mencari luas persegi panjang adalah</p><p><span class=\\\\\\\\\\\\\\\"ql-formula\\\\\\\\\\\\\\\" data-value=\\\\\\\\\\\\\\\"p*l\\\\\\\\\\\\\\\">\\\\\\\\ufeff<span contenteditable=\\\\\\\\\\\\\\\"false\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"katex\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"katex-mathml\\\\\\\\\\\\\\\"><math xmlns=\\\\\\\\\\\\\\\"http://www.w3.org/1998/Math/MathML\\\\\\\\\\\\\\\"><semantics><mrow><mi>p</mi><mo>∗</mo><mi>l</mi></mrow><annotation encoding=\\\\\\\\\\\\\\\"application/x-tex\\\\\\\\\\\\\\\">p*l</annotation></semantics></math></span><span class=\\\\\\\\\\\\\\\"katex-html\\\\\\\\\\\\\\\" aria-hidden=\\\\\\\\\\\\\\\"true\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"base\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"strut\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 0.6597em; vertical-align: -0.1944em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mord mathnormal\\\\\\\\\\\\\\\">p</span><span class=\\\\\\\\\\\\\\\"mspace\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"margin-right: 0.2222em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mbin\\\\\\\\\\\\\\\">∗</span><span class=\\\\\\\\\\\\\\\"mspace\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"margin-right: 0.2222em;\\\\\\\\\\\\\\\"></span></span><span class=\\\\\\\\\\\\\\\"base\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"strut\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 0.6944em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mord mathnormal\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"margin-right: 0.0197em;\\\\\\\\\\\\\\\">l</span></span></span></span></span>\\\\\\\\ufeff</span></p><p><br></p><p>kalau begitu rumus apakah ini ? ' <span class=\\\\\\\\\\\\\\\"ql-formula\\\\\\\\\\\\\\\" data-value=\\\\\\\\\\\\\\\"e=mc^2\\\\\\\\\\\\\\\">\\\\\\\\ufeff<span contenteditable=\\\\\\\\\\\\\\\"false\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"katex\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"katex-mathml\\\\\\\\\\\\\\\"><math xmlns=\\\\\\\\\\\\\\\"http://www.w3.org/1998/Math/MathML\\\\\\\\\\\\\\\"><semantics><mrow><mi>e</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding=\\\\\\\\\\\\\\\"application/x-tex\\\\\\\\\\\\\\\">e=mc^2</annotation></semantics></math></span><span class=\\\\\\\\\\\\\\\"katex-html\\\\\\\\\\\\\\\" aria-hidden=\\\\\\\\\\\\\\\"true\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"base\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"strut\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 0.4306em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mord mathnormal\\\\\\\\\\\\\\\">e</span><span class=\\\\\\\\\\\\\\\"mspace\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"margin-right: 0.2778em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mrel\\\\\\\\\\\\\\\">=</span><span class=\\\\\\\\\\\\\\\"mspace\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"margin-right: 0.2778em;\\\\\\\\\\\\\\\"></span></span><span class=\\\\\\\\\\\\\\\"base\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"strut\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 0.8141em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"mord mathnormal\\\\\\\\\\\\\\\">m</span><span class=\\\\\\\\\\\\\\\"mord\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"mord mathnormal\\\\\\\\\\\\\\\">c</span><span class=\\\\\\\\\\\\\\\"msupsub\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"vlist-t\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"vlist-r\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"vlist\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 0.8141em;\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"top: -3.063em; margin-right: 0.05em;\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"pstrut\\\\\\\\\\\\\\\" style=\\\\\\\\\\\\\\\"height: 2.7em;\\\\\\\\\\\\\\\"></span><span class=\\\\\\\\\\\\\\\"sizing reset-size6 size3 mtight\\\\\\\\\\\\\\\"><span class=\\\\\\\\\\\\\\\"mord mtight\\\\\\\\\\\\\\\">2</span></span></span></span></span></span></span></span></span></span></span></span>\\\\\\\\ufeff</span> '</p><p><br></p><p>test bang bisa gini gak ?</p>\",\n                                \"point\": null,\n                                \"discussion_content\": \"ini pembahasan pertanyaan 3 secton 2 vintage null\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"47359c62-ebbc-42f8-8e7f-b095fc8c9e07\",\n                                        \"question_id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"Option A\",\n                                        \"discussion_content\": null,\n                                        \"point\": 5,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"aa3b0f88-993d-4075-8e72-d2702b0731f6\",\n                                        \"question_id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"Option B\",\n                                        \"discussion_content\": null,\n                                        \"point\": 4,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"d7d85511-8940-4be7-a02e-68b23fdde5e3\",\n                                        \"question_id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"Option C\",\n                                        \"discussion_content\": null,\n                                        \"point\": 3,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"1e65614e-ee31-4b7d-8d94-b1e94f6ca7dc\",\n                                        \"question_id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"Option D\",\n                                        \"discussion_content\": null,\n                                        \"point\": 2,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"b6365b06-73ee-419e-9175-db4f1fa33f0c\",\n                                        \"question_id\": \"f978e373-09b5-423d-9823-722a309b30ed\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"Option E\",\n                                        \"discussion_content\": null,\n                                        \"point\": 1,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            },\n                            {\n                                \"id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 4,\n                                \"question\": \"<p><span style=\\\"color: rgb(83, 83, 83);\\\">Cerpen merupakan salah satu dari&nbsp;</span><a href=\\\"https://mamikos.com/info/contoh-karya-sastra-populer-di-indonesia-pljr/\\\" rel=\\\"noopener noreferrer\\\" target=\\\"_blank\\\" style=\\\"color: rgb(80, 172, 125); background-color: rgb(255, 255, 255);\\\">karya sastra</a><span style=\\\"color: rgb(83, 83, 83);\\\">&nbsp;yang termasuk berbentuk…..</span></p>\",\n                                \"point\": 1,\n                                \"discussion_content\": \"<p>wkwkwkwkwkwkkwkwkwkwkkw</p><p><br></p><p>jrjwkrkrwjwkejwe heehhe edit</p>\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"4b64c82c-4804-4ed2-9657-d6f4afce89b5\",\n                                        \"question_id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"<p><span style=\\\"color: rgb(83, 83, 83);\\\">Nonfiksi</span></p>\",\n                                        \"discussion_content\": \"<p>salah</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"46737a8d-5a67-46db-9b2a-fab6caf3f7dd\",\n                                        \"question_id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"<p>Bait edittt</p>\",\n                                        \"discussion_content\": \"<p>salah</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"fa7ba404-e805-4b23-85bd-0e935e090537\",\n                                        \"question_id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"<p><strong style=\\\"color: rgb(54, 54, 54);\\\">Prosa</strong></p>\",\n                                        \"discussion_content\": \"<p>benar</p>\",\n                                        \"point\": 40,\n                                        \"is_correct\": true,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"472b14a3-e7e3-4caa-a773-e424a4c20c6f\",\n                                        \"question_id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"<p><span style=\\\"color: rgb(83, 83, 83);\\\">Dialog</span></p>\",\n                                        \"discussion_content\": \"<p>hhhha</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"3e8a9be9-1193-491f-9f9e-981f9c81f42d\",\n                                        \"question_id\": \"4523ecb7-aff6-4ed0-b100-ef34ca47c49d\",\n                                        \"option\": \"E\",\n                                        \"answer\": \"<p>cepren</p>\",\n                                        \"discussion_content\": \"<p>wkwkwkwwk</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": null\n                            },\n                            {\n                                \"id\": \"9144f6f3-80a1-4197-9344-d7e48cba75ef\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 5,\n                                \"question\": \"<p>Perbedaan antara cerpen dan puisi adalah….</p><p><br></p>\",\n                                \"point\": 34,\n                                \"discussion_content\": \"<p><span style=\\\"background-color: rgb(238, 238, 238); color: rgb(83, 83, 83);\\\">“Hanya itu alasan dari Mama mengapa melarang Laras menikah dengan Dani?”</span></p><p><br></p><p><span style=\\\"background-color: rgb(238, 238, 238); color: rgb(83, 83, 83);\\\">Bibir Laras menyinggung dengan sinis. “Oh, begitu liciknya yang ada di dalam pikiran Mama! Lalu, apa artinya kemuliaan dari hati Mama yang selama ini selalu Laras kagumi? Padahal Mama dulu tidak pernah mempermasalahkan status dari Dani yang masih belum bisa menemukan pekerjaan tetap. Demikian kakakku yang selama ini juga mendukungku, sekarang justru berbalik arah”.</span></p>\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"bb3d8cee-2bab-4b0e-9dcd-53956c5d03db\",\n                                        \"question_id\": \"9144f6f3-80a1-4197-9344-d7e48cba75ef\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"<p><span style=\\\"color: rgb(83, 83, 83);\\\">Adanya penggunaan imajinasi</span></p>\",\n                                        \"discussion_content\": \"<p>ini salah yo</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": {\n                                            \"id\": \"084e00be-5263-41e1-b1c5-fce14b21a8a6\",\n                                            \"filename\": \"2023_10_31_453270794_buaya.jpeg\",\n                                            \"type\": \"question_option_attachment\",\n                                            \"ext\": \".jpeg\",\n                                            \"size\": 6235,\n                                            \"mime_type\": \"image/jpeg\",\n                                            \"media_type\": \"image\",\n                                            \"url\": \"localhost/media?id=084e00be-5263-41e1-b1c5-fce14b21a8a6\"\n                                        }\n                                    },\n                                    {\n                                        \"id\": \"698ee53c-d2b3-4c63-bcb3-0428139d339f\",\n                                        \"question_id\": \"9144f6f3-80a1-4197-9344-d7e48cba75ef\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"<p><strong style=\\\"color: rgb(54, 54, 54);\\\">Adanya alur</strong></p>\",\n                                        \"discussion_content\": \"<p>ini betull yooo</p>\",\n                                        \"point\": 50,\n                                        \"is_correct\": true,\n                                        \"attachment\": {\n                                            \"id\": \"eda1fcfd-baba-4d5c-9384-87404248bdbd\",\n                                            \"filename\": \"2023_10_31_554963714_kancil.jpeg\",\n                                            \"type\": \"question_option_attachment\",\n                                            \"ext\": \".jpeg\",\n                                            \"size\": 10763,\n                                            \"mime_type\": \"image/jpeg\",\n                                            \"media_type\": \"image\",\n                                            \"url\": \"localhost/media?id=eda1fcfd-baba-4d5c-9384-87404248bdbd\"\n                                        }\n                                    },\n                                    {\n                                        \"id\": \"d1034701-2d7a-47d0-a7c9-60e0b8a62b54\",\n                                        \"question_id\": \"9144f6f3-80a1-4197-9344-d7e48cba75ef\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"<p><span style=\\\"color: rgb(83, 83, 83);\\\">Adanya gaya bahasa tertentu</span></p>\",\n                                        \"discussion_content\": \"<p>ini juga salah</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"c9683d8a-f6d9-4f95-a7e2-5b60228540cb\",\n                                        \"question_id\": \"9144f6f3-80a1-4197-9344-d7e48cba75ef\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"<p>Adanya tema</p><p><br></p>\",\n                                        \"discussion_content\": \"<p>ini juga salahh</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": {\n                                            \"id\": \"e8a688a8-50aa-4195-8ddc-80f33b804996\",\n                                            \"filename\": \"2023_10_31_685019288_monyet.jpeg\",\n                                            \"type\": \"question_option_attachment\",\n                                            \"ext\": \".jpeg\",\n                                            \"size\": 39686,\n                                            \"mime_type\": \"image/jpeg\",\n                                            \"media_type\": \"image\",\n                                            \"url\": \"localhost/media?id=e8a688a8-50aa-4195-8ddc-80f33b804996\"\n                                        }\n                                    }\n                                ],\n                                \"attachment\": {\n                                    \"id\": \"68669437-666c-496b-a1ad-5d1f9f96f7f1\",\n                                    \"filename\": \"2023_10_31_231097335_ppkn.jpeg\",\n                                    \"type\": \"question_attachment\",\n                                    \"ext\": \".jpeg\",\n                                    \"size\": 40811,\n                                    \"mime_type\": \"image/jpeg\",\n                                    \"media_type\": \"image\",\n                                    \"url\": \"localhost/media?id=68669437-666c-496b-a1ad-5d1f9f96f7f1\"\n                                }\n                            },\n                            {\n                                \"id\": \"d8158112-52a5-48ba-9bc6-54b96807f67e\",\n                                \"question_vintage_id\": \"dcd8cb26-a2bf-457c-b5ff-0dc3db5f7e7b\",\n                                \"order_no\": 6,\n                                \"question\": \"<p>memperbaiki</p>\",\n                                \"point\": 20,\n                                \"discussion_content\": \"<p>astagfirullah</p>\",\n                                \"options\": [\n                                    {\n                                        \"id\": \"7bf3e1b3-805f-40a7-8e2e-80132b18cbcb\",\n                                        \"question_id\": \"d8158112-52a5-48ba-9bc6-54b96807f67e\",\n                                        \"option\": \"A\",\n                                        \"answer\": \"<p>heheheh</p>\",\n                                        \"discussion_content\": \"<p>idjfidhfdfhofuh</p>\",\n                                        \"point\": 6,\n                                        \"is_correct\": true,\n                                        \"attachment\": {\n                                            \"id\": \"c9316d7d-3fc5-41ab-a8f9-fb7e8b7ff079\",\n                                            \"filename\": \"2023_11_03_696814289_ppkn.jpeg\",\n                                            \"type\": \"question_option_attachment\",\n                                            \"ext\": \".jpeg\",\n                                            \"size\": 40811,\n                                            \"mime_type\": \"image/jpeg\",\n                                            \"media_type\": \"image\",\n                                            \"url\": \"localhost/media?id=c9316d7d-3fc5-41ab-a8f9-fb7e8b7ff079\"\n                                        }\n                                    },\n                                    {\n                                        \"id\": \"a6a4b01b-c326-433a-84e8-0099b41cd43f\",\n                                        \"question_id\": \"d8158112-52a5-48ba-9bc6-54b96807f67e\",\n                                        \"option\": \"B\",\n                                        \"answer\": \"<p>salah jawaban</p>\",\n                                        \"discussion_content\": \"<p>hahahha</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"65c60e0b-290f-4065-89c4-73afde5dfd4b\",\n                                        \"question_id\": \"d8158112-52a5-48ba-9bc6-54b96807f67e\",\n                                        \"option\": \"C\",\n                                        \"answer\": \"<p>2023 masih main fb ?</p>\",\n                                        \"discussion_content\": \"<p>testinggg</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    },\n                                    {\n                                        \"id\": \"aa75da5f-3560-4075-86e2-409c7d583f6f\",\n                                        \"question_id\": \"d8158112-52a5-48ba-9bc6-54b96807f67e\",\n                                        \"option\": \"D\",\n                                        \"answer\": \"<p>tesr brwo</p>\",\n                                        \"discussion_content\": \"<p>jehehhehe</p>\",\n                                        \"point\": 0,\n                                        \"is_correct\": false,\n                                        \"attachment\": null\n                                    }\n                                ],\n                                \"attachment\": {\n                                    \"id\": \"6a8746f0-996b-4805-97b3-46888ba369fd\",\n                                    \"filename\": \"2023_11_03_455355863_fuji-mountain-with-milky-way-night_335224-104.webp\",\n                                    \"type\": \"question_attachment\",\n                                    \"ext\": \".webp\",\n                                    \"size\": 310450,\n                                    \"mime_type\": \"image/webp\",\n                                    \"media_type\": \"\",\n                                    \"url\": \"localhost/media?id=6a8746f0-996b-4805-97b3-46888ba369fd\"\n                                }\n                            }\n                        ],\n                        \"attachment\": null\n                    },\n                    {\n                        \"id\": \"cad3ea42-65c8-493c-844d-cd59e110b015\",\n                        \"question_section_id\": \"fe29cf31-143b-41eb-a723-def9589f9679\",\n                        \"order_no\": 2,\n                        \"content\": \"<p><br></p>\",\n                        \"questions\": null,\n                        \"attachment\": null\n                    },\n                    {\n                        \"id\": \"b54228dc-2895-46b4-8035-895cb7544a75\",\n                        \"question_section_id\": \"fe29cf31-143b-41eb-a723-def9589f9679\",\n                        \"order_no\": 3,\n                        \"content\": null,\n                        \"questions\": null,\n                        \"attachment\": null\n                    }\n                ]\n            }\n        ]\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Download Attachment",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/attachment",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"attachment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Result",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/result?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"result"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Result",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/result?timezone=%2B7",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"{{ScheduleID}}",
+												"exam",
+												"{{RegisterID}}",
+												"result"
+											],
+											"query": [
+												{
+													"key": "timezone",
+													"value": "%2B7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:40:58 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "732"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "3"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=mJyqYOWnyuBSRtIFt57arb%2FNbwTUhBulL8AbuHXZ34w6oKBF6jQY62eDxjkUBm6jAzkqAc6S27Av411GAiI0KcKo%2FnEvQ%2FJ6uL6Fm9tJ%2BBH0VUmH3tr%2Bo2L6Teg1ucHh8t0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661dc66fc4184bd-HKG"
+										},
+										{
+											"key": "Content-Encoding",
+											"value": "br"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"263c721d-fc90-4d6f-a0e0-bb4e2d8032d7\",\n        \"repeatable\": true,\n        \"is_discussion\": true,\n        \"certificate\": false,\n        \"schedule\": {\n            \"title\": \"Schedule Short Questions 61\",\n            \"start_at\": \"2024-03-13 10:00:20\",\n            \"finish_at\": \"2024-03-13 10:06:21\"\n        },\n        \"rank\": {\n            \"rank_at\": 1,\n            \"participant\": 100\n        },\n        \"detail_exam\": {\n            \"user_exam_id\": \"263c721d-fc90-4d6f-a0e0-bb4e2d8032d7\",\n            \"score\": 0,\n            \"is_passed\": false,\n            \"completing_time\": 6.0218394,\n            \"total_question\": 9,\n            \"sections\": [\n                {\n                    \"title\": \"Wawasan Kebangsaan\",\n                    \"is_passed\": false,\n                    \"score\": 0,\n                    \"correct\": 0,\n                    \"wrong\": 0,\n                    \"skipped\": 3\n                },\n                {\n                    \"title\": \"Karakteristik Pribadi\",\n                    \"is_passed\": false,\n                    \"score\": 0,\n                    \"correct\": 0,\n                    \"wrong\": 0,\n                    \"skipped\": 6\n                }\n            ]\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Answers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/answers",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"answers"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Answers",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/answers",
+											"host": [
+												"{{BaseURL}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"schedules",
+												"{{ScheduleID}}",
+												"exam",
+												"{{RegisterID}}",
+												"answers"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 18 Mar 2024 02:42:23 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Credentials",
+											"value": "true"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "POST, OPTIONS, GET, PUT"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "GET, POST, PATCH, DELETE, OPTIONS"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "20"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "3"
+										},
+										{
+											"key": "Via",
+											"value": "kong/3.0.1"
+										},
+										{
+											"key": "Access-Control-Expose-Headers",
+											"value": "Content-Length,Content-Range"
+										},
+										{
+											"key": "CF-Cache-Status",
+											"value": "DYNAMIC"
+										},
+										{
+											"key": "Report-To",
+											"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=OIs7Z5GqtyoMXQyRLAgJl6NNcoIhtXaRnD53ezslPSs90k3VLrZBHGYBmPZZchI3ZIQ9Ep3%2BIA%2Buf6Se7wpC97H9mivy0sswe8c%2FRMTSiIIopQO5NlXmWid0BcOTY7%2F4StA%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "NEL",
+											"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+										},
+										{
+											"key": "Server",
+											"value": "cloudflare"
+										},
+										{
+											"key": "CF-RAY",
+											"value": "8661de7fdd5f84bd-HKG"
+										},
+										{
+											"key": "alt-svc",
+											"value": "h3=\":443\"; ma=86400"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"question_id\": \"de307ce9-b070-4492-af21-6c86ad998284\",\n            \"option_id\": \"050ff2d0-bfdb-4b9a-b5f5-d27eb78e55eb\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "Start",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question_section_id\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/start",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"start"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Restart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"question_section_id\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/restart",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"restart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finish",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "finish_at",
+											"value": "2023-09-12 11:45:01",
+											"type": "text"
+										},
+										{
+											"key": "finish_by",
+											"value": "user",
+											"description": "user, system",
+											"type": "text"
+										},
+										{
+											"key": "timezone",
+											"value": "7",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/finish",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"finish"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"batch_answer\": [\n    {\n      \"question_id\": \"30797e44-44a4-4b1b-9365-29684961b2a5\",\n      \"option_id\": \"abb1354c-ee26-4cb7-b29d-889a6fd34a79\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/schedules/{{ScheduleID}}/exam/{{RegisterID}}/save",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schedules",
+										"{{ScheduleID}}",
+										"exam",
+										"{{RegisterID}}",
+										"save"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({ ",
+					"    key: \"X-User-Key\",",
+					"    value: \"{{X-User-Key-Web}}\" ",
+					"});",
+					"",
+					"// pm.request.headers.add({ ",
+					"//     key: \"X-User-Key\",",
+					"//     value: \"{{X-User-Key-Web}}\" ",
+					"// });",
+					"",
+					"// pm.request.headers.add({ ",
+					"//     key: \"X-User-Property\",",
+					"//     value: \"{{X-User-Property}}\" ",
+					"// });",
+					"",
+					"// pm.request.headers.add({ ",
+					"//     key: \"X-User-Property\",",
+					"//     value: \"{{X-User-Property-Admin}}\" ",
+					"// });",
+					"",
+					"// pm.request.headers.add({ ",
+					"//     key: \"X-User-Property\",",
+					"//     value: \"{{X-User-Property-Common}}\" ",
+					"// });",
+					"",
+					"pm.request.headers.add({ ",
+					"    key: \"X-User-Device\",",
+					"    value: \"X-User-Device\" ",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

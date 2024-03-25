@@ -1,0 +1,1104 @@
+{
+	"info": {
+		"_postman_id": "8bb85a39-cf9d-4b9d-a39d-05a7f6f0ac66",
+		"name": "Ebook Service Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12171583"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/products/list?timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"list"
+							],
+							"query": [
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/products/list?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"list"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:45:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "163"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=lqqcQeMW8Ht6mQL3XsSOGLLEU2WuBFZMomX6tuKb8ZhEUVdmIXw%2BWiTjp5gtca1nM8PAL5Ee7c8xzrVO9F9w3ifgNOKfaIOF0%2BlIIlTKjhTOmRgtheoNM3jsJZrdAlWuuoU%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e311baf584bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 20,\n        \"total\": 1,\n        \"data\": [\n            {\n                \"id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n                \"type\": \"cpns\",\n                \"code\": \"CPNS02\",\n                \"title\": \"cpns 02\",\n                \"description\": \"cpns description\",\n                \"price\": 0,\n                \"expiration\": 100,\n                \"open_at\": \"2024-03-18 09:40:00\",\n                \"close_at\": \"2024-03-18 20:00:00\",\n                \"thumbnail\": {\n                    \"id\": \"0caa8afd-2ba6-43b2-bd00-a83b084ffc1d\",\n                    \"file_name\": \"thumbnail_placeholder_1710729390.jpeg\",\n                    \"file_type\": \"thumbnail\",\n                    \"file_size\": 44850,\n                    \"mime_type\": \"image/jpeg\",\n                    \"url\": \"https://media.personna.id/ebook-bucket/thumbnail/thumbnail_placeholder_1710729390.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=asqoJkPgBAtRgTD4SU4C%2F20240318%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240318T024530Z&X-Amz-Expires=1200&X-Amz-SignedHeaders=host&X-Amz-Signature=6c8ab8aaa2c2c4c73661c5f9c648fcd61edbf933cd6ec5a16014e098e0a808ab\",\n                    \"created_at\": \"2024-03-18 09:36:30\",\n                    \"updated_at\": \"2024-03-18 09:36:30\"\n                },\n                \"published_at\": \"2024-03-18 09:36:39\",\n                \"created_at\": \"2024-03-18 09:36:30\",\n                \"updated_at\": \"2024-03-18 09:36:39\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Products By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/products/{{ProductID}}?timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{ProductID}}"
+							],
+							"query": [
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Products By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/products/{{ProductID}}?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"{{ProductID}}"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:45:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "232"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=m7ibS8MASgdRZsOmBhYCMYKjMM%2FuGN9MpBukqnSNEOquGYSKcNCzG0pefT6D9OYnnWhhp6jVGaMaWJDMnXVAf62xvEmKctlKOBpeEdpG6DIWM%2FOadlbT5SCdXmEUG%2BlVOyY%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e36fcde684bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n        \"type\": \"cpns\",\n        \"code\": \"CPNS02\",\n        \"title\": \"cpns 02\",\n        \"description\": \"cpns description\",\n        \"price\": 0,\n        \"expiration\": 100,\n        \"open_at\": \"2024-03-18 09:40:00\",\n        \"close_at\": \"2024-03-18 20:00:00\",\n        \"thumbnail\": {\n            \"id\": \"0caa8afd-2ba6-43b2-bd00-a83b084ffc1d\",\n            \"file_name\": \"thumbnail_placeholder_1710729390.jpeg\",\n            \"file_type\": \"thumbnail\",\n            \"file_size\": 44850,\n            \"mime_type\": \"image/jpeg\",\n            \"url\": \"https://media.personna.id/ebook-bucket/thumbnail/thumbnail_placeholder_1710729390.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=asqoJkPgBAtRgTD4SU4C%2F20240318%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240318T024545Z&X-Amz-Expires=1200&X-Amz-SignedHeaders=host&X-Amz-Signature=a6ca1c72dc70c918822b7f32f5532e2966940f9ccfbb8870a05072bac58b244b\",\n            \"created_at\": \"2024-03-18 09:36:30\",\n            \"updated_at\": \"2024-03-18 09:36:30\"\n        },\n        \"published_at\": \"2024-03-18 09:36:39\",\n        \"created_at\": \"2024-03-18 09:36:30\",\n        \"updated_at\": \"2024-03-18 09:36:39\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Product Document",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/products/{{ProductID}}/documents?timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"{{ProductID}}",
+								"documents"
+							],
+							"query": [
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Product Document",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/products/{{ProductID}}/documents?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"products",
+										"{{ProductID}}",
+										"documents"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:45:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "118"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "1"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=nDbJfQbVjIyf2NBLRbT47tS7V3X%2FjsFZwMvIC4NfYtWqMwJ0572agXKkRkYztqhiHQRsoJG7opP1Y3ImhJgxek1RgU1vNjSgf5x%2FMW659CdTtagOhqsVmxrmGHsV%2BWamVLY%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e3a609fb84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"568f9487-e878-42e0-b961-a8396828401d\",\n            \"file_name\": \"jurnal.pdf\",\n            \"file_type\": \"attachment\",\n            \"file_size\": 180156,\n            \"mime_type\": \"application/pdf\",\n            \"url\": \"https://media.personna.id/ebook-bucket/attachment/jurnal.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=asqoJkPgBAtRgTD4SU4C%2F20240318%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240318T024554Z&X-Amz-Expires=1200&X-Amz-SignedHeaders=host&X-Amz-Signature=18658b99a98ae2091b8f40ba227a5e4d37a6b13fdfa1624b61f4277fbc28df47\",\n            \"created_at\": \"2024-03-16 12:25:03\",\n            \"updated_at\": \"2024-03-16 12:25:03\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Enrolled",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_ids\": [\"{{ProductID}}\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/enrolled?user_id={{UserID}}&timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"enrolled"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{UserID}}"
+								},
+								{
+									"key": "list",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Enrolled",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_ids\": [\"{{ProductID}}\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/enrolled?user_id={{UserID}}&timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"enrolled"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{UserID}}"
+										},
+										{
+											"key": "list",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:49:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "27"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=jZQ%2Fuwu0GZrjJBA%2Fr0iTnQrdARhLKT87U2nj34WaW7IXAOqsD7rN%2Bx9vnzZvQ8Igy5zzZRlueR2f5mp5lkx6Er9XpyQ32KExT8%2BoZpS8czFe%2FE1EYepDy8R92MzzD0FlXew%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e8ba496584bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 20,\n        \"total\": 1,\n        \"data\": [\n            {\n                \"id\": \"c36b6fb7-706a-4de2-a0ed-36becd161c88\",\n                \"transaction_id\": \"bae00f3f-ad25-4e6a-b5cb-bca5818b5b05\",\n                \"product_id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n                \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n                \"community_id\": null,\n                \"community_group_id\": null,\n                \"status\": \"verified\",\n                \"expired_at\": \"2024-03-22 13:49:02\",\n                \"created_at\": \"2024-03-18 09:49:02\",\n                \"updated_at\": \"2024-03-18 09:49:02\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Enrolled By Query list and Body product_ids",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_ids\": [\"{{ProductID}}\"]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/enrolled?user_id={{UserID}}&list=&timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"enrolled"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "{{UserID}}"
+										},
+										{
+											"key": "list",
+											"value": ""
+										},
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:50:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "23"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "3"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=weRor4RatC4ZMYDDQLHtzQ7wfM3Him9rrgppg%2Ft1aSywYNpR2ffwmhvl8uvE2MYJkPaEI3A6y5n7ih7jXLuYw8qPmxM9BOzQQQvocaUQIemEQVZaInsNvIgroYzA0cp%2Bkj0%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661ea5c680b84bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": [\n        {\n            \"id\": \"c36b6fb7-706a-4de2-a0ed-36becd161c88\",\n            \"transaction_id\": \"bae00f3f-ad25-4e6a-b5cb-bca5818b5b05\",\n            \"product_id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n            \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n            \"community_id\": null,\n            \"community_group_id\": null,\n            \"status\": \"verified\",\n            \"expired_at\": \"2024-03-22 13:49:02\",\n            \"created_at\": \"2024-03-18 09:49:02\",\n            \"updated_at\": \"2024-03-18 09:49:02\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Enrolled Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/enrolled/products?timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"enrolled",
+								"products"
+							],
+							"query": [
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Enrolled Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/enrolled/products?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"enrolled",
+										"products"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:49:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "444"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "2"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=gWUTo8d%2BHmOu3IduVS%2Bnf%2FSep4KSj8X0p6HoYi3wzXh54wlHBFLYtzuZGZH2xV56rbsNqYzjwcF9yJmROG9abxovkGQPHngH2jy2NOCN7hvJ%2F%2FceIjlkIaO1k1gghKVH45U%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e9848ff784bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 20,\n        \"total\": 0,\n        \"data\": [\n            {\n                \"id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n                \"type\": \"cpns\",\n                \"code\": \"CPNS02\",\n                \"title\": \"cpns 02\",\n                \"description\": \"cpns description\",\n                \"price\": 0,\n                \"expiration\": 100,\n                \"open_at\": \"2024-03-18 09:40:00\",\n                \"close_at\": \"2024-03-18 20:00:00\",\n                \"thumbnail\": {\n                    \"id\": \"0caa8afd-2ba6-43b2-bd00-a83b084ffc1d\",\n                    \"file_name\": \"thumbnail_placeholder_1710729390.jpeg\",\n                    \"file_type\": \"thumbnail\",\n                    \"file_size\": 44850,\n                    \"mime_type\": \"image/jpeg\",\n                    \"url\": \"https://media.personna.id/ebook-bucket/thumbnail/thumbnail_placeholder_1710729390.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=asqoJkPgBAtRgTD4SU4C%2F20240318%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240318T024955Z&X-Amz-Expires=1200&X-Amz-SignedHeaders=host&X-Amz-Signature=c09615f044551ae90c56610557a0c8e0c2e72738fb52601c6feba0bf1912bf21\",\n                    \"created_at\": \"2024-03-18 09:36:30\",\n                    \"updated_at\": \"2024-03-18 09:36:30\"\n                },\n                \"published_at\": \"2024-03-18 09:36:39\",\n                \"created_at\": \"2024-03-18 09:36:30\",\n                \"updated_at\": \"2024-03-18 09:36:39\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Enrolled Product By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}/api/v1/enrolled/products/{{ProductID}}?timezone=%2B7",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"enrolled",
+								"products",
+								"{{ProductID}}"
+							],
+							"query": [
+								{
+									"key": "timezone",
+									"value": "%2B7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Enrolled Product By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseURL}}/api/v1/enrolled/products/{{ProductID}}?timezone=%2B7",
+									"host": [
+										"{{BaseURL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"enrolled",
+										"products",
+										"{{ProductID}}"
+									],
+									"query": [
+										{
+											"key": "timezone",
+											"value": "%2B7"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Mar 2024 02:50:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Accept,Content-Type,X-User-Key,X-User-Property,Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, OPTIONS, GET, PUT"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PATCH, DELETE, OPTIONS"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-Kong-Upstream-Latency",
+									"value": "24"
+								},
+								{
+									"key": "X-Kong-Proxy-Latency",
+									"value": "499"
+								},
+								{
+									"key": "Via",
+									"value": "kong/3.0.1"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Content-Length,Content-Range"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=JH89Hqew%2FvVA57fHCWNJxybrUrgjJpT9gqc%2FwTiqhlkfiAnkW5ANVnbfl2nwQWlxZlQQlBxAXzhhdVefZ5WcG%2FSvNDWWwxHcZx0W%2F9GTtKrxMtSFqYzWot7m8IRX3ww9wbA%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "8661e9dc796484bd-HKG"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=86400"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": \"c36b6fb7-706a-4de2-a0ed-36becd161c88\",\n        \"transaction_id\": \"bae00f3f-ad25-4e6a-b5cb-bca5818b5b05\",\n        \"product_id\": \"d599ff7d-2b84-40b7-8b6f-8a0ce3db6f9f\",\n        \"user_id\": \"9a3f07b3-81e0-45cd-a955-3860804b801d\",\n        \"community_id\": null,\n        \"community_group_id\": null,\n        \"status\": \"verified\",\n        \"expired_at\": \"2024-03-22 13:49:02\",\n        \"created_at\": \"2024-03-18 09:49:02\",\n        \"updated_at\": \"2024-03-18 09:49:02\"\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
