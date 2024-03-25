@@ -38,6 +38,5 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+next.config.js
 next-env.d.ts
-next.config.ts
-/file-api
