@@ -27,8 +27,8 @@ const nextConfig = {
     ENCRYPTION_PREF_KEY: 'prefadZkiAToken331',
     BASEURL: 'https://api.personna.id/',
     GOOGLE_ID:
-      '530827057986-4df87ihc1cgh0l5kknl22k61d72958ib.apps.googleusercontent.com',
-    GOOGLE_SECRET: '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'
+      'http://813611852387-i3o453rpqp4trjvicn2ua5l2redrha1m.apps.googleusercontent.com',
+    GOOGLE_SECRET: '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'
   },
   async rewrites() {
     return {}
