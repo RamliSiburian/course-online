@@ -42,6 +42,9 @@ export default function LoginPage(): React.JSX.Element {
             // })
         })
     }
+
+
+
     return (
         <div className='bg-[#FFF] h-screen'>
             <Row className='px-6 sm:px-10 xl:px-24 py-5 '>

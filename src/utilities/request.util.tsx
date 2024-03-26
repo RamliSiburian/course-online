@@ -46,7 +46,7 @@ export default async function request<T = any, R = any>({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             Authorization: `Bearer ${token}`,
-            'X-User-Key': 'Y29tLmtsaWsud2ViLmlkLCQyeSQxMCRDUkFucmRlRmJ6dmwxVURMYW5GQXouamV0OFlGYVRkRTR1dm55bUROYXNDYW4ybmhMN1lNNg=='
+            'X-User-Key': process.env.X_USER_KEY
           },
           method,
           data: JSON.stringify(data)
@@ -91,7 +91,7 @@ export default async function request<T = any, R = any>({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           Authorization: `Bearer ${token}`,
-          'X-User-Key': 'Y29tLmtsaWsud2ViLmlkLCQyeSQxMCRDUkFucmRlRmJ6dmwxVURMYW5GQXouamV0OFlGYVRkRTR1dm55bUROYXNDYW4ybmhMN1lNNg=='
+          'X-User-Key': process.env.X_USER_KEY
         },
         method,
         data: JSON.stringify(data)

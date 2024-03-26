@@ -13,8 +13,15 @@ export const authOptions = {
     ],
     callback: {
       async signIn({user, account, profile} : any) {
-      console.log({user});
-      
+        user.id = profile.id;
+        user.name = profile.name;
+        user.email = profile.email
+      return true
+    },
+    async afterSignIn({session, user}: any) {
+      // Store user data in local storage
+      localStorage.setItem('userData', JSON.stringify(user));
+      return session;
     }
     },
     onError: async ({error, req, res}: any) => {

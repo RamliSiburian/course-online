@@ -27,8 +27,10 @@ const nextConfig = {
     ENCRYPTION_PREF_KEY: 'prefadZkiAToken331',
     BASEURL: 'https://api.personna.id/',
     GOOGLE_ID:
-      'http://813611852387-i3o453rpqp4trjvicn2ua5l2redrha1m.apps.googleusercontent.com',
-    GOOGLE_SECRET: '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'
+      '813611852387-i3o453rpqp4trjvicn2ua5l2redrha1m.apps.googleusercontent.com',
+    GOOGLE_SECRET: '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',
+    X_USER_KEY:
+      'Y29tLmtsaWsud2ViLmlkLCQyeSQxMCRDUkFucmRlRmJ6dmwxVURMYW5GQXouamV0OFlGYVRkRTR1dm55bUROYXNDYW4ybmhMN1lNNg=='
   },
   async rewrites() {
     return {}
