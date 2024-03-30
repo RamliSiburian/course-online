@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth/next'
 import GoogleProvider from 'next-auth/providers/google'
+import logger from '../../../../../logger';
 
 const googleClientId = process.env.GOOGLE_ID as string;
 const googleClientSecret = process.env.GOOGLE_SECRET as string;
@@ -8,26 +9,26 @@ export const authOptions = {
     providers: [
         GoogleProvider({
             clientId: googleClientId,
-            clientSecret: googleClientSecret
+            clientSecret: googleClientSecret,
+            authorization: {
+              params: {
+                prompt: 'consent',
+                access_type: 'offline',
+                response_type: 'code'
+              }
+            }
         })
     ],
-    callback: {
-      async signIn({user, account, profile} : any) {
-        user.id = profile.id;
-        user.name = profile.name;
-        user.email = profile.email
-      return true
-    },
-    async afterSignIn({session, user}: any) {
-      // Store user data in local storage
-      localStorage.setItem('userData', JSON.stringify(user));
-      return session;
+    callbacks: {
+      async signIn({ user, account, profile, email, credentials }: any) {       
+        logger.info('User Info:', user);
+        logger.info('Account Info:', account);
+        logger.info('Profile Info:', profile);
+        logger.info('Email:', email);
+        logger.info('Credentials:', credentials);
+        return true
+      }
     }
-    },
-    onError: async ({error, req, res}: any) => {
-      console.error('NextAuth Error:', error.message);
-      res.status(500).end(error.message);
-  }
 }
 
 export const handler = NextAuth(authOptions)
