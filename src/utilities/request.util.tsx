@@ -17,7 +17,8 @@ interface IRequestPayloads<T = any> {
 interface IResponsePayloads<T = any> {
   data: T
   meta: { success: boolean; code: string | number; message: string }
-  status_code: number
+  status_code: number,
+  messages: any
 }
 
 const getQueryByName = (name: string, url: string) => {
@@ -58,6 +59,7 @@ export default async function request<T = any, R = any>({
         description: e?.response?.data?.messages
       })
       router.replace('/auth/login')
+      LynxStorages.dropItem('ADZKIA@UTOKEN')
       return Promise.reject()
     }
 

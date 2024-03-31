@@ -9,9 +9,9 @@ const ValidationView = lazy(
   () => import('@afx/views/auth/validation/index.layout')
 )
 
-export const metadata = {
-  title: 'Course Online'
-}
+// export const metadata = {
+//   title: 'Course Online'
+// }
 
 export default function MainLayout({
   children

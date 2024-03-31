@@ -8,6 +8,8 @@ export const endpoint = {
         login: 'login',
         loginGoole: 'login-with-google',
         registerGoolge: 'register-with-google',
-        validation: ''
+        register: 'register',
+        validation: '',
+        logout: 'logout'
     }
 }

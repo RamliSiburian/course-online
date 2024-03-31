@@ -1,4 +1,4 @@
-import { IReqLogin, IReqRegisterGoogle } from '@afx/interfaces/auth/auth.iface';
+import { IReqLogin, IReqRegister, IReqRegisterGoogle } from '@afx/interfaces/auth/auth.iface';
 import { endpoint, services } from '@afx/utils/config.endpoint';
 import request from '@afx/utils/request.util';
 
@@ -18,10 +18,27 @@ export function LoginGoogle(data: { id: number }) {
         method: 'POST'
     })
 }
+export function Register(data: IReqRegister) {
+    return request<any>({
+        url: endpoint.auth.register,
+        data,
+        method: 'POST',
+        service: services.auth
+    })
+}
+
 export function RegisterGoogle(data: IReqRegisterGoogle) {
     return request<any>({
         url: endpoint.auth.registerGoolge,
         data,
+        service: services?.auth,
+        method: 'POST'
+    })
+}
+
+export function Logout() {
+    return request<any>({
+        url: endpoint.auth.logout,
         service: services?.auth,
         method: 'POST'
     })

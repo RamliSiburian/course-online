@@ -1,4 +1,4 @@
-import { Checkbox, Col, Row } from 'antd';
+import { Checkbox, Col, Form, notification, Row } from 'antd';
 import Image from 'next/image';
 import Logo from '@lynx/images/logo.png'
 import { LynxButtons } from '@afx/components/common/button/button';
@@ -7,9 +7,30 @@ import { LynxForm, LynxFormItem } from '@afx/components/common/form/form';
 import LynxInput from '@afx/components/common/input/input';
 import { PhoneFilled, UnlockFilled, UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
+import { IReqRegister } from '@afx/interfaces/auth/auth.iface';
+import { useState } from 'react';
+import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model';
+import { useLynxStore } from '@lynx/store/core';
 
 export default function LoginPage(): React.JSX.Element {
+    const { useActions, isLoading } = useLynxStore<IStateAuth, IActionAuth>('auth')
     const router = useRouter()
+    const [forms] = Form.useForm<IReqRegister>()
+    const [refresh, onRefresh] = useState(false)
+    const [warningPass, setWarningPass] = useState<boolean>(false)
+
+    const handleRegister = () => {
+        return forms.validateFields().then(values => {
+            useActions<'register'>('register', [values, (status: number) => { }], true)
+
+
+        }).catch(err => {
+            notification.warning({
+                message: 'Some field is required',
+                description: err?.errorFields?.[0]?.errors
+            })
+        })
+    }
     return (
         <div className='bg-[#F8FDFF] h-screen'>
             <Row className='px-6 sm:px-10 xl:px-24 py-5 '>
@@ -36,9 +57,9 @@ export default function LoginPage(): React.JSX.Element {
                             <p className='text-sm text-[#4A5C87]'> dan bergabung bersama siswa yang lainnya </p>
                         </div>
 
-                        <LynxForm name='validateOnly' layout='vertical' className='tracking-normal mt-10' autoComplete='off'>
+                        <LynxForm onFieldsChange={() => onRefresh(!refresh)} form={forms} name='validateOnly' layout='vertical' className='tracking-normal mt-10' autoComplete='off'>
                             <Row gutter={[0, 15]}>
-                                <Col span={24}>
+                                {/* <Col span={24}>
                                     <LynxFormItem name="usename" >
                                         <LynxInput
                                             prefix={<UserOutlined className="text-[#ED7020] site-form-item-icon" />}
@@ -46,18 +67,26 @@ export default function LoginPage(): React.JSX.Element {
                                             standart={false}
                                         />
                                     </LynxFormItem>
-                                </Col>
+                                </Col> */}
                                 <Col span={24}>
-                                    <LynxFormItem name="Email" >
+                                    <LynxFormItem
+                                        name="email"
+                                        rules={[
+                                            { required: true, message: 'Fields email is required' },
+                                            {
+                                                type: 'email',
+                                                message: 'the input is not valid E-mail'
+                                            }
+                                        ]}
+                                    >
                                         <LynxInput
                                             // prefix={<EyeOutlined className="site-form-item-icon" />}
                                             placeholder="Email"
                                             standart={false}
-                                            type="email"
                                         />
                                     </LynxFormItem>
                                 </Col>
-                                <Col span={24}>
+                                {/* <Col span={24}>
                                     <LynxFormItem name="no_hp" >
                                         <LynxInput
                                             prefix={<PhoneFilled className="site-form-item-icon text-[#ED7020] " style={{ transform: 'rotate(0.3turn)' }} />}
@@ -66,20 +95,40 @@ export default function LoginPage(): React.JSX.Element {
                                             type="number"
                                         />
                                     </LynxFormItem>
-                                </Col>
+                                </Col> */}
                                 <Col span={24}>
-                                    <LynxFormItem name="password" >
+                                    <LynxFormItem hasFeedback name="password" rules={[{ required: true, message: 'Fields password is required' }]} >
                                         <LynxInput
+                                            onChange={() => onRefresh(!refresh)}
                                             prefix={<UnlockFilled className="text-[#ED7020] site-form-item-icon" />}
                                             placeholder="Kata Sandi"
                                             standart={false}
                                             type="password"
+
                                         />
                                     </LynxFormItem>
                                 </Col>
                                 <Col span={24}>
-                                    <LynxFormItem name="re_password" >
+                                    <LynxFormItem name="confirmation_password"
+                                        dependencies={['password']}
+                                        hasFeedback
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'Please confirm your password'
+                                            },
+                                            ({ getFieldValue }) => ({
+                                                validator(_, value) {
+                                                    if (!value || getFieldValue('password') === value) {
+                                                        return Promise.resolve()
+                                                    }
+                                                    return Promise.reject(new Error('The new password that you entered do not match!'))
+                                                }
+                                            })
+                                        ]}
+                                    >
                                         <LynxInput
+                                            onChange={() => onRefresh(!refresh)}
                                             prefix={<UnlockFilled className="text-[#ED7020] site-form-item-icon" />}
                                             placeholder="Ulangi Kata Sandi"
                                             standart={false}
@@ -87,13 +136,13 @@ export default function LoginPage(): React.JSX.Element {
                                         />
                                     </LynxFormItem>
                                 </Col>
-                                <Col span={24}>
+                                {/* <Col span={24}>
                                     <LynxFormItem name="aggrement">
                                         <Checkbox onChange={(e) => console.log({ value: e.target.checked })} className='text-left text-[#4A5C87] text-xs'>Saya sudah menyetujui <span className='font-semibold'>syarat dan ketentuan</span> yang berlaku</Checkbox>
                                     </LynxFormItem>
-                                </Col>
+                                </Col> */}
                                 <Col span={24} className='mt-4'>
-                                    <LynxButtons onClick={() => { }} title="Daftar" style={{ width: '100%' }} size='large' />
+                                    <LynxButtons onClick={handleRegister} title="Daftar" style={{ width: '100%' }} size='large' />
                                 </Col>
 
                                 <Col span={24}>
