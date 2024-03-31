@@ -26,29 +26,29 @@ function HomePage() {
     setTabCount(prevTabCount => prevTabCount + 1);
   }, []);
 
-  
+
 
   const data = {
-    name : 'MTK',
+    name: 'MTK',
     duration: 90,
     qusetions: [
-      {no:1, question: '10 + 10 is ?'},
-      {no:2, question: '15 - 10 is ?'}
+      { no: 1, question: '10 + 10 is ?' },
+      { no: 2, question: '15 - 10 is ?' }
     ],
     answers: [
-      {soalNo: 1, answer: [{a:20, b:10,c:15,d:25 }]},
-      {soalNo: 2, answer: [{a:0, b:5,c:15,d:25 }]}
+      { soalNo: 1, answer: [{ a: 20, b: 10, c: 15, d: 25 }] },
+      { soalNo: 2, answer: [{ a: 0, b: 5, c: 15, d: 25 }] }
     ]
   }
 
   const key = 'test'
 
   const storeData = () => {
-    const encrypted = CryptoJS.AES.encrypt( JSON.stringify(data), key).toString();
-  localStorage.setItem('exam', encrypted);
+    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
+    localStorage.setItem('exam', encrypted);
 
- 
-    
+
+
   }
 
   const getData = () => {
@@ -56,18 +56,18 @@ function HomePage() {
     const decrypted = CryptoJS.AES.decrypt(encrypted as any, key).toString(CryptoJS.enc.Utf8);
     const datas = JSON.parse(decrypted);
 
-    console.log({ datas});
-    
+    console.log({ datas });
+
   }
-  
+
 
   return (
     <>
-    <div>test</div>
-    <button onClick={storeData}>store</button>
-    <br />
+      <div>test</div>
+      <button onClick={storeData}>store</button>
+      <br />
 
-    <button onClick={getData}>get data</button>
+      <button onClick={getData}>get data</button>
     </>
   )
 }

@@ -5,8 +5,9 @@ export const services = {
 
 export const endpoint = {
     auth: {
-        login: '',
-        register: '',
+        login: 'login',
+        loginGoole: 'login-with-google',
+        registerGoolge: 'register-with-google',
         validation: ''
     }
 }

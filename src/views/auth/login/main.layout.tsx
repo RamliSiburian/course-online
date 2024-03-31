@@ -7,21 +7,22 @@ import { LynxCards } from '@afx/components/common/card/card'
 import { LynxForm, LynxFormItem } from '@afx/components/common/form/form'
 import LynxInput from '@afx/components/common/input/input'
 import { EyeInvisibleOutlined, EyeOutlined, UserOutlined } from '@ant-design/icons'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { Icons } from '@afx/components/common/icons'
 import { useLynxStore } from '@lynx/store/core'
 import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model'
 import { IReqLogin } from '@afx/interfaces/auth/auth.iface'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function LoginPage(): React.JSX.Element {
     const router = useRouter()
     const { useActions, isLoading } = useLynxStore<IStateAuth, IActionAuth>('auth')
     const [typePass, setTypePass] = useState<string>('password')
+    const { data: session } = useSession();
 
     const [forms] = Form.useForm<IReqLogin>()
 
-    const loading = isLoading('login') || false
+    const loading = isLoading('login') || isLoading('loginGoogle') || false
 
 
     const handleLogin = () => {
@@ -42,6 +43,12 @@ export default function LoginPage(): React.JSX.Element {
             // })
         })
     }
+
+    useEffect(() => {
+        if (session) {
+            useActions<'loginGoogle'>('loginGoogle', [session?.id, (status: number, user: string) => { }], true)
+        }
+    }, [session])
 
 
 
