@@ -59,8 +59,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
             },
             async register(data, callback) {
                 try {
-                    // const res = await Register(data)
-                    console.log({ data });
+                    const res = await Register(data)
 
                 } catch (err: any) {
                     notification.warning({

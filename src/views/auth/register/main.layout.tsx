@@ -21,9 +21,16 @@ export default function LoginPage(): React.JSX.Element {
 
     const handleRegister = () => {
         return forms.validateFields().then(values => {
-            useActions<'register'>('register', [values, (status: number) => { }], true)
-
-
+            useActions<'register'>('register', [values, (status: number) => {
+                if (status === 200) {
+                    notification.success({
+                        message: 'Register is Successfully',
+                        description: '',
+                        duration: 2
+                    })
+                    router.replace('/dashboard')
+                }
+            }], true)
         }).catch(err => {
             notification.warning({
                 message: 'Some field is required',
@@ -59,15 +66,6 @@ export default function LoginPage(): React.JSX.Element {
 
                         <LynxForm onFieldsChange={() => onRefresh(!refresh)} form={forms} name='validateOnly' layout='vertical' className='tracking-normal mt-10' autoComplete='off'>
                             <Row gutter={[0, 15]}>
-                                {/* <Col span={24}>
-                                    <LynxFormItem name="usename" >
-                                        <LynxInput
-                                            prefix={<UserOutlined className="text-[#ED7020] site-form-item-icon" />}
-                                            placeholder="Nama Lengkap"
-                                            standart={false}
-                                        />
-                                    </LynxFormItem>
-                                </Col> */}
                                 <Col span={24}>
                                     <LynxFormItem
                                         name="email"
@@ -86,16 +84,6 @@ export default function LoginPage(): React.JSX.Element {
                                         />
                                     </LynxFormItem>
                                 </Col>
-                                {/* <Col span={24}>
-                                    <LynxFormItem name="no_hp" >
-                                        <LynxInput
-                                            prefix={<PhoneFilled className="site-form-item-icon text-[#ED7020] " style={{ transform: 'rotate(0.3turn)' }} />}
-                                            placeholder="No Handphone"
-                                            standart={false}
-                                            type="number"
-                                        />
-                                    </LynxFormItem>
-                                </Col> */}
                                 <Col span={24}>
                                     <LynxFormItem hasFeedback name="password" rules={[{ required: true, message: 'Fields password is required' }]} >
                                         <LynxInput
@@ -136,11 +124,6 @@ export default function LoginPage(): React.JSX.Element {
                                         />
                                     </LynxFormItem>
                                 </Col>
-                                {/* <Col span={24}>
-                                    <LynxFormItem name="aggrement">
-                                        <Checkbox onChange={(e) => console.log({ value: e.target.checked })} className='text-left text-[#4A5C87] text-xs'>Saya sudah menyetujui <span className='font-semibold'>syarat dan ketentuan</span> yang berlaku</Checkbox>
-                                    </LynxFormItem>
-                                </Col> */}
                                 <Col span={24} className='mt-4'>
                                     <LynxButtons onClick={handleRegister} title="Daftar" style={{ width: '100%' }} size='large' />
                                 </Col>
