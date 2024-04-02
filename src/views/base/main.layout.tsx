@@ -1,5 +1,6 @@
-import { Layout, Flex, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import HeaderLayout from './header/header.layout';
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -11,7 +12,6 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
     const {
         token: { colorBgContainer }
     } = theme.useToken()
-
 
     return (
         <Layout className='h-screen overflow-hidden'>

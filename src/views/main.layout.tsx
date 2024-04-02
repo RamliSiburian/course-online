@@ -56,7 +56,6 @@ function HomePage() {
     const decrypted = CryptoJS.AES.decrypt(encrypted as any, key).toString(CryptoJS.enc.Utf8);
     const datas = JSON.parse(decrypted);
 
-    console.log({ datas });
 
   }
 

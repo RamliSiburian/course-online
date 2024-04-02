@@ -9,7 +9,7 @@ import { PhoneFilled, UnlockFilled, UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { IReqRegister, IReqRegisterGoogle } from '@afx/interfaces/auth/auth.iface';
 import { useEffect, useState } from 'react';
-import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model';
+import { IActionAuth, IStateAuth } from '@lynx/models/user-model/auth/auth.model';
 import { useLynxStore } from '@lynx/store/core';
 import { Icons } from '@afx/components/common/icons';
 import { signIn, useSession } from 'next-auth/react';
@@ -45,7 +45,6 @@ export default function LoginPage(): React.JSX.Element {
         })
     }
 
-    console.log({ session });
 
 
     useEffect(() => {

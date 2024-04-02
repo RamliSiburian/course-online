@@ -1,5 +1,6 @@
 export const services = {
     auth: 'auth',
+    userService: 'user-service',
     bimbel: 'bimbel-service'
 }
 
@@ -11,5 +12,13 @@ export const endpoint = {
         register: 'register',
         validation: '',
         logout: 'logout'
+    },
+    client: {
+        user: {
+            profile: {
+                simpleProfile: 'user/profile/simple'
+            }
+        }
     }
+
 }

@@ -1,3 +1,4 @@
 export const StoragesProperties = [
-  'ADZKIA@UTOKEN'
+  'ADZKIA@UTOKEN',
+  'ADZKIA@SIMPLEPROFILE'
 ] as const

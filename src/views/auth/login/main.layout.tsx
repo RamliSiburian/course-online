@@ -10,7 +10,7 @@ import { EyeInvisibleOutlined, EyeOutlined, UserOutlined } from '@ant-design/ico
 import { signIn, useSession } from 'next-auth/react'
 import { Icons } from '@afx/components/common/icons'
 import { useLynxStore } from '@lynx/store/core'
-import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model'
+import { IActionAuth, IStateAuth } from '@lynx/models/user-model/auth/auth.model'
 import { IReqLogin } from '@afx/interfaces/auth/auth.iface'
 import { useEffect, useState } from 'react'
 
@@ -61,7 +61,6 @@ export default function LoginPage(): React.JSX.Element {
         }
     }, [session])
 
-    console.log({ session });
 
 
     return (

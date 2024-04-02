@@ -49,7 +49,7 @@ export default async function request<T = any, R = any>({
             Authorization: `Bearer ${token}`,
             'X-User-Key': process.env.X_USER_KEY
           },
-          method,
+          method: 'POST',
           data: JSON.stringify(data)
         })
     }

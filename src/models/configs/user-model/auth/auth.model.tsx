@@ -1,6 +1,6 @@
 import { IReqLogin, IReqRegister, IReqRegisterGoogle } from '@afx/interfaces/auth/auth.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { Login, LoginGoogle, Logout, Register, RegisterGoogle } from '@afx/services/auth/auth.service'
+import { Login, LoginGoogle, Logout, Register, RegisterGoogle } from '@afx/services/user-services/auth/auth.service'
 import LynxStorages from '@afx/utils/storage.util'
 import { notification } from 'antd'
 
@@ -33,7 +33,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                         message: 'Failed to load data',
                         description: err?.messages,
                         duration: 2,
-                        key: 'FUNC-LOGIN'
+                        key: 'LOGIN'
                     })
                 }
             },
@@ -48,12 +48,11 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                     }
 
                 } catch (err: any) {
-                    console.log({ err });
                     notification.warning({
                         message: 'Failed to load data',
                         description: err?.messages,
                         duration: 2,
-                        key: 'FUNC-LOGIN-GOOGLE'
+                        key: 'LOGIN-GOOGLE'
                     })
                 }
             },
@@ -71,7 +70,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                         message: 'Failed to load data',
                         description: err?.messages?.email,
                         duration: 2,
-                        key: 'FUNC-REGISTER'
+                        key: 'REGISTER'
                     })
                 }
             },
@@ -85,12 +84,11 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                         throw new Error(res?.status_code.toString())
                     }
                 } catch (err: any) {
-                    console.log({ err });
                     notification.warning({
                         message: 'Failed to load data',
                         description: err?.messages?.email[0],
                         duration: 2,
-                        key: 'FUNC-REGISTER-GOOGLE'
+                        key: 'REGISTER-GOOGLE'
                     })
                 }
             },
