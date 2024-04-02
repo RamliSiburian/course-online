@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       textColor: {
-        'base-color': '#ed47bf'
+        'base-color': '#2d4379'
       },
       backgroundColor: {
         'base-color': '#ed47bf'

@@ -61,6 +61,9 @@ export default function LoginPage(): React.JSX.Element {
         }
     }, [session])
 
+    console.log({ session });
+
+
     return (
         <div className='bg-[#FFF] h-screen'>
             <Spin spinning={loadingGoogle} size='small'>
@@ -130,7 +133,7 @@ export default function LoginPage(): React.JSX.Element {
                                                 />
                                             </div>
                                             <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(0,0,255,1)] cursor-pointer flex justify-center items-center' onClick={() => console.log('tes')}>
-                                                <Icons size={20} type='FacebookFilled' />
+                                                <Icons size={20} type='AppleOutlined' />
                                             </div>
                                             <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-blue-300 cursor-pointer flex justify-center items-center' onClick={() => signIn('google')}>
                                                 <Icons size={20} type='GoogleOutlined' />

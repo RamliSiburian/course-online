@@ -3,14 +3,10 @@ import { IActionAuth, IStateAuth } from '@lynx/models/auth/auth.model';
 import { useLynxStore } from '@lynx/store/core'
 import { Button, notification } from 'antd';
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+
 
 export default function Bimbel(): React.JSX.Element {
     const { useActions } = useLynxStore<IStateAuth, IActionAuth>('auth')
-    const router = useRouter()
-
-
     const handleLogout = () => {
         useActions<'logout'>('logout', [(status: number) => {
             if (status === 200) {
@@ -24,6 +20,8 @@ export default function Bimbel(): React.JSX.Element {
         }], true)
 
     }
+
+
     return (
         <>
             <Button onClick={handleLogout}>Logout</Button>

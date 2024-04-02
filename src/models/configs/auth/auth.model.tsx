@@ -60,11 +60,16 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
             async register(data, callback) {
                 try {
                     const res = await Register(data)
-
+                    callback(res?.status_code)
+                    if (res?.status_code === 200) {
+                        LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
+                    } else {
+                        throw new Error(res?.status_code.toString())
+                    }
                 } catch (err: any) {
                     notification.warning({
                         message: 'Failed to load data',
-                        description: err?.messages,
+                        description: err?.messages?.email,
                         duration: 2,
                         key: 'FUNC-REGISTER'
                     })
@@ -74,12 +79,16 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                 try {
                     const res = await RegisterGoogle(data)
                     callback(res?.status_code, res?.data?.username)
-
+                    if (res?.status_code === 200) {
+                        LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
+                    } else {
+                        throw new Error(res?.status_code.toString())
+                    }
                 } catch (err: any) {
                     console.log({ err });
                     notification.warning({
                         message: 'Failed to load data',
-                        description: err?.messages,
+                        description: err?.messages?.email[0],
                         duration: 2,
                         key: 'FUNC-REGISTER-GOOGLE'
                     })

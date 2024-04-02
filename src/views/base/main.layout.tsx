@@ -1,4 +1,5 @@
 import { Layout, Flex, theme } from 'antd';
+import HeaderLayout from './header/header.layout';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -13,25 +14,23 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
 
 
     return (
-        <Flex gap="middle" wrap="wrap">
-            <Layout className='h-screen'>
-                <Header style={{
-                    display: 'flex',
-                    justifyContent: '',
-                    padding: '0px 0px 0px 30px',
-                    background: colorBgContainer,
-                    borderRight: '1px solid #E2E2E2'
-                }} >Header</Header>
-                <Layout className=''>
-                    <Sider width="25%" style={{ background: colorBgContainer }} >
-                        Sider
-                    </Sider>
-                    <Content style={{ background: colorBgContainer }} >{props.children}</Content>
-                </Layout>
-                <Footer style={{ background: colorBgContainer }} >Footer</Footer>
+        <Layout className='h-screen overflow-hidden'>
+            <Header className='!px-0' style={{
+                height: 'auto',
+                display: 'flex',
+                justifyItems: 'center',
+                background: colorBgContainer,
+                padding: 'none',
+                boxShadow: '0px 3px 6px rgb(151 169 204/10%)',
+                zIndex: 2
+            }} ><HeaderLayout /> </Header>
+            <Layout className=''>
+                <Sider width="25%" style={{ background: colorBgContainer }} >
+                    Sider
+                </Sider>
+                <Content style={{ background: colorBgContainer }} >{props.children}</Content>
             </Layout>
-
-
-        </Flex>
+            <Footer style={{ background: colorBgContainer }} >Footer</Footer>
+        </Layout>
     )
 }
