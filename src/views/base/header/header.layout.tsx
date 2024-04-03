@@ -9,7 +9,7 @@ import { signOut } from 'next-auth/react';
 import LynxStorages from '@afx/utils/storage.util';
 import { useEffect, useState } from 'react';
 
-const menus = ['Dashboard', 'Profil']
+const tempMenus = ['Dashboard', 'Profil']
 
 
 function content(): React.JSX.Element {
@@ -30,7 +30,7 @@ function content(): React.JSX.Element {
     return (
         <div>
             <ul>
-                {menus?.map((item, idx) =>
+                {tempMenus?.map((item, idx) =>
                     <li className='text-[#97999F] hover:text-base-color cursor-pointer' key={idx}>{item}</li>
                 )}
                 <li className='text-[#97999F] hover:text-base-color cursor-pointer' onClick={handleLogout} >Keluar</li>

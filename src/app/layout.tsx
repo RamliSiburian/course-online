@@ -3,7 +3,7 @@ import './globals.css'
 import './font.css'
 import './style.scss'
 import { lazy } from 'react'
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react'
 
 const ValidationView = lazy(
   () => import('@afx/views/auth/validation/index.layout')

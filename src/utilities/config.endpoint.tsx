@@ -17,7 +17,11 @@ export const endpoint = {
         user: {
             profile: {
                 simpleProfile: 'user/profile/simple'
+            },
+            menu: {
+                listMenu: 'menu'
             }
+
         }
     }
 
