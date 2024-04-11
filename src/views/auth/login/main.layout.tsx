@@ -35,7 +35,7 @@ export default function LoginPage(): React.JSX.Element {
                         message: 'Login berhasil',
                         duration: 2
                     })
-                    router.push('/dashboard')
+                    router.push('/page/dashboard')
                 }
             }], true)
         }).catch(err => {
@@ -55,12 +55,11 @@ export default function LoginPage(): React.JSX.Element {
                         message: 'Login berhasil',
                         duration: 2
                     })
-                    router.push('/dashboard')
+                    router.push('/page/dashboard')
                 }
             }], true)
         }
     }, [session])
-
 
 
     return (

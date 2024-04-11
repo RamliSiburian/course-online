@@ -1,17 +1,31 @@
-import { Layout, theme } from 'antd';
+import { Layout, MenuProps, theme } from 'antd';
 import HeaderLayout from './header/header.layout';
+import { Icons } from '@afx/components/common/icons';
+import SiderMenu from './sider/sider.layout';
+import Link from 'next/link';
 
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 interface IDashboard {
     children: any
 }
 
-export default function Dashboard(props: IDashboard): React.JSX.Element {
+const items: MenuProps['items'] = [
+    {
+        label: <Link href={'/page/dashboard'} >Dashboard </Link>,
+        key: 'dashboard',
+        icon: <Icons type='AppstoreOutlined' size={16} />
+    }
+
+]
+
+export default function Pages(props: IDashboard): React.JSX.Element {
     const {
         token: { colorBgContainer }
     } = theme.useToken()
+
+
 
     return (
         <Layout className='h-screen overflow-hidden'>
@@ -25,12 +39,14 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
                 zIndex: 2
             }} ><HeaderLayout /> </Header>
             <Layout className=''>
-                <Sider width="25%" style={{ background: colorBgContainer }} >
-                    Sider
-                </Sider>
-                <Content style={{ background: colorBgContainer }} >{props.children}</Content>
+                <SiderMenu items={items} />
+                <Content style={{ background: colorBgContainer }} >
+                    {props.children}
+                </Content>
             </Layout>
             <Footer style={{ background: colorBgContainer }} >Footer</Footer>
-        </Layout>
+        </Layout >
     )
 }
+
+

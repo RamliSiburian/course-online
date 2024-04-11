@@ -1,7 +1,7 @@
 export const services = {
     auth: 'auth',
     userService: 'user-service',
-    bimbel: 'bimbel-service'
+    bimbelService: 'bimbel-service'
 }
 
 export const endpoint = {
@@ -23,6 +23,37 @@ export const endpoint = {
             }
 
         }
-    }
+    },
+    bimbel: {
+        rpc: {
+            stages: {
+                listStages: 'stages'
+            },
+            subjects: {
+                listSubjects: 'subject-types'
+            },
+            exam: {
+                listQuestion: 'get-questions'
+            },
+            purchase: {
+                purchase: 'purchase',
+                purchaseList: 'purchase',
+                purchaseDetail: 'purchase-status',
+                purchaseStatus: 'purchase-status',
+                purchaseVerifying: 'purchase/verifying',
+                purchaseVerified: 'purchase/verified',
+                purchaseCancel: 'purchase/cancel'
+            }
+        },
+        rest: {
+            tutoringPackages: {
+                listPackages: 'tutoring-package',
+                packageDetail: 'tutoring-package',
+                addPackage: 'tutoring-package',
+                updatePackage: 'tutoring-package',
+                deletePackage: 'tutoring-package'
+            }
 
+        }
+    }
 }

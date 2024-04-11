@@ -21,7 +21,6 @@ const modelProfile: IModelDefinitions<IStateProfile, IActionProfile> = {
             async getSimpleProfile() {
                 try {
                     const res = await GetSimpleProfile()
-
                     if (res?.status_code === 200) {
                         LynxStorages.setItem('ADZKIA@SIMPLEPROFILE', JSON.stringify(res?.data), true)
                     } else {
