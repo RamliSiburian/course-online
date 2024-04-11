@@ -1,7 +1,8 @@
 export const services = {
     auth: 'auth',
     userService: 'user-service',
-    bimbelService: 'bimbel-service'
+    bimbelService: 'bimbel-service',
+    examService: 'tryout-service'
 }
 
 export const endpoint = {
@@ -54,6 +55,13 @@ export const endpoint = {
                 deletePackage: 'tutoring-package'
             }
 
+        }
+    },
+    exam: {
+        client: {
+            schedule: {
+                listExam: 'schedules/list'
+            }
         }
     }
 }

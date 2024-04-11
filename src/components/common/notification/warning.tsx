@@ -4,6 +4,7 @@ interface IWarningNotif {
     message?: string
     description: string
     key: string
+
 }
 
 export function WarningNotif(props: IWarningNotif) {

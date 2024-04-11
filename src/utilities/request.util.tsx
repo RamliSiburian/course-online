@@ -2,6 +2,7 @@ import axios from 'axios'
 import LynxStorages from './storage.util'
 import { useRouter } from 'next/navigation'
 import { notification } from 'antd'
+import { services } from './config.endpoint'
 // import LynxStorages from './storage.util'
 
 
@@ -42,7 +43,7 @@ export default async function request<T = any, R = any>({
     try {
       await axios
         .request({
-          url: `${baseUrl}${service}/api/v1/token-validation`,
+          url: `${baseUrl}${services.auth}/api/v1/token-validation`,
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
