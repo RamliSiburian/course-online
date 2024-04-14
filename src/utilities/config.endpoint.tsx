@@ -60,7 +60,8 @@ export const endpoint = {
     exam: {
         client: {
             schedule: {
-                listExam: 'schedules/list'
+                listExam: 'schedules/list',
+                listOwnedExam: 'schedules/owned'
             }
         }
     }

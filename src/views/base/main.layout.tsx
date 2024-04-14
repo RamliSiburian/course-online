@@ -28,7 +28,7 @@ export default function Pages(props: IDashboard): React.JSX.Element {
 
 
     return (
-        <Layout className='h-screen overflow-hidden'>
+        <Layout className='h-screen overflow-scroll'>
             <Header className='!px-0' style={{
                 height: 'auto',
                 display: 'flex',
@@ -40,11 +40,11 @@ export default function Pages(props: IDashboard): React.JSX.Element {
             }} ><HeaderLayout /> </Header>
             <Layout className=''>
                 <SiderMenu items={items} />
-                <Content style={{ background: colorBgContainer }} >
+                <Content className='overflow-scroll' style={{ background: colorBgContainer }} >
                     {props.children}
                 </Content>
             </Layout>
-            <Footer style={{ background: colorBgContainer }} >Footer</Footer>
+            <Footer style={{ background: '#303030' }} >Footer</Footer>
         </Layout >
     )
 }

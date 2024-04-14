@@ -1,8 +1,8 @@
 import { useLynxStore } from '@lynx/store/core';
-import Browse from './browse.layout';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model';
 import { useEffect } from 'react';
 import { IReqListExam } from '@afx/interfaces/exam/client/schedule.iface';
+import ListSchedule from './browse.layout';
 
 export default function Ujian(): React.JSX.Element {
     const { useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
@@ -14,7 +14,7 @@ export default function Ujian(): React.JSX.Element {
     }, [])
     return (
         <>
-            <Browse />
+            <ListSchedule />
         </>
     )
 }

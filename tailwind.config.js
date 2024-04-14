@@ -12,7 +12,8 @@ module.exports = {
         'base-color': '#2d4379'
       },
       backgroundColor: {
-        'base-color': '#ed47bf'
+        'base-color': '#ed47bf',
+        'secondary-color': '#ED7020'
       },
       fontFamily: {},
       backgroundImage: {
