@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 const Schedule = lazy(
-    () => import('@afx/views/dashboard/ujian/layouts/index.layout')
+    () => import('@afx/views/dashboard/ujian/schedule/index.layout')
 )
 
 export default function RouteUjian() {

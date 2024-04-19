@@ -61,7 +61,9 @@ export const endpoint = {
         client: {
             schedule: {
                 listExam: 'schedules/list',
-                listOwnedExam: 'schedules/owned'
+                detailExam: 'schedules/:id/form-register',
+                listOwnedExam: 'schedules/owned',
+                register: 'schedules/:id/registration'
             }
         }
     }

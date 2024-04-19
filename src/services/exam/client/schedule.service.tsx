@@ -10,6 +10,20 @@ export function GetListExam(data: IReqListExam) {
         service: services.examService
     })
 }
+export function GetDetailExam(id: string) {
+    return request<any>({
+        url: endpoint.exam.client.schedule.detailExam.replace(':id', id),
+        method: 'GET',
+        service: services.examService
+    })
+}
+export function RegitsterExam(id: string) {
+    return request<any>({
+        url: endpoint.exam.client.schedule.register.replace(':id', id),
+        method: 'POST',
+        service: services.examService
+    })
+}
 export function GetListOwnedExam(data: IReqListOwnedExam) {
     return request<any>({
         url: endpoint.exam.client.schedule.listOwnedExam,
