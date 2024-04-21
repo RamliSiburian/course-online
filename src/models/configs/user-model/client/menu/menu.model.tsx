@@ -11,7 +11,7 @@ export type IActionMenu = {
 const modelMenu: IModelDefinitions<IStateMenu, IActionMenu> = {
     name: 'menu',
     subscriptions: (getStates, useActions) => ({ pathname }) => {
-        if (pathname === '/dashboard') {
+        if (pathname === '/page') {
             useActions('menu')('getListMenu', [], true)
         }
     },

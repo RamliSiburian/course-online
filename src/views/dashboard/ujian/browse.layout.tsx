@@ -23,7 +23,7 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                 <div className='w-[320px]'>
                     <LynxInput prefix={<Icons type='SearchOutlined' size={18} />} placeholder='Search' standart={false} />
                 </div>
-                <LynxButtons onClick={() => router.replace('/page/dashboard/ujian/schedules')} title='Tambah Ujian' iconType='PlusOutlined' size='large' />
+                <LynxButtons onClick={() => router.replace('/page/dashboard/tryout/schedules')} title=' Lihat list ujian' size='large' />
             </div>
             <div className='flex gap-8 flex-wrap mt-5' >
                 <SimpleTable

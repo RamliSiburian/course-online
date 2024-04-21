@@ -3,12 +3,18 @@ import { Icons } from '@afx/components/common/icons';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model';
 import { useLynxStore } from '@lynx/store/core';
 import { Col, Image, Row } from 'antd';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
-    const { state } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
-    console.log({ state: state?.detailSchedule })
+    const { state, useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const { scheduleID: params }: { scheduleID: string } = useParams() as any
+
+
+    useEffect(() => {
+        useActions<'getDetailExam'>('getDetailExam', [params], true)
+    }, [])
 
     return (
         <div className='shadow-2xl p-4 h-full' >

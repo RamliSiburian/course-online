@@ -34,7 +34,7 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
     return (
         <>
             {listMenus?.length !== 0 &&
-                <Menu items={subMenus} mode='horizontal' style={{
+                <Menu items={listMenus} mode='horizontal' style={{
                     border: 'none',
                     padding: '10px',
                     background: colorBgContainer

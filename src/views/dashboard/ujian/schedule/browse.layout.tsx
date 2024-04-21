@@ -1,6 +1,7 @@
 import { Icons } from '@afx/components/common/icons';
 import LynxInput from '@afx/components/common/input/input';
 import LynxCurrency from '@afx/components/common/typography/currency.layout';
+import getPath from '@lynx/const/router.path';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
 import { Button, Card, Image, Skeleton } from 'antd';
@@ -13,16 +14,17 @@ export default function ListSchedule(props: IListSchedule): React.JSX.Element {
     const { state, useActions, isLoading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const router = useRouter()
     const loading = isLoading('getDetailExam') || false
-    const handleDetail = (id: string) => {
-        useActions<'getDetailExam'>('getDetailExam', [id], true)
-        router.replace('/page/dashboard/ujian/schedules/detail')
-    }
+    // const handleDetail = (id: string) => {
+    //     useActions<'getDetailExam'>('getDetailExam', [id], true)
+    //     // router.replace('/page/dashboard/tryout/schedules/detail')
+    //     router.replace(getPath('scheduleDetail, {scheduleID: id}'))
+    // }
 
     return (
         <div className='shadow-2xl p-4 min-h-screen' >
             <div className='flex justify-between'>
                 <div className='flex items-center gap-4'>
-                    <Icons onClick={() => router.replace('/page/dashboard/ujian')} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
+                    <Icons onClick={() => router.replace('/page/dashboard/tryout')} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
                     <p className='text-base-color font-bold text-xl'>Jadwal Ujian</p>
                 </div>
                 <div className='w-[320px]'>
@@ -55,7 +57,7 @@ export default function ListSchedule(props: IListSchedule): React.JSX.Element {
                                         <LynxCurrency value={item?.price} prefix='Rp.' />
                                     </p>
                                 }
-                                <Button onClick={() => handleDetail(item?.id)} type='primary' className='w-full !bg-secondary-color'>
+                                <Button onClick={() => router.push(getPath('scheduleDetail', { scheduleID: item?.id }))} type='primary' className='w-full !bg-secondary-color'>
                                     Ikuti Sekarang
                                 </Button>
                             </div>
