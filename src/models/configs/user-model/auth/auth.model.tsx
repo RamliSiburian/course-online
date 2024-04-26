@@ -24,6 +24,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                     callback(res?.status_code, res?.data?.username)
                     if (res?.status_code === 200) {
                         LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
+                            .setItem('ADZKIA@UROLE', JSON.stringify(res?.data?.role[0]), true)
                     } else {
                         throw new Error(res?.messages?.username[0] || res?.messages?.password)
                     }

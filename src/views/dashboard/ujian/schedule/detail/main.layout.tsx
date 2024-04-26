@@ -1,20 +1,35 @@
 import { LynxButtons } from '@afx/components/common/button/button';
 import { Icons } from '@afx/components/common/icons';
+import { ModalConfirm } from '@afx/components/common/modals/modal-confirm.layout';
+import LynxStorages from '@afx/utils/storage.util';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model';
 import { useLynxStore } from '@lynx/store/core';
 import { Col, Image, Row } from 'antd';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
     const { state, useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { scheduleID: params }: { scheduleID: string } = useParams() as any
+    const [openConfirm, setOpenConfirm] = useState<boolean>(false)
+    const roleUser = LynxStorages.getItem('ADZKIA@UROLE', true, true).data[0]
+
+    console.log({ roleUser });
+
 
 
     useEffect(() => {
         useActions<'getDetailExam'>('getDetailExam', [params], true)
     }, [])
+
+
+    const freeRegister = () => {
+        console.log(
+            'df'
+        );
+
+    }
 
     return (
         <div className='shadow-2xl p-4 h-full' >
@@ -44,14 +59,14 @@ export function DetailSchedule(): React.JSX.Element {
                         </div>
                         <div className='w-full flex justify-between items-center mt-10'>
                             <div>
-                                <p className='text-base-color'>Biaya Pendaftara</p>
+                                <p className='text-base-color'>Biaya Pendaftaran</p>
                                 <p className='text-base-color'>Gratis</p>
                             </div>
                             {
                                 state?.detailSchedule?.total_registered === state?.detailSchedule?.quota ?
                                     <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
                                     :
-                                    <LynxButtons title='Daftar' className='!w-32' />
+                                    <LynxButtons onClick={() => setOpenConfirm(true)} title='Daftar' className='!w-32' />
                             }
                         </div>
                     </div>
@@ -72,6 +87,7 @@ export function DetailSchedule(): React.JSX.Element {
                     </div>
                 </Col>
             </Row>
+            <ModalConfirm description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} />
         </div>
     )
 }
