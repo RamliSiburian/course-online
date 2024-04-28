@@ -7,34 +7,75 @@ import { useLynxStore } from '@lynx/store/core';
 import { Col, Image, Row } from 'antd';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Order from '@lynx/images/order.png'
+import { IActionPayment, IStatePayment } from '@lynx/models/payment/client/payment.model';
+import { IReqClaimExam } from '@afx/interfaces/payment/payment.iface';
+import { SuccessNotif } from '@afx/components/common/notification/success';
+import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
+import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
-    const { state, useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const { state, useActions: schedules } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const { useActions: exam } = useLynxStore<IStateExam, IActionExam>('exam')
+    const { useActions: claimExam, isLoading } = useLynxStore<IStatePayment, IActionPayment>('payment')
     const { scheduleID: params }: { scheduleID: string } = useParams() as any
     const [openConfirm, setOpenConfirm] = useState<boolean>(false)
     const roleUser = LynxStorages.getItem('ADZKIA@UROLE', true, true).data[0]
-
-    console.log({ roleUser });
-
-
+    const loading = isLoading('claimExam') || false
 
     useEffect(() => {
-        useActions<'getDetailExam'>('getDetailExam', [params], true)
+        schedules<'getDetailExam'>('getDetailExam', [params], true)
     }, [])
 
+    // const handleAttachment = () => {
+    //     const params: IReqAttachment = {
+    //         registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
+    //         scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
+    //     }
+    //     attachment<'getAttachment'>('getAttachment', [params], true)
+    // }
+
+    const handleGetQuestion = () => {
+        const params: IReqExamQuestion = {
+            registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
+            scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
+        }
+        exam<'getListExamQuestion'>('getListExamQuestion', [params], true)
+    }
 
     const freeRegister = () => {
-        console.log(
-            'df'
-        );
+        try {
+            // const paramsToClaim: IReqClaimExam = {
+            //     id: state?.detailSchedule?.id,
+            //     name: 'Schedule Short Questions 60',
+            //     type: 'cpns',
+            //     user_id: roleUser?.user_id
+            // }
+
+            var paramsToClaim = new FormData()
+            paramsToClaim.set('id', state?.detailSchedule?.id)
+            paramsToClaim.set('name', 'Schedule Short Questions 60')
+            paramsToClaim.set('type', 'cpns')
+            paramsToClaim.set('user_id', roleUser?.user_id)
+
+            claimExam<'claimExam'>('claimExam', [paramsToClaim, (status: number) => {
+                if (status === 200) {
+                    SuccessNotif({ key: 'CLAIM', message: 'Succes to load data', description: 'Exam has been claimed' })
+                    schedules<'getDetailExam'>('getDetailExam', [params], true)
+                    setOpenConfirm(false)
+                }
+            }], true)
+        } catch (err: any) {
+
+        }
 
     }
 
     return (
         <div className='shadow-2xl p-4 h-full' >
             <div className='flex items-center gap-4 mb-10'>
-                <Icons onClick={() => router.replace('/page/dashboard/ujian/schedules')} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
+                <Icons onClick={() => router.replace('/page/dashboard/tryout/schedules')} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
                 <p className='text-base-color font-bold text-xl'>Detail Ujian</p>
             </div>
             <Row gutter={[0, 40]}>
@@ -52,7 +93,7 @@ export function DetailSchedule(): React.JSX.Element {
                                     <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.total_question}</p></Col>
                                     <Col span={6}><p className='font-normal text-xs'>Durasi Ujian</p></Col>
                                     <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.duration} Menit</p></Col>
-                                    <Col span={6}><p className='font-normal text-xs'>Kapasita Peserta</p></Col>
+                                    <Col span={6}><p className='font-normal text-xs'>Kapasitas Peserta</p></Col>
                                     <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.total_registered}/{state?.detailSchedule?.quota}</p></Col>
                                 </Row>
                             </div>
@@ -63,10 +104,11 @@ export function DetailSchedule(): React.JSX.Element {
                                 <p className='text-base-color'>Gratis</p>
                             </div>
                             {
-                                state?.detailSchedule?.total_registered === state?.detailSchedule?.quota ?
-                                    <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
-                                    :
-                                    <LynxButtons onClick={() => setOpenConfirm(true)} title='Daftar' className='!w-32' />
+                                state?.detailSchedule?.exam !== null ?
+                                    <LynxButtons onClick={handleGetQuestion} title='Mulai Ujian' className='!w-32' />
+                                    : state?.detailSchedule?.total_registered === state?.detailSchedule?.quota
+                                        ? <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
+                                        : <LynxButtons onClick={() => setOpenConfirm(true)} title='Daftar' className='!w-32' />
                             }
                         </div>
                     </div>
@@ -87,7 +129,7 @@ export function DetailSchedule(): React.JSX.Element {
                     </div>
                 </Col>
             </Row>
-            <ModalConfirm description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} />
+            <ModalConfirm loading={false} description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} srcImage={Order} textSave="Claim Now" />
         </div>
     )
 }

@@ -44,14 +44,14 @@ export default function ListSchedule(props: IListSchedule): React.JSX.Element {
                         <Card
                             key={idx}
                             hoverable
-                            style={{ minWidth: 260, overflow: 'hidden', cursor: 'default' }}
+                            style={{ width: 260, overflow: 'hidden', cursor: 'default' }}
                             cover={<Image height={200} alt="example" src="https://klik-adzkia.com/assets/assets/images/no_thumbnail/tryout.jpg" />}
                         >
                             {item?.price === null && <div className='absolute w-[200px] flex items-end pb-3 justify-center h-[72px] top-[-16px] left-[-84px] bg-secondary-color' style={{ transform: 'rotate(-40deg)' }}>
                                 <p className='text-[#fff] text-base font-bold '>Gratis</p>
                             </div>}
                             <p className='text-base-color'>{item?.title}</p>
-                            <div className='mt-2 flex justify-between items-center gap-4'>
+                            <div className='mt-2 flex justify-between items-center gap-2 '>
                                 {item?.price !== null &&
                                     <p className='text-base-color font-bold w-full '>
                                         <LynxCurrency value={item?.price} prefix='Rp.' />

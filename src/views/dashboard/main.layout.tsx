@@ -7,10 +7,6 @@ interface IDashboard {
     children: any
 }
 
-const subMenus: MenuProps['items'] = [
-    { label: <Link href={'/page/dashboard/bimbel'} >Bimbel</Link>, key: 'bimbel', icon: null },
-    { label: <Link href={'/page/dashboard/ujian'} >Ujian</Link>, key: 'ujian', icon: null }
-]
 
 export default function Dashboard(props: IDashboard): React.JSX.Element {
     const {

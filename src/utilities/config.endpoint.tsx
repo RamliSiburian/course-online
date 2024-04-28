@@ -2,7 +2,8 @@ export const services = {
     auth: 'auth',
     userService: 'user-service',
     bimbelService: 'bimbel-service',
-    examService: 'tryout-service'
+    examService: 'tryout-service',
+    paymentService: 'payment-service'
 }
 
 export const endpoint = {
@@ -22,7 +23,6 @@ export const endpoint = {
             menu: {
                 listMenu: 'menu'
             }
-
         }
     },
     bimbel: {
@@ -64,7 +64,15 @@ export const endpoint = {
                 detailExam: 'schedules/:id/form-register',
                 listOwnedExam: 'schedules/owned',
                 register: 'schedules/:id/registration'
+            },
+            exam: {
+                getAttachment: 'schedules/:scheduleID/exam/:registerID/attachment',
+                getListExamQuestion: 'schedules/:scheduleID/exam/:registerID/question'
             }
         }
+    },
+    payment: {
+        claim: 'claim',
+        purchase: 'purchases'
     }
 }

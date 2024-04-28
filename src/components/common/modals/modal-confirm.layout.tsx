@@ -17,6 +17,7 @@ interface ModalCustom {
     description?: any
     onChange?: (e: any) => void
     srcImage?: any
+    loading?: boolean
 }
 
 export function ModalConfirm(props: ModalCustom): React.JSX.Element {
@@ -32,13 +33,14 @@ export function ModalConfirm(props: ModalCustom): React.JSX.Element {
             className={props.className}
             width={350}
         >
-            {props?.srcImage && <div className="w-full flex justify-center">
+            {props?.srcImage && <div className="mt-5 w-full flex justify-center">
                 <Image
                     src={props.srcImage}
                     alt="icon bundle"
                     style={{
                         placeContent: 'center'
                     }}
+                    height={120}
                 />
             </div>}
 
@@ -52,6 +54,7 @@ export function ModalConfirm(props: ModalCustom): React.JSX.Element {
                     title={props.textSave || 'Next'}
                     className="!w-full"
                     onClick={props.onSave}
+                    disabled={props?.loading}
                 />
             </div>
 
