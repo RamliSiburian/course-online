@@ -3,7 +3,7 @@ import { notification } from 'antd';
 interface ISuccessNotif {
     message?: string
     description: string
-    key: string
+    key?: string
 }
 
 export function SuccessNotif(props: ISuccessNotif) {

@@ -13,6 +13,8 @@ import { IReqClaimExam } from '@afx/interfaces/payment/payment.iface';
 import { SuccessNotif } from '@afx/components/common/notification/success';
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
 import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface';
+import JSZip from 'jszip';
+import { WarningNotif } from '@afx/components/common/notification/warning';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
@@ -28,20 +30,82 @@ export function DetailSchedule(): React.JSX.Element {
         schedules<'getDetailExam'>('getDetailExam', [params], true)
     }, [])
 
-    // const handleAttachment = () => {
-    //     const params: IReqAttachment = {
-    //         registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
-    //         scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
-    //     }
-    //     attachment<'getAttachment'>('getAttachment', [params], true)
-    // }
+    const handleAttachment = () => {
+        const params: IReqAttachment = {
+            registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
+            scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
+        }
+        exam<'getAttachment'>('getAttachment', [params, (status: number, data: any) => {
+            if (status === 200) {
+                saveImageToIndexedDB(data)
+            }
+        }], true)
+    }
+
+    const saveImageToIndexedDB = async (data: any) => {
+        if (!data) return;
+
+        try {
+            const zip = await JSZip.loadAsync(data);
+
+            zip.forEach(async (relativePath, file) => {
+
+                if (file.dir) return; // Skip directories
+                if (isImageFile(relativePath)) {
+                    const blob = await file.async('blob');
+                    const imageUrl = URL.createObjectURL(blob);
+                    saveToIndexedDB(relativePath, blob); // Save the blob to IndexedDB
+                }
+            });
+
+        } catch (error) {
+            WarningNotif({ message: 'Failed', description: 'Error extracting ZIP contents' })
+        }
+    };
+    const saveToIndexedDB = (relativePath: string, blob: any) => {
+
+        const request = window.indexedDB.open('images', 1);
+
+        request.onerror = function (event) {
+            console.log('Error opening database');
+        };
+
+        request.onupgradeneeded = function (event) {
+            var db = event?.target.result;
+
+            var objectStore = db.createObjectStore('Images', { keyPath: 'id' });
+        };
+
+        request.onsuccess = function (event) {
+            var db = event.target.result;
+
+            // Insert data into the object store
+            var transaction = db.transaction(['Images'], 'readwrite');
+            var objectStore = transaction.objectStore('Images');
+
+            var request = objectStore.put({ 'id': relativePath, blob });
+
+            request.onsuccess = function (event: any) {
+                console.log('Data inserted successfully');
+            };
+
+            request.onerror = function (event: any) {
+                console.log('Error inserting data');
+            };
+        };
+    };
+
+    const isImageFile = (fileName: any) => {
+        // Add logic to determine if a file is an image
+        return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
+    };
 
     const handleGetQuestion = () => {
         const params: IReqExamQuestion = {
             registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
             scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
         }
-        exam<'getListExamQuestion'>('getListExamQuestion', [params], true)
+        exam<'getListExamQuestion'>('getListExamQuestion', [params, (status: number) => { }], true)
     }
 
     const freeRegister = () => {
@@ -71,6 +135,58 @@ export function DetailSchedule(): React.JSX.Element {
         }
 
     }
+
+    const [image, setImage] = useState<any>([]);
+
+    const getImage = () => {
+        const request = window.indexedDB.open('images', 1);
+
+        request.onerror = function (event) {
+            console.log('Error opening database');
+        };
+
+        request.onsuccess = (event) => {
+            var db = event.target.result;
+
+            var transaction = db.transaction(['Images'], 'readonly');
+            var objectStore = transaction.objectStore('Images');
+
+
+            // const dataImages = ['2023_10_31_554963714_kancil.jpeg', '2023_11_03_869202118_fuji-mountain-with-milky-way-night_335224-104.webp']
+
+            // const storeImage = dataImages?.map((item: any, idx: number) => {
+            //     return objectStore.get(item).onsuccess = (event: any) => {
+            //         if (getRequest.result) {
+            //             return URL.createObjectURL(getRequest.result.blob)
+
+            //         } else {
+            //             console.log('No data found with the specified key');
+            //         }
+            //     };
+            // })
+
+            // console.log({ storeImage });
+
+
+            var getRequest = objectStore.get('2023_10_31_554963714_kancil.jpeg'); // Replace 'your_specific_key' with the key you want to retrieve
+
+            getRequest.onsuccess = (event: any) => {
+                if (getRequest.result) {
+                    console.log('Data found:', getRequest.result);
+                    setImage(URL.createObjectURL(getRequest.result.blob))
+
+                } else {
+                    console.log('No data found with the specified key');
+                }
+            };
+
+            getRequest.onerror = function (event: any) {
+                console.log('Error retrieving data');
+            };
+        };
+    }
+
+
 
     return (
         <div className='shadow-2xl p-4 h-full' >
@@ -105,7 +221,7 @@ export function DetailSchedule(): React.JSX.Element {
                             </div>
                             {
                                 state?.detailSchedule?.exam !== null ?
-                                    <LynxButtons onClick={handleGetQuestion} title='Mulai Ujian' className='!w-32' />
+                                    <LynxButtons onClick={handleAttachment} title='Mulai Ujian' className='!w-32' />
                                     : state?.detailSchedule?.total_registered === state?.detailSchedule?.quota
                                         ? <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
                                         : <LynxButtons onClick={() => setOpenConfirm(true)} title='Daftar' className='!w-32' />
@@ -128,6 +244,9 @@ export function DetailSchedule(): React.JSX.Element {
                         </ol>
                     </div>
                 </Col>
+
+                <button onClick={getImage}>GET</button>
+                {image && <Image alt='tets' src={image} />}
             </Row>
             <ModalConfirm loading={false} description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} srcImage={Order} textSave="Claim Now" />
         </div>

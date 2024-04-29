@@ -3,7 +3,7 @@ import { notification } from 'antd';
 interface IWarningNotif {
     message?: string
     description: string
-    key: string
+    key?: string
 
 }
 
