@@ -1,7 +1,7 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
 import { IReqListExam, IReqListOwnedExam } from '@afx/interfaces/exam/client/schedule.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { GetDetailExam, GetListExam, RegitsterExam } from '@afx/services/exam/client/schedule.service'
+import { GetDetailExam, GetListExam, FormRegitsterExam } from '@afx/services/exam/client/schedule.service'
 
 type IpageInfo = {
     per_page: number
@@ -15,12 +15,13 @@ export type IStateExamSchedule = {
     listOwnedExam: Array<any>
     pageInfoOwnedExam: IpageInfo
     detailSchedule: any
+    formRegister: any
 }
 export type IActionExamSchedule = {
     getListExam: (data: IReqListExam) => void
     getDetailExam: (id: string) => void
     getListOwnedExam: (data: IReqListOwnedExam) => void
-    register: (id: string) => void
+    getFormRegister: (id: string) => void
 }
 
 const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> = {
@@ -31,7 +32,8 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
             pageInfo: {} as IpageInfo,
             listOwnedExam: [],
             pageInfoOwnedExam: {} as IpageInfo,
-            detailSchedule: {}
+            detailSchedule: {},
+            formRegister: {}
         },
         actions: {
             async getListExam(data) {
@@ -63,10 +65,13 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
                     WarningNotif({ key: 'DETAIL-EXAM', description: err?.messages })
                 }
             },
-            async register(id) {
+            async getFormRegister(id) {
                 try {
-                    const res = RegitsterExam(id)
-                    console.log({ res });
+                    const res = await FormRegitsterExam(id)
+                    put({
+                        formRegister: res?.data
+                    })
+
                 } catch (err: any) {
                     WarningNotif({ key: 'REGISTER-EXAM', description: err?.messages })
                 }

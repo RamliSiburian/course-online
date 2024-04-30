@@ -168,7 +168,7 @@ export function DetailSchedule(): React.JSX.Element {
             // console.log({ storeImage });
 
 
-            var getRequest = objectStore.get('2023_10_31_554963714_kancil.jpeg'); // Replace 'your_specific_key' with the key you want to retrieve
+            var getRequest = objectStore.get('2023_11_03_696814289_ppkn.jpeg'); // Replace 'your_specific_key' with the key you want to retrieve
 
             getRequest.onsuccess = (event: any) => {
                 if (getRequest.result) {
@@ -224,7 +224,7 @@ export function DetailSchedule(): React.JSX.Element {
                                     <LynxButtons onClick={handleAttachment} title='Mulai Ujian' className='!w-32' />
                                     : state?.detailSchedule?.total_registered === state?.detailSchedule?.quota
                                         ? <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
-                                        : <LynxButtons onClick={() => setOpenConfirm(true)} title='Daftar' className='!w-32' />
+                                        : <LynxButtons onClick={freeRegister} title='Daftar' className='!w-32' />
                             }
                         </div>
                     </div>

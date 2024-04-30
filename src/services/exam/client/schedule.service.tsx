@@ -17,10 +17,10 @@ export function GetDetailExam(id: string) {
         service: services.examService
     })
 }
-export function RegitsterExam(id: string) {
+export function FormRegitsterExam(id: string) {
     return request<any>({
-        url: endpoint.exam.client.schedule.register.replace(':id', id),
-        method: 'POST',
+        url: endpoint.exam.client.schedule.formRegisterExam.replace(':id', id),
+        method: 'GET',
         service: services.examService
     })
 }
