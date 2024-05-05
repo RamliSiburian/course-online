@@ -3,7 +3,7 @@ import { endpoint, services } from '@afx/utils/config.endpoint';
 import request from '@afx/utils/request.util';
 
 export function ClaimExam(data: IReqClaimExam) {
-    request<any>({
+    return request<any>({
         url: endpoint.payment.claim,
         service: services.paymentService,
         data,

@@ -15,6 +15,7 @@ import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
 import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface';
 import JSZip from 'jszip';
 import { WarningNotif } from '@afx/components/common/notification/warning';
+import LynxCurrency from '@afx/components/common/typography/currency.layout';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
@@ -28,6 +29,7 @@ export function DetailSchedule(): React.JSX.Element {
 
     useEffect(() => {
         schedules<'getDetailExam'>('getDetailExam', [params], true)
+        schedules<'getFormRegister'>('getFormRegister', [params], true)
     }, [])
 
     const handleAttachment = () => {
@@ -110,17 +112,10 @@ export function DetailSchedule(): React.JSX.Element {
 
     const freeRegister = () => {
         try {
-            // const paramsToClaim: IReqClaimExam = {
-            //     id: state?.detailSchedule?.id,
-            //     name: 'Schedule Short Questions 60',
-            //     type: 'cpns',
-            //     user_id: roleUser?.user_id
-            // }
-
             var paramsToClaim = new FormData()
             paramsToClaim.set('id', state?.detailSchedule?.id)
-            paramsToClaim.set('name', 'Schedule Short Questions 60')
-            paramsToClaim.set('type', 'cpns')
+            paramsToClaim.set('name', state?.detailSchedule?.title)
+            paramsToClaim.set('type', state?.detailSchedule?.type)
             paramsToClaim.set('user_id', roleUser?.user_id)
 
             claimExam<'claimExam'>('claimExam', [paramsToClaim, (status: number) => {
@@ -131,9 +126,8 @@ export function DetailSchedule(): React.JSX.Element {
                 }
             }], true)
         } catch (err: any) {
-
+            console.log({ test: err?.messages });
         }
-
     }
 
     const [image, setImage] = useState<any>([]);
@@ -201,30 +195,31 @@ export function DetailSchedule(): React.JSX.Element {
                 <Col span={18}>
                     <div>
                         <div className='p-4 rounded-lg shadow-md w-full'>
-                            <p className='text-base-color'>TRYOUT PSIKOTES BINTARA-POLRI SISWA ADZKIA #1</p>
+                            <p className='text-base-color'>{state?.detailSchedule?.title}</p>
 
                             <div className='mt-2 text-base-color' >
                                 <Row gutter={[0, 10]} >
                                     <Col span={6}><p className='font-normal text-xs'>jumlah Soal</p></Col>
-                                    <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.total_question}</p></Col>
+                                    <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question}</p></Col>
                                     <Col span={6}><p className='font-normal text-xs'>Durasi Ujian</p></Col>
-                                    <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.duration} Menit</p></Col>
+                                    <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.duration} Menit</p></Col>
                                     <Col span={6}><p className='font-normal text-xs'>Kapasitas Peserta</p></Col>
-                                    <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.total_registered}/{state?.detailSchedule?.quota}</p></Col>
+                                    <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_registered}/{state?.formRegister?.quota}</p></Col>
                                 </Row>
                             </div>
                         </div>
                         <div className='w-full flex justify-between items-center mt-10'>
                             <div>
                                 <p className='text-base-color'>Biaya Pendaftaran</p>
-                                <p className='text-base-color'>Gratis</p>
+                                <p className='text-base-color'>{state?.detailSchedule?.price === null ? 'Gratis' : <LynxCurrency value={state?.detailSchedule?.price} prefix='Rp.' />}</p>
                             </div>
-                            {
-                                state?.detailSchedule?.exam !== null ?
-                                    <LynxButtons onClick={handleAttachment} title='Mulai Ujian' className='!w-32' />
-                                    : state?.detailSchedule?.total_registered === state?.detailSchedule?.quota
-                                        ? <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
-                                        : <LynxButtons onClick={freeRegister} title='Daftar' className='!w-32' />
+                            {state?.formRegister?.exam === null ? (
+                                state?.formRegister?.total_registered < state?.formRegister?.quota ? (
+                                    state?.detailSchedule?.price === null ? <LynxButtons onClick={() => setOpenConfirm(true)} title='Ikuti Ujian' className='!w-32' />
+                                        : <LynxButtons title='Ikuti Ujian' className='!w-32' />
+                                ) : <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
+                            ) : 'aa' //TODO: nect case if exam paid
+
                             }
                         </div>
                     </div>
@@ -245,8 +240,8 @@ export function DetailSchedule(): React.JSX.Element {
                     </div>
                 </Col>
 
-                <button onClick={getImage}>GET</button>
-                {image && <Image alt='tets' src={image} />}
+                {/* <button onClick={getImage}>GET</button>
+                {image && <Image alt='tets' src={image} />} */}
             </Row>
             <ModalConfirm loading={false} description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} srcImage={Order} textSave="Claim Now" />
         </div>

@@ -16,9 +16,9 @@ const modelPayment: IModelDefinitions<IStatePayment, IActionPayment> = {
             async claimExam(data, callback) {
                 try {
                     const res = await ClaimExam(data)
-                    console.log({ res });
+                    console.log({ res: res?.data });
 
-                    // callback(200)
+                    callback(200)
                 } catch (err: any) {
                     WarningNotif({ key: 'CLAIM', message: 'Failed to load data', description: err?.messages })
                 }
