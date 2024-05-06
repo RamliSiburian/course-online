@@ -9,19 +9,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Order from '@lynx/images/order.png'
 import { IActionPayment, IStatePayment } from '@lynx/models/payment/client/payment.model';
-import { IReqClaimExam } from '@afx/interfaces/payment/payment.iface';
 import { SuccessNotif } from '@afx/components/common/notification/success';
-import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
-import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface';
-import JSZip from 'jszip';
-import { WarningNotif } from '@afx/components/common/notification/warning';
 import LynxCurrency from '@afx/components/common/typography/currency.layout';
 import getPath from '@lynx/const/router.path';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
-    const { useActions: exam } = useLynxStore<IStateExam, IActionExam>('exam')
     const { useActions: claimExam, isLoading } = useLynxStore<IStatePayment, IActionPayment>('payment')
     const { scheduleID: params }: { scheduleID: string } = useParams() as any
     const [openConfirm, setOpenConfirm] = useState<boolean>(false)
@@ -33,84 +27,6 @@ export function DetailSchedule(): React.JSX.Element {
         schedules<'getDetailExam'>('getDetailExam', [params], true)
         schedules<'getFormRegister'>('getFormRegister', [params], true)
     }, [])
-
-    const handleAttachment = () => {
-        const params: IReqAttachment = {
-            registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
-            scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
-        }
-        exam<'getAttachment'>('getAttachment', [params, (status: number, data: any) => {
-            if (status === 200) {
-                saveImageToIndexedDB(data)
-            }
-        }], true)
-    }
-
-    const saveImageToIndexedDB = async (data: any) => {
-        if (!data) return;
-
-        try {
-            const zip = await JSZip.loadAsync(data);
-
-            zip.forEach(async (relativePath, file) => {
-
-                if (file.dir) return; // Skip directories
-                if (isImageFile(relativePath)) {
-                    const blob = await file.async('blob');
-                    const imageUrl = URL.createObjectURL(blob);
-                    saveToIndexedDB(relativePath, blob); // Save the blob to IndexedDB
-                }
-            });
-
-        } catch (error) {
-            WarningNotif({ message: 'Failed', description: 'Error extracting ZIP contents' })
-        }
-    };
-    const saveToIndexedDB = (relativePath: string, blob: any) => {
-
-        const request = window.indexedDB.open('images', 1);
-
-        request.onerror = function (event) {
-            console.log('Error opening database');
-        };
-
-        request.onupgradeneeded = function (event) {
-            var db = event?.target.result;
-
-            var objectStore = db.createObjectStore('Images', { keyPath: 'id' });
-        };
-
-        request.onsuccess = function (event) {
-            var db = event.target.result;
-
-            // Insert data into the object store
-            var transaction = db.transaction(['Images'], 'readwrite');
-            var objectStore = transaction.objectStore('Images');
-
-            var request = objectStore.put({ 'id': relativePath, blob });
-
-            request.onsuccess = function (event: any) {
-                console.log('Data inserted successfully');
-            };
-
-            request.onerror = function (event: any) {
-                console.log('Error inserting data');
-            };
-        };
-    };
-
-    const isImageFile = (fileName: any) => {
-        // Add logic to determine if a file is an image
-        return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
-    };
-
-    const handleGetQuestion = () => {
-        const params: IReqExamQuestion = {
-            registerID: '82ff5889-983a-4385-b754-be55945ee7f9',
-            scheduleID: '1439ad8a-ce64-4e89-883a-3faea89db90d'
-        }
-        exam<'getListExamQuestion'>('getListExamQuestion', [params, (status: number) => { }], true)
-    }
 
     const freeRegister = () => {
         try {
@@ -186,7 +102,7 @@ export function DetailSchedule(): React.JSX.Element {
 
 
     return (
-        <div className='shadow-2xl p-8 h-full' >
+        <div className='shadow-xl p-8 h-full' >
             <div className='flex items-center gap-4 mb-10'>
                 <Icons onClick={() => router.replace('/page/dashboard/tryout/schedules')} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
                 <p className='text-base-color font-bold text-xl'>Detail Ujian</p>
@@ -274,7 +190,7 @@ export function DetailSchedule(): React.JSX.Element {
                 {image && <Image alt='tets' src={image} />} */}
                 </Row>
             }
-            <ModalConfirm loading={false} description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} srcImage={Order} textSave="Claim Now" />
+            <ModalConfirm loading={claimLoading} description="Claim Produk Gratis" onCancel={() => setOpenConfirm(false)} onSave={freeRegister} open={openConfirm} srcImage={Order} textSave="Claim Now" />
         </div>
     )
 }

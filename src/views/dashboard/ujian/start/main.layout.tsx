@@ -138,7 +138,7 @@ export function StartExam(): React.JSX.Element {
 
 
     return (
-        <div className='shadow-2xl p-8 h-full' >
+        <div className='shadow-xl p-8 h-full' >
             <div className='flex items-center gap-4 mb-10'>
                 <Icons onClick={() => router.push(getPath('scheduleDetail', { scheduleID: params }))} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
                 <p className='text-base-color font-bold text-xl'>Detail Ujian</p>
@@ -170,10 +170,10 @@ export function StartExam(): React.JSX.Element {
                         <Col span={18}><p className='font-normal text-xs'>: {user?.name}</p></Col>
                         <Col span={6}><p className='font-normal text-xs'>Total Soal</p></Col>
                         <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question} Soal</p></Col>
-                        <Col span={6}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.randomize === true ? 'Ya' : 'Tidak'}</p></Col>
+                        {/* <Col span={6}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>
+                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.randomize === true ? 'Ya' : 'Tidak'}</p></Col> */}
                         <Col span={6}><p className='font-normal text-xs'>Pembahasan</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: { }</p></Col>
+                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.is_discussion === true ? 'Ya' : 'Tidak'}</p></Col>
                         <Col span={6}><p className='font-normal text-xs'>Dapat Diulang</p></Col>
                         <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
                     </Row>

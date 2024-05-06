@@ -33,10 +33,12 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
                 <Menu items={listMenus} mode='horizontal' style={{
                     border: 'none',
                     padding: '10px',
-                    background: colorBgContainer
-                }} />
+                    background: '#FEFEFE'
+                }}
+                    className='shadow-md'
+                />
             }
-            <div className='px-[22px] pt-3'>
+            <div className='px-[22px] pt-10'>
                 {props.children}
             </div>
         </>
