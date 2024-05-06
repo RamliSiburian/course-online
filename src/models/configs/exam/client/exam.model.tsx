@@ -18,6 +18,8 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
             async getAttachment(data, callback) {
                 try {
                     const res = await GetAttachment(data)
+                    console.log({ res });
+
                     callback(200, res)
                     if (res?.status_code === 200) {
                         callback(200, res?.data)
@@ -25,7 +27,7 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                         throw new Error(res?.messages)
                     }
                 } catch (err: any) {
-                    WarningNotif({ key: 'ATTACHMENT', message: 'Failed to load data', description: err?.messages })
+                    // WarningNotif({ key: 'ATTACHMENT', message: 'Failed to load data attachment', description: err?.messages })
                 }
             },
             async getListExamQuestion(data, callback) {

@@ -11,7 +11,7 @@ export type IActionProfile = {
 const modelProfile: IModelDefinitions<IStateProfile, IActionProfile> = {
     name: 'profile',
     subscriptions: (getStates, useActions) => ({ pathname }) => {
-        if (pathname === '/dashboard') {
+        if (pathname === '/page') {
             useActions('profile')('getSimpleProfile', [], true)
         }
     },

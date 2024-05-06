@@ -16,6 +16,7 @@ import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/ex
 import JSZip from 'jszip';
 import { WarningNotif } from '@afx/components/common/notification/warning';
 import LynxCurrency from '@afx/components/common/typography/currency.layout';
+import getPath from '@lynx/const/router.path';
 
 export function DetailSchedule(): React.JSX.Element {
     const router = useRouter()
@@ -159,7 +160,7 @@ export function DetailSchedule(): React.JSX.Element {
             //             console.log('No data found with the specified key');
             //         }
             //     };
-            // })
+            // })   
 
             // console.log({ storeImage });
 
@@ -228,7 +229,7 @@ export function DetailSchedule(): React.JSX.Element {
 
                                 <div className='mt-2 text-base-color' >
                                     <Row gutter={[0, 10]} >
-                                        <Col span={6}><p className='font-normal text-xs'>jumlah Soal</p></Col>
+                                        <Col span={6}><p className='font-normal text-xs'>Jumlah Soal</p></Col>
                                         <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question}</p></Col>
                                         <Col span={6}><p className='font-normal text-xs'>Durasi Ujian</p></Col>
                                         <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.duration} Menit</p></Col>
@@ -247,7 +248,7 @@ export function DetailSchedule(): React.JSX.Element {
                                         state?.detailSchedule?.price === null ? <LynxButtons onClick={() => setOpenConfirm(true)} title='Ikuti Ujian' className='!w-32' />
                                             : <LynxButtons title='Ikuti Ujian' className='!w-32' />
                                     ) : <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
-                                ) : <LynxButtons onClick={() => { }} title='Mulai Ujian' className='!w-32' />
+                                ) : <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Mulai Ujian' className='!w-32' />
 
                                 }
                             </div>

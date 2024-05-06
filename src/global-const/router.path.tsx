@@ -1,6 +1,7 @@
 const listPath = {
     scheduleDetail: '/page/dashboard/tryout/schedules/detail/:scheduleID',
-    test: '/'
+    examStart: '/page/dashboard/tryout/start/:examID'
+
 }
 
 export default function getPath(

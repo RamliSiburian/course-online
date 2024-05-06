@@ -53,15 +53,15 @@ export function LynxButtons(props: IButtonCustom): React.JSX.Element {
                 border: props.disabled
                     ? '#E4E4E4'
                     : props.typeButton === 'primary-300'
-                        ? '2px solid #B9E0BE'
+                        ? '1px solid #ED7020'
                         : 'none',
                 borderRadius: '8px',
                 color: props.disabled
                     ? '#9E9D9D'
                     : props.typeButton === 'primary-300'
-                        ? '#50AF5B'
+                        ? '#ED7020'
                         : props.typeButton === 'primary-600'
-                            ? '#50AF5B'
+                            ? '#ED7020'
                             : props.typeButton === 'danger-primary-300'
                                 ? '#F33A3A'
                                 : '#FFFFFF',
