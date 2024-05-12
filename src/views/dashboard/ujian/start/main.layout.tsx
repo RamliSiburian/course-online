@@ -1,46 +1,25 @@
-import { LynxButtons } from '@afx/components/common/button/button'
-import { LynxCards } from '@afx/components/common/card/card'
-import { Icons } from '@afx/components/common/icons'
-import { LynxModal } from '@afx/components/common/modals/modal.layout'
 import { SuccessNotif } from '@afx/components/common/notification/success'
 import { WarningNotif } from '@afx/components/common/notification/warning'
 import { IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface'
-import LynxStorages from '@afx/utils/storage.util'
-import getPath from '@lynx/const/router.path'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model'
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
-import { Col, Row } from 'antd'
 import JSZip from 'jszip'
-import Image from 'next/image'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
-
-const panduan: string[] = [
-    'Pastikan Koneksi Internet kamu stabil dan paket data kamu cukup untuk mengikuti ujian.',
-    'Pilihlah jawaban yang paling benar menurut kamu lalu tekan tombol Simpan untuk melanjutkan ke nomor soal berikutnya.',
-    'Jika kamu masih ragu-ragu dengan jawaban soal tersebut maka kamu bisa menekan tombol Lewati untuk ke soal berikutnya.',
-    'Jika kamu ingin mengerjakan soal secara acak maka kamu bisa menekan tombol , lalu pilih nomor soal yang kamu inginkan dan jangan lupa simpan setiap jawaban yang sudah dipilih.',
-    'Jika kamu menekan tombol Selesai maka kamu dianggap sudah menyelesaikan ujian tersebut dan tidak bisa mengulanginya lagi.',
-    'Pastikan waktu ujian kamu cukup untuk menyelesaikan seluruh soal. Jika tidak maka ujian akan selesai secara otomatis atau akan masuk ke ujian berikutnya.',
-    ' Jika seluruh ujian sudah selesai dan kamu sudah menekan tombol Selesai maka kamu akan diarahkan ke menu hasil ujian : skor per bidang, total skor, lulus/tidak lulus, dan rinciannya.',
-    'Setelah kamu menekan Tombol Mulai Ujian maka waktu akan otomatis berjalan.'
-]
+import { DetailStartExam } from './layouts/detail.layout'
+import { ProccessExam } from './layouts/proccess-exam.layout'
 
 export function StartExam(): React.JSX.Element {
     const { examID: params }: { examID: string } = useParams() as any
-    const router = useRouter()
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { useActions: exam, isLoading: examLoading } = useLynxStore<IStateExam, IActionExam>('exam')
-    const user = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0]
-    const loadingDetail = scheduleloading('getDetailExam') || scheduleloading('getFormRegister') || false
-    const loadingExam = examLoading('getAttachment') || examLoading('getListExamQuestion') || false
-    const [openModal, setOpenModal] = useState<boolean>(false)
     const [isQuestion, setIsQuestion] = useState<boolean>(false)
     const [isAttachment, setIsAttachment] = useState<boolean>(false)
+    const [isStart, setisStart] = useState<boolean>(false)
 
     useEffect(() => {
+        setisStart(false)
         schedules<'getDetailExam'>('getDetailExam', [params], true)
         schedules<'getFormRegister'>('getFormRegister', [params], true)
     }, [])
@@ -131,64 +110,17 @@ export function StartExam(): React.JSX.Element {
 
     useEffect(() => {
         if (isQuestion && isAttachment) {
+            setisStart(true)
             //TODO: start api
-        } else { }
+        } else {
+            setisStart(false)
+        }
+
     }, [isQuestion, isAttachment])
 
-
-
     return (
-        <div className='shadow-xl p-8 h-full' >
-            <div className='flex items-center gap-4 mb-10'>
-                <Icons onClick={() => router.push(getPath('scheduleDetail', { scheduleID: params }))} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
-                <p className='text-base-color font-bold text-xl'>Detail Ujian</p>
-            </div>
-            <div className='flex justify-between '>
-                <div>
-                    <p className='text-base-color text-lg font-semibold'>{state?.detailSchedule?.title}</p>
-                    <p className=''>{state?.detailSchedule?.description}</p>
-                    <div className='flex gap-2 mt-5'>
-                        <LynxButtons typeButton='primary-300' size='small' title="Ujian saya" onClick={() => router.replace('/page/dashboard/tryout')} />
-                        <LynxButtons size='small' title="baca Panduan" onClick={() => setOpenModal(true)} />
-                    </div>
-                </div>
-                <div>
-                    <Image
-                        src={require('@lynx/images/list.png')}
-                        alt="Adzkia"
-                        className="mr-2"
-                        width={150}
-                        height={150}
-                    />
-                </div>
-            </div>
-            <div>
-                <p className='text-base-color text-base'>Detail Peserta Ujian</p>
-                <div className='mt-2 text-base-color' >
-                    <Row gutter={[0, 10]} >
-                        <Col span={6}><p className='font-normal text-xs'>Nama Peserta</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {user?.name}</p></Col>
-                        <Col span={6}><p className='font-normal text-xs'>Total Soal</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question} Soal</p></Col>
-                        {/* <Col span={6}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.randomize === true ? 'Ya' : 'Tidak'}</p></Col> */}
-                        <Col span={6}><p className='font-normal text-xs'>Pembahasan</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.is_discussion === true ? 'Ya' : 'Tidak'}</p></Col>
-                        <Col span={6}><p className='font-normal text-xs'>Dapat Diulang</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
-                    </Row>
-                    <LynxButtons disabled={loadingExam} onClick={startExam} title="Mulai Ujian" className='!w-full mt-10' />
-                </div>
-            </div>
-            <LynxModal width={450} open={openModal} onCancel={() => setOpenModal(false)} title="Tata Tertib Ujian" content={
-                <LynxCards className='mt-10 !shadow-md'>
-                    <ul>
-                        {
-                            panduan?.map((item: string, idx: number) => <li key={idx} className='text-[#4A5C87]'>{idx + 1}. {item}</li>)
-                        }
-                    </ul>
-                </LynxCards>
-            } />
-        </div>
+        isStart
+            ? <ProccessExam />
+            : <DetailStartExam startExam={startExam} />
     )
 }

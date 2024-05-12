@@ -3,6 +3,7 @@ import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/ex
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
 import { GetAttachment, GetExamQuestion } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
+import { tr } from 'date-fns/locale'
 
 export type IStateExam = {}
 export type IActionExam = {
@@ -18,8 +19,6 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
             async getAttachment(data, callback) {
                 try {
                     const res = await GetAttachment(data)
-                    console.log({ res });
-
                     callback(200, res)
                     if (res?.status_code === 200) {
                         callback(200, res?.data)
@@ -34,7 +33,7 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                 try {
                     const res = await GetExamQuestion(data)
                     if (res?.status_code === 200) {
-                        LynxStorages.setItem('ADZKIA@QUESTION', res?.data)
+                        LynxStorages.setItem('ADZKIA@QUESTION', JSON.stringify(res?.data), true)
                         callback(200)
                     } else {
                         throw new Error(res?.messages)

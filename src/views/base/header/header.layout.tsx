@@ -53,7 +53,7 @@ export default function HeaderLayout(): React.JSX.Element {
     }, [])
 
     return (
-        <Row className=' px-6 sm:px-10 xl:px-16 w-full'>
+        <Row className=' px-6 sm:px-10 xl:px-16 w-full py-4' >
             <Col span={24} >
                 <div className='flex justify-between  w-full'>
                     <div className='flex gap-2 items-center text-base font-semibold text-[#ED7020] '>
