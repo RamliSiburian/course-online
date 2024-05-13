@@ -1,7 +1,7 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
-import { IReqAttachment, IReqExamQuestion } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqAttachment, IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { GetAttachment, GetExamQuestion } from '@afx/services/exam/client/exam.service'
+import { GetAttachment, GetExamQuestion, SaveAnswer } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
 import { tr } from 'date-fns/locale'
 
@@ -9,6 +9,7 @@ export type IStateExam = {}
 export type IActionExam = {
     getAttachment: (data: IReqAttachment, callback: (status: number, data: any) => void) => void
     getListExamQuestion: (data: IReqExamQuestion, callback: (status: number) => void) => void
+    saveAnswer: (data: IReqOption, ids: IReqSaveAnswer, callback: (code: number) => void) => void
 }
 
 const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
@@ -40,6 +41,16 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                     }
                 } catch (err: any) {
                     WarningNotif({ key: 'QUESTION', message: 'Failed to load data', description: err?.messages })
+                }
+            },
+            async saveAnswer(data, ids, callback) {
+                try {
+                    const res = await SaveAnswer(data, ids)
+                    callback(res?.status_code)
+                    console.log({ res });
+
+                } catch (err: any) {
+                    WarningNotif({ key: 'SAVE-ANSWER', message: 'Failed to load data', description: err?.messages })
                 }
             }
         }

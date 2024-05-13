@@ -67,7 +67,8 @@ export const endpoint = {
             },
             exam: {
                 getAttachment: 'schedules/:scheduleID/exam/:registerID/attachment',
-                getListExamQuestion: 'schedules/:scheduleID/exam/:registerID/question'
+                getListExamQuestion: 'schedules/:scheduleID/exam/:registerID/question',
+                saveAnswer: 'schedules/:scheduleID/exam/:registerID/save'
             }
         }
     },
