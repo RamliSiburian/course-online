@@ -1,0 +1,173 @@
+{
+  "id": "d9ee8cbb-9065-4278-94d0-00abdba29e72",
+  "total_question": 9,
+  "duration": 6,
+  "sections": [
+      {
+          "id": "e0beee6b-c87a-4266-bbf2-b3db56ea775d",
+          "question_group_id": "d9ee8cbb-9065-4278-94d0-00abdba29e72",
+          "name": "Wawasan Kebangsaan",
+          "duration": 3,
+          "total_question": 3,
+          "scoring_type": "question_base",
+          "passing_grade": 10,
+          "vintages": [
+              {
+                  "id": "9bed248c-1ced-45d2-a753-abdb1c4dc214",
+                  "question_section_id": "e0beee6b-c87a-4266-bbf2-b3db56ea775d",
+                  "order_no": 1,
+                  "content": "<h1>KANCIL DAN BUAYA</h1>\r\n<p>Disebuah hutan belantara yang luas, tinggal beraneka ragam satwa. Salah satunya seekor kancil. Kancil yang satu ini dikenal memiliki kecerdikan yang luar biasa. Tak hanya cerdik, kancil pun dikenal sebagai satwa yang ramah akan sesama.</p>\r\n<p>Seperti suatu pagi, ia melihat seekor induk bebek yang tengah berenang bersama anaknya. Kancil pun yang sedang berjalan menelusuri hutan menyapa bebek tersebut, “Hai bebek! Asik sekali kamu berenang.”</p>",
+                  "questions": [
+                      {
+                          "id": "de307ce9-b070-4492-af21-6c86ad998284",
+                          "question_vintage_id": "9bed248c-1ced-45d2-a753-abdb1c4dc214",
+                          "type": "multiple_choice",
+                          "order_no": 1,
+                          "question": "Kau tau Kancil?",
+                          "options": [
+                              {
+                                  "id": "050ff2d0-bfdb-4b9a-b5f5-d27eb78e55eb",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "A",
+                                  "answer": "Option A",
+                                  "discussion_content": null,
+                                  "is_correct": true,
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "929962e2-93db-4f5d-8172-032a4da7522f",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "B",
+                                  "answer": "Option B",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "e60b7f57-775f-47e1-9e39-9bb38c17bbe2",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "C",
+                                  "answer": "Option C",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "a670c6ee-4810-471c-a3be-c5c50ab8f9ac",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "D",
+                                  "answer": "Option D",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "d790464b-ba96-468f-a885-698da98295f6",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "E",
+                                  "answer": "Option E",
+                                  "attachment": null
+                              }
+                          ],
+                          "attachment": null
+                      },
+                      {
+                          "id": "de307ce9-b070-4492-af21-6c86ad998284",
+                          "question_vintage_id": "9bed248c-1ced-45d2-a753-abdb1c4dc214",
+                          "type": "statement",
+                          "order_no": 2,
+                          "question": "Pilih pernyataan yang sesuai dengan pernyataan berikut 'Budi berbelanja di pasar'",
+                          "options": [
+                              {
+                                  "id": "050ff2d0-bfdb-4b9a-b5f5-d27eb78e55eb",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": null,
+                                  "answer": "Pernyataan 1",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "929962e2-93db-4f5d-8172-032a4da7522f",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": null,
+                                  "answer": "Pernyataan 2",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "e60b7f57-775f-47e1-9e39-9bb38c17bbe2",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": null,
+                                  "answer": "Pernyataan 3",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "a670c6ee-4810-471c-a3be-c5c50ab8f9ac",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": null,
+                                  "answer": "Pernyataan 4",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "d790464b-ba96-468f-a885-698da98295f6",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": null,
+                                  "answer": "Pernyataan 5",
+                                  "attachment": null
+                              }
+                          ],
+                          "attachment": null
+                      },
+                      {
+                          "id": "de307ce9-b070-4492-af21-6c86ad998284",
+                          "question_vintage_id": "9bed248c-1ced-45d2-a753-abdb1c4dc214",
+                          "type": "checkbox", 
+                          "order_no": 3,
+                          "question": "10 : 5 = ?",
+                          "options": [
+                              {
+                                  "id": "050ff2d0-bfdb-4b9a-b5f5-d27eb78e55eb",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "A",
+                                  "answer": "2",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "929962e2-93db-4f5d-8172-032a4da7522f",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "B",
+                                  "answer": "4 / 2",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "e60b7f57-775f-47e1-9e39-9bb38c17bbe2",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "C",
+                                  "answer": "2 * 1",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "a670c6ee-4810-471c-a3be-c5c50ab8f9ac",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "D",
+                                  "answer": "1 / 2",
+                                  "attachment": null
+                              },
+                              {
+                                  "id": "d790464b-ba96-468f-a885-698da98295f6",
+                                  "question_id": "de307ce9-b070-4492-af21-6c86ad998284",
+                                  "option": "E",
+                                  "answer": "1",
+                                  "attachment": null
+                              }
+                          ],
+                          "attachment": null
+                      },
+                      {
+                          "id": "de307ce9-b070-4492-af21-6c86ad998284",
+                          "question_vintage_id": "9bed248c-1ced-45d2-a753-abdb1c4dc214",
+                          "type": "essay", 
+                          "order_no": 5,
+                          "question": "10 : 5 = ?",
+                          "options": null,
+                          "attachment": null
+                      }
+                  ],
+                  "attachment": null
+              }
+          ]
+      }
+  ]
+}

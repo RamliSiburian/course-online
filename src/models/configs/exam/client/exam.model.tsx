@@ -3,7 +3,7 @@ import { IReqAttachment, IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@a
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
 import { GetAttachment, GetExamQuestion, SaveAnswer } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
-import { tr } from 'date-fns/locale'
+import DummyQuestion from '@lynx/mock-data/question.json'
 
 export type IStateExam = {}
 export type IActionExam = {
@@ -34,7 +34,7 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                 try {
                     const res = await GetExamQuestion(data)
                     if (res?.status_code === 200) {
-                        LynxStorages.setItem('ADZKIA@QUESTION', JSON.stringify(res?.data), true)
+                        LynxStorages.setItem('ADZKIA@QUESTION', JSON.stringify(DummyQuestion), true)
                         callback(200)
                     } else {
                         throw new Error(res?.messages)

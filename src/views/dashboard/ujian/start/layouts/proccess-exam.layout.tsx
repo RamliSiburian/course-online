@@ -1,5 +1,7 @@
 import { LynxButtons } from '@afx/components/common/button/button';
 import { Icons } from '@afx/components/common/icons';
+import SimpleTable from '@afx/components/common/simple-table/table.layout';
+import { CountdownTimer } from '@afx/components/common/typography/count-time.layout';
 import LynxStorages from '@afx/utils/storage.util'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model';
@@ -19,10 +21,11 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     const [sectionsIndex, setSectionIndex] = useState<number>(0)
     const [vintagesIndex, setVintagesIndex] = useState<number>(0)
     const [questionIndex, setQuestionIndex] = useState<number>(0)
+    const [disableNextButton, setDisableNextButton] = useState<boolean>(true)
+    const [statementOption, setStatementOption] = useState<Array<any>>([])
 
     useEffect(() => {
         if (props?.responseCode === 200) {
-
         } else {
 
         }
@@ -39,10 +42,53 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
             setVintagesIndex(0)
             setQuestionIndex(0)
         } else { }
+
+        setDisableNextButton(true)
+    }
+    const validationButton = (e: any, type: string) => {
+        if (type === 'multiple_choice') {
+            setDisableNextButton(false)
+        } else if (type === 'statement') {
+
+            if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
+                setDisableNextButton(false)
+            }
+        }
+
+    }
+
+    const handleStatement = (e: any, record: any, type: string) => {
+        const tempOption = {
+            question_id: record?.question_id,
+            option_id: record?.id,
+            is_correct: e.target.value
+        };
+        setStatementOption(prevOptions => {
+            const index = prevOptions.findIndex(option => option.option_id === tempOption.option_id);
+            if (index !== -1) {
+                const existingOption = prevOptions[index];
+                if (existingOption.is_correct !== tempOption.is_correct) {
+                    const updatedOptions = [...prevOptions];
+                    updatedOptions[index] = tempOption;
+                    return updatedOptions;
+                }
+                return prevOptions;
+            } else {
+                return [...prevOptions, tempOption];
+            }
+        });
+
+        setTimeout(() => {
+            validationButton(null, type)
+        }, 500)
     }
 
 
-    console.log({ sectionsIndex, vintagesIndex, questionIndex, question });
+
+
+    // console.log({ sectionsIndex, vintagesIndex, questionIndex, question, ss: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options });
+    console.log({ statementOption });
+
     return (
         <div className='shadow-xl p-8 h-full' >
             <div>
@@ -50,7 +96,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
             </div>
             <div className='flex items-center justify-between mt-5  '>
                 <p className='text-base-color text-xs'>{state?.detailSchedule?.description} </p>
-                <p className='text-base-color text-xs'>Akan berakhir dalam {question?.duration} </p>
+                <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={question?.duration} />  </p>
             </div>
 
             {question?.sections?.length !== 0 &&
@@ -58,7 +104,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                     {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
                         <>
                             <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages </p>
-                            <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content.replace('\\', '') }} />
+                            <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content }} />
                         </>
                     }
 
@@ -69,8 +115,11 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                 <div className='text-base-color font-semibold text-xs mt-5 mb-5' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
                                 {/* <p className='text-base-color font-semibold text-xs mt-5 mb-5'> </p> */}
                                 {
-                                    question?.sections[sectionsIndex]?.scoring_type === 'question_base' || question?.sections[sectionsIndex]?.scoring_type === 'option_base' ?
-                                        <Radio.Group disabled={saveLoading} onChange={(e: RadioChangeEvent) => props?.handleAnswer(e)} >
+                                    question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' ?
+                                        <Radio.Group disabled={saveLoading} onChange={(e: RadioChangeEvent) => {
+                                            props?.handleAnswer(e)
+                                            validationButton(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type)
+                                        }} >
                                             <Space direction="vertical">
                                                 {
                                                     question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.map((item: any, idx: number) => {
@@ -81,7 +130,45 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                                 }
                                             </Space>
                                         </Radio.Group>
-                                        : 'b'
+                                        : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
+                                            <SimpleTable
+                                                pagination={false}
+                                                action={false}
+                                                dataSource={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options || []}
+                                                columns={[
+                                                    {
+                                                        key: 'answer',
+                                                        title: 'Pernyataan',
+                                                        width: 200,
+                                                        align: 'left',
+                                                        dataIndex: 'answer',
+                                                        renderType: 'string'
+                                                    },
+                                                    {
+                                                        key: 'a',
+                                                        title:
+                                                            <div className='flex items-center justify-around'>
+                                                                <p>Benar</p>
+                                                                <p>Salah</p>
+                                                            </div>,
+                                                        width: 120,
+                                                        align: 'left',
+                                                        dataIndex: 'answer',
+                                                        renderType: 'string',
+                                                        render(_, record, idx) {
+                                                            return (
+                                                                <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type)}>
+                                                                    <Radio value={true}></Radio>
+                                                                    <Radio value={false}></Radio>
+                                                                </Radio.Group>
+                                                            )
+                                                        }
+                                                    }
+                                                ]}
+                                                LOADINGS={false}
+                                                minHeight={400}
+                                            />
+                                            : 'b'
                                 }
                             </>
                             : ''
@@ -89,7 +176,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
                     <div className='mt-10 flex gap-4'>
                         <LynxButtons disabled={saveLoading} title="Lewati" className='!w-full' iconType='FastForwardOutlined' typeButton='primary-300' />
-                        <LynxButtons disabled={saveLoading} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                        <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
                     </div>
                 </>
             }

@@ -33,7 +33,7 @@
       "@lynx/images/*": ["./src/assets/images/*"],
       "@lynx/icons/*": ["./src/assets/icons/*"],
       "@lynx/const/*": ["./src/global-const/*"],
-      "@lynx/mock-data/*": ["./src/data-mock/*"]
+      "@lynx/mock-data/*": ["./src/mock-data/*"]
     }
   },
   "include": [
