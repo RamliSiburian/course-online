@@ -128,6 +128,8 @@ export function StartExam(): React.JSX.Element {
             batch_answer: [{ option_id: e.target.value.id, question_id: e.target.value.question_id }]
         }
         debouncedApiCall(paramsQuestion, ids);
+        console.log({ paramsQuestion });
+
     }
 
 

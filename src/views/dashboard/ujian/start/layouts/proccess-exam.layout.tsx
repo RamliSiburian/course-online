@@ -21,6 +21,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     const [sectionsIndex, setSectionIndex] = useState<number>(0)
     const [vintagesIndex, setVintagesIndex] = useState<number>(0)
     const [questionIndex, setQuestionIndex] = useState<number>(0)
+    const [valueOption, setValueOption] = useState<any>()
     const [disableNextButton, setDisableNextButton] = useState<boolean>(true)
     const [statementOption, setStatementOption] = useState<Array<any>>([])
 
@@ -31,6 +32,9 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }
     }, [props?.responseCode])
 
+    const handleChangeValue = (e: RadioChangeEvent) => {
+        setValueOption(e.target?.value?.id)
+    }
     const handleNext = () => {
         if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
             setQuestionIndex(questionIndex + 1)
@@ -83,6 +87,12 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }, 500)
     }
 
+    useEffect(() => {
+        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
+            setDisableNextButton(false)
+        }
+    }, [statementOption])
+
 
 
 
@@ -116,8 +126,9 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                 {/* <p className='text-base-color font-semibold text-xs mt-5 mb-5'> </p> */}
                                 {
                                     question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' ?
-                                        <Radio.Group disabled={saveLoading} onChange={(e: RadioChangeEvent) => {
+                                        <Radio.Group disabled={saveLoading} value={valueOption} onChange={(e: RadioChangeEvent) => {
                                             props?.handleAnswer(e)
+                                            handleChangeValue(e)
                                             validationButton(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type)
                                         }} >
                                             <Space direction="vertical">
