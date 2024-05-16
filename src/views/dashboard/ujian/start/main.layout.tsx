@@ -119,17 +119,22 @@ export function StartExam(): React.JSX.Element {
         }], true)
     }, 3000);
 
-    const handleSaveAnswer = (e: RadioChangeEvent) => {
+    const handleSaveAnswer = (e: RadioChangeEvent | any, type?: any) => {
         const ids: IReqSaveAnswer = {
             registerID: state?.formRegister?.exam?.id,
             scheduleID: params
         }
-        const paramsQuestion: IReqOption = {
-            batch_answer: [{ option_id: e.target.value.id, question_id: e.target.value.question_id }]
+        if (type === undefined) {
+            const paramsQuestion: IReqOption = {
+                batch_answer: [{ option_id: e.target.value.id, question_id: e.target.value.question_id }]
+            }
+            debouncedApiCall(paramsQuestion, ids);
+        } else if (type === 'statement') {
+            const paramsTypeCheckbox: IReqOption = {
+                batch_answer: e
+            }
+            debouncedApiCall(paramsTypeCheckbox, ids);
         }
-        debouncedApiCall(paramsQuestion, ids);
-        console.log({ paramsQuestion });
-
     }
 
 

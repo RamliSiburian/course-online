@@ -6,11 +6,11 @@ import LynxStorages from '@afx/utils/storage.util'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model';
 import { useLynxStore } from '@lynx/store/core';
-import { Radio, RadioChangeEvent, Space } from 'antd';
+import { Checkbox, Radio, RadioChangeEvent, Space } from 'antd';
 import { useEffect, useState } from 'react';
-
+import type { GetProp } from 'antd';
 interface IProccessExam {
-    handleAnswer: (data: any) => void
+    handleAnswer: (data: any, type?: any) => void
     responseCode: number | undefined
 }
 export function ProccessExam(props: IProccessExam): React.JSX.Element {
@@ -53,10 +53,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         if (type === 'multiple_choice') {
             setDisableNextButton(false)
         } else if (type === 'statement') {
-
-            if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
-                setDisableNextButton(false)
-            }
         }
 
     }
@@ -82,22 +78,33 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
             }
         });
 
-        setTimeout(() => {
-            validationButton(null, type)
-        }, 500)
     }
+    const handleOptionCheckbox: GetProp<typeof Checkbox.Group, 'onChange'> = (checkedValues: any) => {
+        console.log('checked = ', checkedValues);
+    };
 
     useEffect(() => {
         if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
+
+            setTimeout(() => {
+                props?.handleAnswer(statementOption, 'statement')
+            }, 3000)
             setDisableNextButton(false)
         }
     }, [statementOption])
 
+    useEffect(() => {
+        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox') {
+            const temp = question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.map((item: any) => ({ labe: item?.answer, ...item }))
+            console.log({ temp });
+
+        } else {
+
+        }
+    }, [question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]])
 
 
-
-    // console.log({ sectionsIndex, vintagesIndex, questionIndex, question, ss: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options });
-    console.log({ statementOption });
+    console.log({ statementOption, sectionsIndex, vintagesIndex, questionIndex });
 
     return (
         <div className='shadow-xl p-8 h-full' >
@@ -179,7 +186,13 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                                 LOADINGS={false}
                                                 minHeight={400}
                                             />
-                                            : 'b'
+                                            : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' ?
+                                                <Checkbox.Group options={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.map((item: any) => ({ label: item?.option, value: item, ...item }))} onChange={(v: any) => {
+                                                    handleOptionCheckbox()
+                                                    console.log({ v });
+                                                }
+                                                } />
+                                                : 'b'
                                 }
                             </>
                             : ''

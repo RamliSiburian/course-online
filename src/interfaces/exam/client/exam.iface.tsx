@@ -7,7 +7,7 @@ export interface IReqExamQuestion {
     registerID: string
 }
 export interface IReqOption {
-    batch_answer: Array<{ question_id: string, option_id: string }>
+    batch_answer: Array<{ question_id: string, option_id: string, is_correct?: string }>
 }
 export interface IReqSaveAnswer {
     scheduleID: string
