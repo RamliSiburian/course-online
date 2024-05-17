@@ -2,6 +2,16 @@ import { IReqAttachment, IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@a
 import { endpoint, services } from '@afx/utils/config.endpoint';
 import request from '@afx/utils/request.util';
 
+
+export function StartExam(ids: IReqExamQuestion, data: { question_section_id: string }) {
+    return request<any>({
+        url: endpoint.exam.client.exam.startExam.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
+        method: 'POST',
+        data,
+        service: services.examService
+    })
+}
+
 export function GetAttachment(data: IReqAttachment) {
     return request<any>({
         url: endpoint.exam.client.exam.getAttachment.replace(':scheduleID', data?.scheduleID).replace(':registerID', data?.registerID),
@@ -24,6 +34,14 @@ export function SaveAnswer(data: IReqOption, ids: IReqSaveAnswer) {
         url: endpoint.exam.client.exam.saveAnswer.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
         method: 'POST',
         data,
+        service: services.examService
+    })
+}
+
+export function ResultExam(ids: IReqSaveAnswer) {
+    return request<any>({
+        url: endpoint.exam.client.exam.result.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
+        method: 'GET',
         service: services.examService
     })
 }

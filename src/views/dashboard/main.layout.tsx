@@ -1,4 +1,6 @@
 import LynxStorages from '@afx/utils/storage.util';
+import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model';
+import { useLynxStore } from '@lynx/store/core';
 import { Menu, MenuProps, theme } from 'antd';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -14,6 +16,7 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
     } = theme.useToken()
     const menus = LynxStorages.getItem('ADZKIA@MENUS', true, true).data[0]
     const [listMenus, setListMenus] = useState<Array<any>>([])
+    const { state } = useLynxStore<IStateGlobal, IActionGlobal>('globalState')
 
     useEffect(() => {
         const tempMenu = menus?.map((item: any) => {
@@ -29,7 +32,9 @@ export default function Dashboard(props: IDashboard): React.JSX.Element {
     }, [])
     return (
         <>
-            {listMenus?.length !== 0 &&
+            {
+                state?.statusMaximize &&
+                listMenus?.length !== 0 &&
                 <Menu items={listMenus} mode='horizontal' style={{
                     border: 'none',
                     padding: '10px',

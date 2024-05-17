@@ -11,15 +11,22 @@ import { DetailStartExam } from './layouts/detail.layout'
 import { ProccessExam } from './layouts/proccess-exam.layout'
 import { RadioChangeEvent } from 'antd'
 import { debounce } from 'lodash';
+import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model'
 
 export function StartExam(): React.JSX.Element {
     const { examID: params }: { examID: string } = useParams() as any
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const { state: globalState, useActions: globalActions } = useLynxStore<IStateGlobal, IActionGlobal>('globalState')
+
     const { useActions: exam, isLoading: examLoading } = useLynxStore<IStateExam, IActionExam>('exam')
     const [isQuestion, setIsQuestion] = useState<boolean>(false)
     const [isAttachment, setIsAttachment] = useState<boolean>(false)
     const [isStart, setisStart] = useState<boolean>(false)
     const [responseCode, setResponseCode] = useState<number | undefined>()
+
+    useEffect(() => {
+        globalActions<'handleMaximizeFloor'>('handleMaximizeFloor', [isStart ? false : true], true)
+    }, [isStart])
 
     useEffect(() => {
         setisStart(false)
@@ -130,27 +137,60 @@ export function StartExam(): React.JSX.Element {
             }
             debouncedApiCall(paramsQuestion, ids);
         } else if (type === 'statement') {
-            const paramsTypeCheckbox: IReqOption = {
+            const paramsTypeStatement: IReqOption = {
                 batch_answer: e
             }
-            debouncedApiCall(paramsTypeCheckbox, ids);
+            debouncedApiCall(paramsTypeStatement, ids);
+        } else if (type === 'checkbox') {
+            const paramsCheckbox: IReqOption = {
+                batch_answer: e
+            }
+            debouncedApiCall(paramsCheckbox, ids);
         }
     }
 
+    const handleStartExam = (id: string) => {
+        const paramsQuestion: IReqExamQuestion = {
+            registerID: state?.formRegister?.exam?.id,
+            scheduleID: params
+        }
+        exam<'StartExam'>('StartExam', [{ question_section_id: id }, paramsQuestion, (code: number) => {
+            console.log({ code });
+        }], true)
 
+    }
+
+    const handleResult = () => {
+        const paramsQuestion: IReqExamQuestion = {
+            registerID: state?.formRegister?.exam?.id,
+            scheduleID: params
+        }
+        exam<'getResultExam'>('getResultExam', [paramsQuestion, (code: number) => {
+            console.log({ code });
+
+        }], true)
+    }
     useEffect(() => {
         if (isQuestion && isAttachment) {
             setisStart(true)
-            //TODO: start api
         } else {
             setisStart(false)
         }
 
     }, [isQuestion, isAttachment])
 
+    useEffect(() => {
+        if (state?.formRegister?.exam?.status === 'finish') {
+            console.log('finish');
+
+        } else { }
+    }, [state?.formRegister])
+    console.log({ dfs: state?.formRegister });
+
+
     return (
         isStart
-            ? <ProccessExam responseCode={responseCode} handleAnswer={handleSaveAnswer} />
-            : <DetailStartExam startExam={startExam} />
+            ? <ProccessExam restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
+            : <DetailStartExam result={handleResult} startExam={startExam} />
     )
 }

@@ -14,6 +14,7 @@ import { useState } from 'react';
 
 interface IDetailStartExam {
     startExam: () => void
+    result: () => void
 }
 
 export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
@@ -64,7 +65,11 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                         <Col span={6}><p className='font-normal text-xs'>Dapat Diulang</p></Col>
                         <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
                     </Row>
-                    <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Mulai Ujian" className='!w-full mt-10' />
+                    {
+                        state?.formRegister?.exam?.status === 'finish' ?
+                            <LynxButtons disabled={loadingExam} onClick={props?.result} title="Lihat Hasil Ujian" className='!w-full mt-10' />
+                            : <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Mulai Ujian" className='!w-full mt-10' />
+                    }
                 </div>
             </div>
             <LynxModal width={450} open={openModal} onCancel={() => setOpenModal(false)} title="Tata Tertib Ujian" content={
@@ -79,6 +84,8 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
         </div>
     )
 }
+
+
 
 
 const panduan: string[] = [

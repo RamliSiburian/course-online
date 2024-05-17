@@ -66,9 +66,11 @@ export const endpoint = {
                 listOwnedExam: 'schedules/owned'
             },
             exam: {
+                startExam: 'schedules/:scheduleID/exam/:registerID/start',
                 getAttachment: 'schedules/:scheduleID/exam/:registerID/attachment',
                 getListExamQuestion: 'schedules/:scheduleID/exam/:registerID/question',
-                saveAnswer: 'schedules/:scheduleID/exam/:registerID/save'
+                saveAnswer: 'schedules/:scheduleID/exam/:registerID/save',
+                result: 'schedules/:scheduleID/exam/:registerID/result'
             }
         }
     },

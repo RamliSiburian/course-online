@@ -3,6 +3,8 @@ import HeaderLayout from './header/header.layout';
 import { Icons } from '@afx/components/common/icons';
 import SiderMenu from './sider/sider.layout';
 import Link from 'next/link';
+import { useLynxStore } from '@lynx/store/core';
+import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model';
 
 
 const { Header, Footer, Content } = Layout;
@@ -25,21 +27,25 @@ export default function Pages(props: IDashboard): React.JSX.Element {
         token: { colorBgContainer }
     } = theme.useToken()
 
-
+    const { state } = useLynxStore<IStateGlobal, IActionGlobal>('globalState')
 
     return (
         <Layout className='h-screen overflow-scroll'>
-            <Header className='!px-0' style={{
-                height: 'auto',
-                display: 'flex',
-                justifyItems: 'center',
-                background: colorBgContainer,
-                padding: 'none',
-                boxShadow: '0px 3px 6px rgb(151 169 204/10%)',
-                zIndex: 2
-            }} ><HeaderLayout /> </Header>
+            {state?.statusMaximize &&
+                <Header className='!px-0' style={{
+                    height: 'auto',
+                    display: 'flex',
+                    justifyItems: 'center',
+                    background: colorBgContainer,
+                    padding: 'none',
+                    boxShadow: '0px 3px 6px rgb(151 169 204/10%)',
+                    zIndex: 2
+                }} ><HeaderLayout /> </Header>
+            }
             <Layout className=''>
-                <SiderMenu items={items} />
+                {state?.statusMaximize &&
+                    <SiderMenu items={items} />
+                }
                 <Content className='overflow-scroll' style={{ background: colorBgContainer }} >
                     {props.children}
                 </Content>
