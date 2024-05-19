@@ -40,7 +40,7 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                 try {
                     const res = await GetExamQuestion(data)
                     if (res?.status_code === 200) {
-                        LynxStorages.setItem('ADZKIA@QUESTION', JSON.stringify(res?.data), true)
+                        LynxStorages.setItem('ADZKIA@QUESTION', JSON.stringify(DummyQuestion), true)
                         callback(200)
                     } else {
                         throw new Error(res?.messages)
@@ -77,7 +77,7 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                     })
 
                 } catch (err: any) {
-                    WarningNotif({ key: 'RESULT-EXAM', message: 'Failed to load data', description: err?.messages })
+                    // WarningNotif({ key: 'RESULT-EXAM', message: 'Failed to load data', description: err?.messages })
 
                 }
             }

@@ -158,7 +158,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         } else {
         }
     }, [checkedOption]);
-    console.log({ question });
 
 
     return (

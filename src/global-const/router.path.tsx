@@ -1,6 +1,7 @@
 const listPath = {
     scheduleDetail: '/page/dashboard/tryout/schedules/detail/:scheduleID',
-    examStart: '/page/dashboard/tryout/start/:examID'
+    examStart: '/page/dashboard/tryout/start/:examID',
+    resultStart: '/page/dashboard/tryout/result/:examID'
 
 }
 

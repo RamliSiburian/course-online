@@ -100,6 +100,7 @@ export function DetailSchedule(): React.JSX.Element {
     }
 
 
+    console.log({ test: state?.formRegister });
 
     return (
         <div className='shadow-xl p-8 h-full' >
@@ -164,7 +165,9 @@ export function DetailSchedule(): React.JSX.Element {
                                         state?.detailSchedule?.price === null ? <LynxButtons onClick={() => setOpenConfirm(true)} title='Ikuti Ujian' className='!w-32' />
                                             : <LynxButtons title='Ikuti Ujian' className='!w-32' />
                                     ) : <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
-                                ) : <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Mulai Ujian' className='!w-32' />
+                                ) : state?.formRegister?.exam?.status === 'finish' ?
+                                    <LynxButtons title='Lihat Hasil Ujian' onClick={() => router.push(getPath('resultStart', { examID: params }))} className='!w-32' />
+                                    : <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Mulai Ujian' className='!w-32' />
 
                                 }
                             </div>
