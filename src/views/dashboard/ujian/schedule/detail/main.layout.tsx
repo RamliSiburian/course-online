@@ -63,30 +63,11 @@ export function DetailSchedule(): React.JSX.Element {
 
             var transaction = db.transaction(['Images'], 'readonly');
             var objectStore = transaction.objectStore('Images');
-
-
-            // const dataImages = ['2023_10_31_554963714_kancil.jpeg', '2023_11_03_869202118_fuji-mountain-with-milky-way-night_335224-104.webp']
-
-            // const storeImage = dataImages?.map((item: any, idx: number) => {
-            //     return objectStore.get(item).onsuccess = (event: any) => {
-            //         if (getRequest.result) {
-            //             return URL.createObjectURL(getRequest.result.blob)
-
-            //         } else {
-            //             console.log('No data found with the specified key');
-            //         }
-            //     };
-            // })   
-
-            // console.log({ storeImage });
-
-
             var getRequest = objectStore.get('2023_11_03_696814289_ppkn.jpeg'); // Replace 'your_specific_key' with the key you want to retrieve
 
             getRequest.onsuccess = (event: any) => {
                 if (getRequest.result) {
-                    console.log('Data found:', getRequest.result);
-                    setImage(URL.createObjectURL(getRequest.result.blob))
+                    return (URL.createObjectURL(getRequest.result.blob))
 
                 } else {
                     console.log('No data found with the specified key');
@@ -98,9 +79,6 @@ export function DetailSchedule(): React.JSX.Element {
             };
         };
     }
-
-
-    console.log({ test: state?.formRegister });
 
     return (
         <div className='shadow-xl p-8 h-full' >

@@ -124,7 +124,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     };
 
     const handleEssay: InputNumberProps['onChange'] = (value) => {
-        console.log('changed', value);
         setDisableNextButton(false)
         props?.handleAnswer(value, 'essay');
 

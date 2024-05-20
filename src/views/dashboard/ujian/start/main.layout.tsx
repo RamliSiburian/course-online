@@ -43,7 +43,6 @@ export function StartExam(): React.JSX.Element {
         const request = window.indexedDB.open('images', 1);
 
         request.onerror = function (event) {
-            console.log('Error opening database');
         };
 
         request.onupgradeneeded = function (event: any) {
@@ -62,11 +61,9 @@ export function StartExam(): React.JSX.Element {
             var request = objectStore.put({ 'id': relativePath, blob });
 
             request.onsuccess = function (event: any) {
-                console.log('Data inserted successfully');
             };
 
             request.onerror = function (event: any) {
-                console.log('Error inserting data');
             };
         };
     };
@@ -155,7 +152,6 @@ export function StartExam(): React.JSX.Element {
             scheduleID: params
         }
         exam<'StartExam'>('StartExam', [{ question_section_id: id }, paramsQuestion, (code: number) => {
-            console.log({ code });
         }], true)
 
     }
@@ -166,7 +162,6 @@ export function StartExam(): React.JSX.Element {
             scheduleID: params
         }
         exam<'getResultExam'>('getResultExam', [paramsQuestion, (code: number) => {
-            console.log({ code });
 
         }], true)
     }
@@ -181,11 +176,10 @@ export function StartExam(): React.JSX.Element {
 
     useEffect(() => {
         if (state?.formRegister?.exam?.status === 'finish') {
-            console.log('finish');
 
         } else { }
     }, [state?.formRegister])
-    console.log({ dfs: state?.formRegister });
+
 
 
     return (

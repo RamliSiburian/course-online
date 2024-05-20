@@ -28,6 +28,13 @@ export function GetExamQuestion(data: IReqExamQuestion) {
         service: services.examService
     })
 }
+export function GetExamDiscussion(data: IReqExamQuestion) {
+    return request<any>({
+        url: endpoint.exam.client.exam.discussion.replace(':scheduleID', data?.scheduleID).replace(':registerID', data?.registerID),
+        method: 'GET',
+        service: services.examService
+    })
+}
 
 export function SaveAnswer(data: IReqOption, ids: IReqSaveAnswer) {
     return request<any>({

@@ -16,7 +16,6 @@ const modelPayment: IModelDefinitions<IStatePayment, IActionPayment> = {
             async claimExam(data, callback) {
                 try {
                     const res = await ClaimExam(data)
-                    console.log({ res: res?.data });
 
                     callback(200)
                 } catch (err: any) {

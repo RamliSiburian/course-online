@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from 'recharts';
 interface IPropsPie {
   data: any
 }
@@ -22,33 +22,23 @@ export default function LynxPieChart(props: IPropsPie): React.JSX.Element {
         lulus: props?.data?.is_passed ? 'LL' : 'TL'
       },
       data: [
-        { name: 'Benar', value: props?.data?.correct },
-        { name: 'Dilewati', value: props?.data?.skipped },
-        { name: 'Salah', value: props?.data?.wrong }
+        { name: 'Benar', value: props?.data?.correct, color: '#0000FF' },
+        { name: 'Dilewati', value: props?.data?.skipped, color: '#ED7020' },
+        { name: 'Salah', value: props?.data?.wrong, color: '#00FF00' }
       ]
     }
     setData(tempData)
   }, [props?.data])
 
   const renderActiveShape = (props: any) => {
-    const RADIAN = Math.PI / 180;
-    const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? 'start' : 'end';
+    const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill } = props;
 
     return (
       <g>
-        <text x={cx} y={cy - 20} dy={8} textAnchor="middle" fill={fill}>
+        <text x={cx} y={cy - 20} dy={8} textAnchor="middle" fill={'#000'}>
           Nilai
         </text>
-        <text x={cx} y={cy + 5} dy={8} textAnchor="middle" fill={fill}>
+        <text x={cx} y={cy + 5} dy={8} textAnchor="middle" fill={'#000'}>
           {data?.hasil?.nilai} &nbsp;
           {`(${data?.hasil?.lulus})`}
         </text>
@@ -66,22 +56,23 @@ export default function LynxPieChart(props: IPropsPie): React.JSX.Element {
   };
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart width={500} height={500}>
-        <Pie
-          activeIndex={state}
-          activeShape={renderActiveShape}
-          data={data?.data}
-          cx="50%"
-          cy="50%"
-          innerRadius={40}
-          outerRadius={60}
-          fill="#ED7020"
-          dataKey="value"
-          onMouseEnter={onPieEnter}
-        />
-        <Tooltip />
-      </PieChart>
-    </ResponsiveContainer>
+    <PieChart width={250} height={250}>
+      <Pie
+        activeIndex={state}
+        activeShape={renderActiveShape}
+        data={data?.data}
+        cx="50%"
+        cy="40%"
+        innerRadius={40}
+        outerRadius={60}
+        dataKey="value"
+        onMouseEnter={onPieEnter}
+      >
+        {data?.data.map((entry: any, index: number) => (
+          <Cell key={`cell-${index}`} fill={entry.color} />
+        ))}
+      </Pie>
+      <Tooltip />
+    </PieChart>
   )
 }
