@@ -1,12 +1,13 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
 import { IReqAttachment, IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { GetAttachment, GetExamDiscussion, GetExamQuestion, ResultExam, SaveAnswer, StartExam } from '@afx/services/exam/client/exam.service'
+import { GetAnswer, GetAttachment, GetExamDiscussion, GetExamQuestion, ReStartExam, ResultExam, SaveAnswer, StartExam } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
 import DummyQuestion from '@lynx/mock-data/question.json'
 
 export type IStateExam = {
     resultExam: any
+    answers: any
     listDiscussion: any
 }
 export type IActionExam = {
@@ -14,7 +15,9 @@ export type IActionExam = {
     getListExamQuestion: (data: IReqExamQuestion, callback: (status: number) => void) => void
     getListExamDiscussion: (data: IReqExamQuestion) => void
     saveAnswer: (data: IReqOption, ids: IReqSaveAnswer, callback: (code: number) => void) => void
+    getAnswer: (ids: IReqSaveAnswer) => void
     StartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void
+    reStartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void
     getResultExam: (ids: IReqSaveAnswer, callback: (code: number) => void) => void
 }
 
@@ -23,7 +26,8 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
     model: (put, getState, useActions) => ({
         state: {
             resultExam: {} as any,
-            listDiscussion: {}
+            listDiscussion: {},
+            answers: []
         },
         actions: {
             async getAttachment(data, callback) {
@@ -36,7 +40,8 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                         throw new Error(res?.messages)
                     }
                 } catch (err: any) {
-                    // WarningNotif({ key: 'ATTACHMENT', message: 'Failed to load data attachment', description: err?.messages })
+                    callback(404, null)
+                    // WarningNotif({ key: 'ATTACHMENT', message: 'Failed to load data attachment', description: err?.message })
                 }
             },
             async getListExamQuestion(data, callback) {
@@ -74,6 +79,16 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                     WarningNotif({ key: 'SAVE-ANSWER', message: 'Failed to load data', description: err?.messages })
                 }
             },
+            async getAnswer(ids) {
+                try {
+                    const res = await GetAnswer(ids)
+                    put({
+                        answers: res?.data
+                    })
+                } catch (err: any) {
+                    WarningNotif({ key: 'GET-ANSWER', message: 'Failed to load data', description: err?.messages })
+                }
+            },
             async StartExam(data, ids, callback) {
                 try {
                     const res = await StartExam(ids, data)
@@ -81,6 +96,14 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
 
                 } catch (err: any) {
                     WarningNotif({ key: 'START-EXAM', message: 'Failed to load data', description: err?.messages })
+                }
+            },
+            async reStartExam(data, ids, callback) {
+                try {
+                    const res = await ReStartExam(ids, data)
+                    callback(res?.status_code)
+                } catch (err: any) {
+                    WarningNotif({ key: 'RE-START-EXAM', message: 'Failed to load data', description: err?.messages })
                 }
             },
             async getResultExam(ids, callback) {

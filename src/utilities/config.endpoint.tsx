@@ -67,9 +67,11 @@ export const endpoint = {
             },
             exam: {
                 startExam: 'schedules/:scheduleID/exam/:registerID/start',
+                reStartExam: 'schedules/:scheduleID/exam/:registerID/restart',
                 getAttachment: 'schedules/:scheduleID/exam/:registerID/attachment',
                 getListExamQuestion: 'schedules/:scheduleID/exam/:registerID/question',
                 saveAnswer: 'schedules/:scheduleID/exam/:registerID/save',
+                answer: 'schedules/:scheduleID/exam/:registerID/answers',
                 result: 'schedules/:scheduleID/exam/:registerID/result',
                 discussion: 'schedules/:scheduleID/exam/:registerID/discussion'
             }

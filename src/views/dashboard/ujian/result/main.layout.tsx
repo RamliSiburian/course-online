@@ -3,7 +3,7 @@ import { LynxCards } from '@afx/components/common/card/card'
 import LynxPieChart from '@afx/components/common/charts/pie'
 import { Icons } from '@afx/components/common/icons'
 import LynxKatexEditor from '@afx/components/common/katex-editor/katex-editor'
-import { IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqExamQuestion, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import LynxStorages from '@afx/utils/storage.util'
 import getPath from '@lynx/const/router.path'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model'
@@ -14,6 +14,9 @@ import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Latex from 'react-latex-next'
 import 'katex/dist/katex.min.css';
+import { SuccessNotif } from '@afx/components/common/notification/success'
+import JSZip from 'jszip'
+import { WarningNotif } from '@afx/components/common/notification/warning'
 
 export default function ResultExam(): React.JSX.Element {
   const [profile, setProfile] = useState<any>(null)
@@ -26,6 +29,9 @@ export default function ResultExam(): React.JSX.Element {
   const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
   const { state: examData, useActions: exams, isLoading: examLoading } = useLynxStore<IStateExam, IActionExam>('exam');
   const loading = examLoading('getResultExam') || scheduleloading('getFormRegister') || false
+  const [isQuestion, setIsQuestion] = useState<boolean>(false)
+  const [isAttachment, setIsAttachment] = useState<boolean>(false)
+  const [isStart, setisStart] = useState<boolean>(false)
 
   useEffect(() => {
     if (Object.keys(state?.formRegister).length === 0) {
@@ -47,6 +53,109 @@ export default function ResultExam(): React.JSX.Element {
     }
   }, [state?.formRegister])
 
+
+  const isImageFile = (fileName: any) => {
+    return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
+  };
+
+  const saveToIndexedDB = (relativePath: string, blob: any) => {
+
+    const request = window.indexedDB.open('images', 1);
+
+    request.onerror = function (event) {
+    };
+
+    request.onupgradeneeded = function (event: any) {
+      var db = event.target.result;
+
+      var objectStore = db.createObjectStore('Images', { keyPath: 'id' });
+    };
+
+    request.onsuccess = function (event: any) {
+      var db = event.target.result;
+
+      // Insert data into the object store
+      var transaction = db.transaction(['Images'], 'readwrite');
+      var objectStore = transaction.objectStore('Images');
+
+      var request = objectStore.put({ 'id': relativePath, blob });
+
+      request.onsuccess = function (event: any) {
+      };
+
+      request.onerror = function (event: any) {
+      };
+    };
+  };
+
+  const saveImageToIndexedDB = async (data: any) => {
+    if (!data) return;
+
+    try {
+      const zip = await JSZip.loadAsync(data);
+
+      zip.forEach(async (relativePath, file) => {
+
+        if (file.dir) return;
+        if (isImageFile(relativePath)) {
+          const blob = await file.async('blob');
+          const imageUrl = URL.createObjectURL(blob);
+          saveToIndexedDB(relativePath, blob);
+        }
+      });
+
+    } catch (error) {
+      WarningNotif({ message: 'Failed', description: 'Error extracting ZIP contents' })
+    }
+  };
+
+  const deleteDatabase = (dbName: any) => {
+    return new Promise((resolve, reject) => {
+      const deleteRequest = indexedDB.deleteDatabase(dbName);
+
+      deleteRequest.onerror = (event) => {
+        reject('Error deleting database');
+      };
+
+      deleteRequest.onsuccess = (event) => {
+        resolve('Database deleted successfully');
+      };
+
+      deleteRequest.onblocked = (event) => {
+        reject('Database deletion blocked');
+      };
+    });
+  };
+
+  const startExam = () => {
+    deleteDatabase('images')
+    const paramsQuestion: IReqExamQuestion = {
+      registerID: state?.formRegister?.exam?.id,
+      scheduleID: params
+    }
+    exams<'getListExamQuestion'>('getListExamQuestion', [paramsQuestion, (status: number) => {
+      if (status === 200) {
+        SuccessNotif({ key: 'LIST-QUESTION', message: 'Success', description: 'Question has been downloaded' })
+        setIsQuestion(true)
+      } else {
+        setIsQuestion(false)
+      }
+    }], true)
+
+    exams<'getAttachment'>('getAttachment', [paramsQuestion, (status: number, data: any) => {
+      if (status === 200) {
+        saveImageToIndexedDB(data)
+        SuccessNotif({ key: 'LIST-ATTACHMENT', message: 'Success', description: 'Attachment has been downloaded' })
+        setIsAttachment(true)
+      } else if (status === 404) {
+        setIsAttachment(true)
+      } else {
+        setIsAttachment(false)
+      }
+    }], true)
+  }
+
+  console.log({ examData: examData?.resultExam, sf: examData?.answers });
 
 
   return (

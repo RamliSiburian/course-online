@@ -25,6 +25,7 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
     const loadingExam = examLoading('getAttachment') || examLoading('getListExamQuestion') || false
     const user = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0]
     const [openModal, setOpenModal] = useState<boolean>(false)
+
     return (
         <div className='shadow-xl p-8 h-full' >
             <div className='flex items-center gap-4 mb-10'>

@@ -21,6 +21,7 @@ export default function Discussion() {
   const { state: examData, useActions: exams, isLoading } = useLynxStore<IStateExam, IActionExam>('exam');
   const [isAttachment, setIsAttachment] = useState<boolean>(false)
   const loading = isLoading('getListExamDiscussion') || false
+  let questionCounter = 0;
 
   const deleteDatabase = (dbName: any) => {
     return new Promise((resolve, reject) => {
@@ -121,6 +122,7 @@ export default function Discussion() {
         scheduleID: state?.formRegister?.id
       }
       exams<'getListExamDiscussion'>('getListExamDiscussion', [params], true)
+      exams<'getAnswer'>('getAnswer', [params], true)
       exams<'getAttachment'>('getAttachment', [params, (status: number, data: any) => {
         if (status === 200) {
           saveImageToIndexedDB(data)
@@ -182,6 +184,10 @@ export default function Discussion() {
     setImageUrls(newImageUrls);
   };
 
+  console.log({ sdf: examData?.answers, disc: examData?.listDiscussion });
+
+
+
   return (
     <Row gutter={[10, 20]}>
       <Col span={24}>
@@ -206,51 +212,54 @@ export default function Discussion() {
               <Col span={24}>
                 {examData?.listDiscussion?.sections?.map((section: any, idx: number) => (
                   section?.vintages?.map((vintage: any, idxV: number) => (
-                    vintage?.questions?.map((question: any, idxQ: number) => (
-                      question.type === 'multiple_choice' ? (
-                        <div key={idxQ} className='flex gap-5 mb-5'>
-                          <p>{idx + idxV + idxQ + 1}</p>
-                          <div>
+                    vintage?.questions?.map((question: any, idxQ: number) => {
+                      questionCounter++
+                      return (
+                        question.type === 'multiple_choice' ? (
+                          <div key={idxQ} className='flex gap-5 mb-5'>
+                            <p>{questionCounter}</p>
                             <div>
-                              {question?.attachment !== null && (
-                                <>
-                                  {imageUrls[question.attachment.filename] ? (
-                                    <Image alt='test' src={imageUrls[question.attachment.filename]} style={{ width: '200px' }} />
-                                  ) : (
-                                    <p>Loading...</p>
-                                  )}
-                                </>
-                              )}
-                              <div dangerouslySetInnerHTML={{ __html: question?.question }} />
-                              <p>{section?.scoring_type === 'question_base' && `Point : ${question?.point}`}</p>
-                            </div>
-                            {question?.options?.map((option: any, idxO: number) => (
-                              <div key={idxO} className='flex gap-2'>
-                                <p>{String.fromCharCode(idxO + 65)}.</p>
-                                <p>{option?.option} {section?.scoring_type === 'option_base' && `Point : ${option?.point}`}</p>
+                              <div>
+                                {question?.attachment !== null && (
+                                  <>
+                                    {imageUrls[question.attachment.filename] ? (
+                                      <Image alt='test' src={imageUrls[question.attachment.filename]} style={{ width: '200px' }} />
+                                    ) : (
+                                      <p>Loading...</p>
+                                    )}
+                                  </>
+                                )}
+                                <div dangerouslySetInnerHTML={{ __html: question?.question }} />
+                                <p>{section?.scoring_type === 'question_base' && `Point : ${question?.point}`}</p>
                               </div>
-                            ))}
-                            <div className='mt-2 text-[#477C82]'>
-                              <p className='text-black'>Kunci Jawaban & Pembahasan :</p>
-                              <div className='flex gap-10 '>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Kunci </p>
-                                <p>: {question[idxQ]?.answer}</p>
-                              </div>
-                              <div className='flex gap-10 '>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Materi </p>
-                                <p>: {section?.name}</p>
-                              </div>
-                              <div className=''>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Pembahasan </p>
-                                <div dangerouslySetInnerHTML={{ __html: question?.discussion_content }} />
+                              {question?.options?.map((option: any, idxO: number) => (
+                                <div key={idxO} className='flex gap-2'>
+                                  <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? 'text-red-700' : 'text-base-color'}>{String.fromCharCode(idxO + 65)}.</p>
+                                  <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? 'text-red-700' : 'text-base-color'}>{option?.option} {section?.scoring_type === 'option_base' && `Point : ${option?.point}`}</p>
+                                </div>
+                              ))}
+                              <div className='mt-2 text-[#477C82]'>
+                                <p className='text-black'>Kunci Jawaban & Pembahasan :</p>
+                                <div className='flex gap-10 '>
+                                  <p className='font-bold min-w-[100px] flex-wrap'> Kunci </p>
+                                  <p>: {question?.options?.map((item: any, idx: number) => item?.is_correct && item?.option)}</p>
+                                </div>
+                                <div className='flex gap-10 '>
+                                  <p className='font-bold min-w-[100px] flex-wrap'> Materi </p>
+                                  <p>: {section?.name}</p>
+                                </div>
+                                <div className=''>
+                                  <p className='font-bold min-w-[100px] flex-wrap'> Pembahasan </p>
+                                  <div dangerouslySetInnerHTML={{ __html: question?.discussion_content }} />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ) : (
-                        's'
+                        ) : (
+                          's'
+                        )
                       )
-                    ))
+                    })
                   ))
                 ))}
               </Col>

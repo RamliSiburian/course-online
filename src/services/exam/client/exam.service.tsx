@@ -11,6 +11,14 @@ export function StartExam(ids: IReqExamQuestion, data: { question_section_id: st
         service: services.examService
     })
 }
+export function ReStartExam(ids: IReqExamQuestion, data: { question_section_id: string }) {
+    return request<any>({
+        url: endpoint.exam.client.exam.reStartExam.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
+        method: 'POST',
+        data,
+        service: services.examService
+    })
+}
 
 export function GetAttachment(data: IReqAttachment) {
     return request<any>({
@@ -41,6 +49,13 @@ export function SaveAnswer(data: IReqOption, ids: IReqSaveAnswer) {
         url: endpoint.exam.client.exam.saveAnswer.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
         method: 'POST',
         data,
+        service: services.examService
+    })
+}
+export function GetAnswer(ids: IReqSaveAnswer) {
+    return request<any>({
+        url: endpoint.exam.client.exam.answer.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
+        method: 'GET',
         service: services.examService
     })
 }

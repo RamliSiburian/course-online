@@ -2,9 +2,11 @@ import { LynxButtons } from '@afx/components/common/button/button';
 import { Icons } from '@afx/components/common/icons';
 import LynxInput from '@afx/components/common/input/input';
 import SimpleTable from '@afx/components/common/simple-table/table.layout';
+import getPath from '@lynx/const/router.path';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
 import { Divider } from 'antd';
+import moment from 'moment';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -13,7 +15,8 @@ interface IBrowseUjian {
 }
 export default function Browse(props: IBrowseUjian): React.JSX.Element {
     const router = useRouter()
-    const { state } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const { state, isLoading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
+    const loading = isLoading('getListOwnedExam') || false
 
     return (
         <div className='shadow-2xl p-4 min-h-screen' >
@@ -28,26 +31,68 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
             <div className='flex gap-8 flex-wrap mt-5' >
                 <SimpleTable
                     action={false}
-                    LOADINGS={false}
-                    dataSource={[]}
+                    LOADINGS={loading}
+                    dataSource={state?.listOwnedExam}
                     minHeight={500}
                     pagination={true}
                     columns={[
                         {
-                            key: 'no',
-                            title: 'No'
+                            key: 'id',
+                            title: 'No',
+                            itemAlign: 'center',
+                            width: 80,
+                            align: 'center',
+                            render(value, record, index) {
+                                return (
+                                    <p>{(index + 1)}</p>
+                                )
+                            }
                         },
                         {
-                            key: 'title',
-                            title: 'Title'
+                            key: 'waktu',
+                            title: 'Waktu Mengerjakan',
+                            itemAlign: 'center',
+                            width: 80,
+                            align: 'center',
+                            dataIndex: 'open_from',
+                            renderType: 'string',
+                            render(value, record, index) {
+                                return (
+                                    <p>{moment(value).format('DD MMM YYY - HH:mm')}</p>
+                                )
+                            }
                         },
                         {
-                            key: 'status',
-                            title: 'Status'
+                            key: 'description',
+                            title: 'Keterangan Ujian',
+                            itemAlign: 'center',
+                            width: 80,
+                            align: 'center',
+                            dataIndex: 'description',
+                            renderType: 'string'
                         },
                         {
-                            key: 'score',
-                            title: 'Score'
+                            key: 'nilai',
+                            title: 'Nilai Hasil',
+                            itemAlign: 'center',
+                            width: 80,
+                            align: 'center',
+                            dataIndex: 'description',
+                            renderType: 'string'
+                        },
+                        {
+                            key: 'detail',
+                            title: 'Detail',
+                            itemAlign: 'center',
+                            width: 80,
+                            align: 'center',
+                            render(value, record, index) {
+                                return (
+                                    <div className='flex justify-center items-center'>
+                                        <LynxButtons title="Lihat Hasil" typeButton='primary-300' onClick={() => router.push(getPath('resultStart', { examID: record?.id }))} />
+                                    </div>
+                                )
+                            }
                         }
                     ]}
                 />

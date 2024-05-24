@@ -80,6 +80,7 @@ export function DetailSchedule(): React.JSX.Element {
         };
     }
 
+
     return (
         <div className='shadow-xl p-8 h-full' >
             <div className='flex items-center gap-4 mb-10'>
@@ -144,7 +145,12 @@ export function DetailSchedule(): React.JSX.Element {
                                             : <LynxButtons title='Ikuti Ujian' className='!w-32' />
                                     ) : <LynxButtons disabled title='Kuota Penuh' className='!w-32 !bg-[#f00]' />
                                 ) : state?.formRegister?.exam?.status === 'finish' ?
-                                    <LynxButtons title='Lihat Hasil Ujian' onClick={() => router.push(getPath('resultStart', { examID: params }))} className='!w-32' />
+                                    <div className='flex gap-4'>
+                                        <LynxButtons title='Lihat Hasil Ujian' onClick={() => router.push(getPath('resultStart', { examID: params }))} className='!w-32' />
+                                        {state?.formRegister?.repeatable &&
+                                            <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Ulangi Ujian' className='!w-32' typeButton='danger' />
+                                        }
+                                    </div>
                                     : <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Mulai Ujian' className='!w-32' />
 
                                 }

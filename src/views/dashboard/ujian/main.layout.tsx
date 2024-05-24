@@ -8,9 +8,10 @@ export default function Ujian(): React.JSX.Element {
     const { useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     useEffect(() => {
         const params: IReqListExam = {
-            per_page: 11
+            per_page: 20
         }
         useActions<'getListExam'>('getListExam', [params], true)
+        useActions<'getListOwnedExam'>('getListOwnedExam', [params], true)
     }, [])
     return (
         <>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Checkbox, Radio, Space } from 'antd';
+import { Checkbox, Image, Radio, Space } from 'antd';
 import SimpleTable from '@afx/components/common/simple-table/table.layout';
 import { LynxButtons } from '@afx/components/common/button/button';
 import { Icons } from '@afx/components/common/icons';
@@ -31,6 +31,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
     const [statementOption, setStatementOption] = useState<Array<any>>([]);
     const [checkedOption, setCheckedOption] = useState<Array<any>>([]);
+    const [imageUrls, setImageUrls] = useState<any>({});
 
     useEffect(() => {
         if (props?.responseCode === 200) {
@@ -158,6 +159,55 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }
     }, [checkedOption]);
 
+    const getImage = (key: any) => {
+        return new Promise((resolve, reject) => {
+            const request = window.indexedDB.open('images', 1);
+
+            request.onerror = function () {
+                reject('Error opening database');
+            };
+
+            request.onsuccess = (event) => {
+                const db = event.target.result;
+
+
+                const transaction = db.transaction(['Images'], 'readonly');
+                const objectStore = transaction.objectStore('Images');
+                const getRequest = objectStore.get(key);
+
+                getRequest.onsuccess = () => {
+                    if (getRequest.result) {
+                        const url = URL.createObjectURL(getRequest.result.blob);
+                        resolve(url);
+                    } else {
+                        resolve(null);
+                    }
+                };
+
+                getRequest.onerror = function () {
+                    reject('Error retrieving data');
+                };
+            };
+        });
+    };
+
+
+    const fetchImages = async (fileName: any) => {
+        const newImageUrls = {} as any;
+        const url = await getImage(fileName);
+        setImageUrls(url);
+    };
+
+    useEffect(() => {
+        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null) {
+            fetchImages(question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment?.filename)
+        } else {
+        }
+    }, [vintagesIndex, sectionsIndex, questionIndex])
+
+    console.log({ question, imageUrls });
+
+
 
     return (
         <div className='shadow-xl p-8 h-full'>
@@ -180,6 +230,15 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                     :
                     question?.sections?.length !== 0 && (
                         <>
+
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null &&
+                                <>
+                                    {imageUrls && (
+                                        <Image alt='test' src={imageUrls} style={{ width: '200px' }} />
+                                    )}
+                                </>
+                            }
+
                             {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
                                 <>
                                     <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages {vintagesIndex + 1} </p>

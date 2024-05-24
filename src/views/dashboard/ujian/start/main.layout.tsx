@@ -89,7 +89,26 @@ export function StartExam(): React.JSX.Element {
         }
     };
 
+    const deleteDatabase = (dbName: any) => {
+        return new Promise((resolve, reject) => {
+            const deleteRequest = indexedDB.deleteDatabase(dbName);
+
+            deleteRequest.onerror = (event) => {
+                reject('Error deleting database');
+            };
+
+            deleteRequest.onsuccess = (event) => {
+                resolve('Database deleted successfully');
+            };
+
+            deleteRequest.onblocked = (event) => {
+                reject('Database deletion blocked');
+            };
+        });
+    };
+
     const startExam = () => {
+        deleteDatabase('images')
         const paramsQuestion: IReqExamQuestion = {
             registerID: state?.formRegister?.exam?.id,
             scheduleID: params
@@ -107,6 +126,8 @@ export function StartExam(): React.JSX.Element {
             if (status === 200) {
                 saveImageToIndexedDB(data)
                 SuccessNotif({ key: 'LIST-ATTACHMENT', message: 'Success', description: 'Attachment has been downloaded' })
+                setIsAttachment(true)
+            } else if (status === 404) {
                 setIsAttachment(true)
             } else {
                 setIsAttachment(false)

@@ -1,7 +1,7 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
 import { IReqListExam, IReqListOwnedExam } from '@afx/interfaces/exam/client/schedule.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { GetDetailExam, GetListExam, FormRegitsterExam } from '@afx/services/exam/client/schedule.service'
+import { GetDetailExam, GetListExam, FormRegitsterExam, GetListOwnedExam } from '@afx/services/exam/client/schedule.service'
 
 type IpageInfo = {
     per_page: number
@@ -12,7 +12,7 @@ type IpageInfo = {
 export type IStateExamSchedule = {
     listSchedule: Array<any>
     pageInfo: IpageInfo
-    listOwnedExam: Array<any>
+    listOwnedExam: any
     pageInfoOwnedExam: IpageInfo
     detailSchedule: any
     formRegister: any
@@ -78,7 +78,9 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
             },
             async getListOwnedExam(data) {
                 try {
-                    const res = await GetListExam(data)
+                    const res = await GetListOwnedExam(data)
+                    console.log({ res });
+
                     const pageinfo: IpageInfo = {
                         current_page: res?.data?.current_page,
                         per_page: res?.data?.per_page,
