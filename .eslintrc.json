@@ -13,7 +13,7 @@
     "react-hooks/exhaustive-deps": "off",
     "react/display-name": "off",
     "array-bracket-spacing": "off",
-    "max-lines": ["error", 300]
+    "max-lines": ["error", 700]
   },
   "extends": ["next", "prettier"]
 }

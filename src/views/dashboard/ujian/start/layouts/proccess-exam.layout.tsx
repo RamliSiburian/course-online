@@ -13,7 +13,7 @@ import LynxInput from '@afx/components/common/input/input';
 import LynxInputNumber from '@afx/components/common/input/input-number.layout';
 
 interface IProccessExam {
-    handleAnswer: (data: any, type?: any) => void;
+    handleAnswer: (data: any, type: any, callback: (code: number) => void) => void;
     responseCode: number | undefined;
     restartExam: (sectionID: string) => void
 }
@@ -32,6 +32,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     const [statementOption, setStatementOption] = useState<Array<any>>([]);
     const [checkedOption, setCheckedOption] = useState<Array<any>>([]);
     const [imageUrls, setImageUrls] = useState<any>({});
+    const [selectedStatements, setSelectedStatements] = useState<Array<any>>([]);
 
     useEffect(() => {
         if (props?.responseCode === 200) {
@@ -41,27 +42,47 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     const handleChangeValue = (e: any) => {
         setValueOption(e.target?.value?.id);
-        props?.handleAnswer(e)
+        props?.handleAnswer(e, '', (code: number) => { })
         validationButton(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type)
     };
 
-    const handleNext = () => {
-        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
-            setQuestionIndex(questionIndex + 1);
-        } else if (question?.sections[sectionsIndex]?.vintages?.length > vintagesIndex + 1) {
-            setVintagesIndex(vintagesIndex + 1);
-            setQuestionIndex(0);
-        } else if (question?.sections?.length > sectionsIndex + 1) {
-            props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
-            setSectionIndex(sectionsIndex + 1);
-            setVintagesIndex(0);
-            setQuestionIndex(0);
+    const handleNext = (trigger?: string) => {
+        if (trigger === 'statement') {
+            props?.handleAnswer(statementOption, 'statement', (code: number) => {
+                if (code === 200) {
+                    if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
+                        setQuestionIndex(questionIndex + 1);
+                    } else if (question?.sections[sectionsIndex]?.vintages?.length > vintagesIndex + 1) {
+                        setVintagesIndex(vintagesIndex + 1);
+                        setQuestionIndex(0);
+                    } else if (question?.sections?.length > sectionsIndex + 1) {
+                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        setSectionIndex(sectionsIndex + 1);
+                        setVintagesIndex(0);
+                        setQuestionIndex(0);
+                    } else {
+                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                    }
+                    setDisableNextButton(true);
+                    setStatementOption([]);
+                }
+            })
         } else {
-            props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+            if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
+                setQuestionIndex(questionIndex + 1);
+            } else if (question?.sections[sectionsIndex]?.vintages?.length > vintagesIndex + 1) {
+                setVintagesIndex(vintagesIndex + 1);
+                setQuestionIndex(0);
+            } else if (question?.sections?.length > sectionsIndex + 1) {
+                props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                setSectionIndex(sectionsIndex + 1);
+                setVintagesIndex(0);
+                setQuestionIndex(0);
+            } else {
+                props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+            }
         }
 
-        setDisableNextButton(true);
-        setStatementOption([]);
     };
 
     useEffect(() => {
@@ -86,8 +107,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
             setDisableNextButton(false);
         }
     };
-
-    const handleStatement = (e: any, record: any, type: string) => {
+    const handleStatement = (e: any, record: any) => {
         const tempOption = {
             question_id: record?.question_id,
             option_id: record?.id,
@@ -107,7 +127,12 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                 return [...prevOptions, tempOption];
             }
         });
+        setSelectedStatements((prevState: any) => ({
+            ...prevState,
+            [record.id]: e.target.value
+        }));
     };
+
 
     const handleOptionCheckbox: GetProp<typeof Checkbox.Group, 'onChange'> = (checkedValues: any, type: any) => {
         setDisableNextButton(false)
@@ -125,8 +150,13 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     };
 
     const handleEssay: InputNumberProps['onChange'] = (value) => {
-        setDisableNextButton(false)
-        props?.handleAnswer(value, 'essay');
+        console.log({ value });
+
+        props?.handleAnswer(value, 'essay', (code: number) => {
+            if (code === 200) {
+                setDisableNextButton(false)
+            }
+        });
 
     };
 
@@ -140,21 +170,19 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     }, []);
 
     useEffect(() => {
-        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
-            setTimeout(() => {
-                props?.handleAnswer(statementOption, 'statement');
-            }, 3000);
+        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length != statementOption?.length) {
+            setDisableNextButton(true);
+        } else if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.length === statementOption?.length) {
             setDisableNextButton(false);
         } else if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions === null) {
             setDisableNextButton(false);
         }
-        setDisableNextButton(false);
 
     }, [statementOption]);
 
     useEffect(() => {
         if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox') {
-            props?.handleAnswer(checkedOption, 'checkbox');
+            props?.handleAnswer(checkedOption, 'checkbox', (code: number) => { });
         } else {
         }
     }, [checkedOption]);
@@ -205,10 +233,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }
     }, [vintagesIndex, sectionsIndex, questionIndex])
 
-    console.log({ question, imageUrls });
-
-
-
     return (
         <div className='shadow-xl p-8 h-full'>
             <div>
@@ -217,118 +241,123 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
             {state?.formRegister?.exam?.status !== 'finish' &&
                 <div className='flex items-center justify-between mt-5'>
                     <p className='text-base-color text-xs'>{state?.detailSchedule?.description} </p>
-                    <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={question?.duration} />  </p>
+                    <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? state?.formRegister?.exam?.remaind_section_duration
+                        : question?.duration} />  </p>
                 </div>
             }
 
             {
-                state?.formRegister?.exam?.status === 'finish' ?
-                    <div className='h-40 flex items-center justify-center flex-col'>
-                        <p>Ujian Telah berakhir</p>
-                        <LynxButtons disabled={false} onClick={() => { }} title="Lihat Hasil Ujian" className='!w-full mt-10' />
-                    </div>
-                    :
-                    question?.sections?.length !== 0 && (
-                        <>
+                // state?.formRegister?.exam?.status === 'finish' ?
+                //     <div className='h-40 flex items-center justify-center flex-col'>
+                //         <p>Ujian Telah berakhir</p>
+                //         <LynxButtons disabled={false} onClick={() => { }} title="Lihat Hasil Ujian" className='!w-full mt-10' />
+                //     </div>
+                //     :
+                question?.sections?.length !== 0 && (
+                    <>
 
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null &&
-                                <>
-                                    {imageUrls && (
-                                        <Image alt='test' src={imageUrls} style={{ width: '200px' }} />
-                                    )}
-                                </>
-                            }
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null &&
+                            <>
+                                {imageUrls && (
+                                    <Image alt='test' src={imageUrls} style={{ width: '200px' }} />
+                                )}
+                            </>
+                        }
 
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
-                                <>
-                                    <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages {vintagesIndex + 1} </p>
-                                    <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content }} />
-                                </>
-                            }
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' && (
-                                <div className='mt-5'>
-                                    <div className='text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
-                                    <Radio.Group onChange={handleChangeValue}>
-                                        <Space direction="vertical">
-                                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
-                                                <Radio key={option.id} value={option}>
-                                                    <span className='flex items-center gap-2'>{option.option}. <div dangerouslySetInnerHTML={{ __html: option?.answer }} /></span>
-                                                </Radio>
-                                            ))}
-                                        </Space>
-                                    </Radio.Group>
-                                </div>
-                            )}
-
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' && (
-                                <div className='mt-5'>
-                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
-                                    <Checkbox.Group onChange={(v: any) => handleOptionCheckbox(v, 'checkbox')}>
-                                        <Space direction="vertical">
-                                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
-                                                <Checkbox key={option.id} value={option} >
-                                                    {option.option}. {option?.answer}
-                                                </Checkbox>
-                                            ))}
-                                        </Space>
-                                    </Checkbox.Group>
-                                </div>
-                            )}
-
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' && (
-                                <div className='mt-5'>
-                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
-                                    <SimpleTable
-                                        LOADINGS={false}
-                                        minHeight={400}
-                                        pagination={false}
-                                        action={false}
-                                        dataSource={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options}
-                                        columns={[
-                                            {
-                                                title: 'Statement',
-                                                dataIndex: 'answer',
-                                                key: 'option',
-                                                align: 'center',
-                                                itemAlign: 'left',
-                                                renderType: 'string'
-                                            },
-                                            {
-                                                title:
-                                                    <div className='flex items-center justify-around'>
-                                                        <p>Benar</p>
-                                                        <p>Salah</p>
-                                                    </div>,
-                                                dataIndex: 'is_correct',
-                                                key: 'is_correct',
-                                                align: 'center',
-                                                render: (text: any, record: any) => (
-                                                    <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record, 'statement')}>
-                                                        <Radio value={true}></Radio>
-                                                        <Radio value={false}></Radio>
-                                                    </Radio.Group>
-                                                )
-                                            }
-                                        ]}
-                                    />
-                                </div>
-                            )}
-
-                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
-                                <div className='mt-5 flex gap-5 items-center'>
-                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
-                                    <LynxInputNumber
-                                        onPressEnter={handleEssay}
-                                        size='middle' controls={false} placeholder='type your answer' standart={false} className='!w-[320px]  ' />
-                                </div>
-                            )}
-
-                            <div className='mt-10 flex gap-4'>
-                                <LynxButtons disabled={saveLoading} title="Lewati" className='!w-full' iconType='FastForwardOutlined' typeButton='primary-300' />
-                                <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
+                            <>
+                                <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages {vintagesIndex + 1} </p>
+                                <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content }} />
+                            </>
+                        }
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' && (
+                            <div className='mt-5'>
+                                <div className='text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                <Radio.Group onChange={handleChangeValue}>
+                                    <Space direction="vertical">
+                                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
+                                            <Radio key={option.id} value={option}>
+                                                <span className='flex items-center gap-2'>{option.option}. <div dangerouslySetInnerHTML={{ __html: option?.answer }} /></span>
+                                            </Radio>
+                                        ))}
+                                    </Space>
+                                </Radio.Group>
                             </div>
-                        </>
-                    )
+                        )}
+
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' && (
+                            <div className='mt-5'>
+                                <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                <Checkbox.Group onChange={(v: any) => handleOptionCheckbox(v, 'checkbox')}>
+                                    <Space direction="vertical">
+                                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
+                                            <Checkbox key={option.id} value={option} >
+                                                {option.option}. {option?.answer}
+                                            </Checkbox>
+                                        ))}
+                                    </Space>
+                                </Checkbox.Group>
+                            </div>
+                        )}
+
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' && (
+                            <div className='mt-5'>
+                                <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                <SimpleTable
+                                    LOADINGS={false}
+                                    minHeight={400}
+                                    pagination={false}
+                                    action={false}
+                                    dataSource={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options}
+                                    columns={[
+                                        {
+                                            title: 'Statement',
+                                            dataIndex: 'answer',
+                                            key: 'option',
+                                            align: 'center',
+                                            itemAlign: 'left',
+                                            renderType: 'string'
+                                        },
+                                        {
+                                            title:
+                                                <div className='flex items-center justify-around'>
+                                                    <p>Benar</p>
+                                                    <p>Salah</p>
+                                                </div>,
+                                            dataIndex: 'is_correct',
+                                            key: 'is_correct',
+                                            align: 'center',
+                                            render: (text: any, record: any) => (
+                                                <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record)} value={selectedStatements[record.id]}>
+                                                    <Radio value={true}></Radio>
+                                                    <Radio value={false}></Radio>
+                                                </Radio.Group>
+                                            )
+                                        }
+                                    ]}
+                                />
+                            </div>
+                        )}
+
+                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
+                            <div className='mt-5 flex-col gap-5 items-center'>
+                                <div className='text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                <LynxInputNumber
+                                    onPressEnter={handleEssay}
+                                    size='middle' controls={false} placeholder='type your answer' standart={false} className='!w-[320px]  ' />
+                            </div>
+                        )}
+
+                        <div className='mt-10 flex gap-4'>
+                            <LynxButtons disabled={saveLoading} title="Lewati" className='!w-full' iconType='FastForwardOutlined' typeButton='primary-300' />
+                            {
+                                question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
+                                    <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('statement')} />
+                                    : <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                            }
+                        </div>
+                    </>
+                )
             }
         </div >
     );

@@ -135,35 +135,51 @@ export function StartExam(): React.JSX.Element {
         }], true)
     }
 
-    const debouncedApiCall = debounce((data: IReqOption, ids: IReqSaveAnswer) => {
+    const debouncedApiCall = debounce((data: IReqOption, ids: IReqSaveAnswer, callback: (code: number) => void) => {
         exam<'saveAnswer'>('saveAnswer', [data, ids, (code: number) => {
             setResponseCode(code)
             if (code === 200) {
                 SuccessNotif({ message: 'Success', description: 'Your answer have been sent', key: 'SENT-ANSWER' })
+                callback(200)
             }
         }], true)
     }, 3000);
 
-    const handleSaveAnswer = (e: RadioChangeEvent | any, type?: any) => {
+    const handleSaveAnswer = (e: RadioChangeEvent | any, type: any, callback: (code: number) => void) => {
         const ids: IReqSaveAnswer = {
             registerID: state?.formRegister?.exam?.id,
             scheduleID: params
         }
-        if (type === undefined) {
+        if (type === undefined || type === '') {
             const paramsQuestion: IReqOption = {
                 batch_answer: [{ option_id: e.target.value.id, question_id: e.target.value.question_id }]
             }
-            debouncedApiCall(paramsQuestion, ids);
+            debouncedApiCall(paramsQuestion, ids, (code: number) => {
+                if (code === 200) {
+                    callback(200)
+                }
+            });
         } else if (type === 'statement') {
             const paramsTypeStatement: IReqOption = {
                 batch_answer: e
             }
-            debouncedApiCall(paramsTypeStatement, ids);
+            debouncedApiCall(paramsTypeStatement, ids, (code: number) => {
+                if (code === 200) {
+                    callback(200)
+                }
+            });
         } else if (type === 'checkbox') {
             const paramsCheckbox: IReqOption = {
                 batch_answer: e
             }
-            debouncedApiCall(paramsCheckbox, ids);
+            debouncedApiCall(paramsCheckbox, ids, (code: number) => {
+                if (code === 200) {
+                    callback(200)
+                }
+            });
+        } else if (type === 'essay') {
+            console.log({ e });
+
         }
     }
 
