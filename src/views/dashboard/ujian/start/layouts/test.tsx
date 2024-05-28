@@ -93,8 +93,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         question_id: item?.question_id,
         option_id: item?.id
       }));
-      // setCheckedOption(tempOption);
-      console.log({ tempOption });
+      setCheckedOption(tempOption);
 
     }, 3000);
   };
@@ -120,11 +119,9 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
   // useEffect(() => {
   //     if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox') {
   //         // const temp = question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options?.map((item: any) => ({ label: item?.answer, ...item }))
-  //         // console.log({ temp });
   //         // props?.handleAnswer(checkedOption, 'checkbox')
   //         // setTimeout(() => {
   //         // }, 3000)
-  //         console.log({ asu: checkedOption });
 
   //     } else {
 
@@ -132,7 +129,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
   // }, [checkedOption])
 
 
-  console.log({ statementOption, sectionsIndex, vintagesIndex, questionIndex });
 
   return (
     <div className='shadow-xl p-8 h-full' >

@@ -68,7 +68,7 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                     </Row>
                     {
                         state?.formRegister?.exam?.status === 'finish' ?
-                            <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Lihat Hasil Ujian" className='!w-full mt-10' />
+                            <LynxButtons disabled={loadingExam} onClick={props?.result} title="Lihat Hasil Ujian" className='!w-full mt-10' />
                             : <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Mulai Ujian" className='!w-full mt-10' />
                     }
                 </div>

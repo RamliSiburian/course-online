@@ -155,7 +155,6 @@ export default function ResultExam(): React.JSX.Element {
     }], true)
   }
 
-  console.log({ examData: examData?.resultExam, sf: examData?.answers });
 
 
   return (
@@ -173,7 +172,7 @@ export default function ResultExam(): React.JSX.Element {
         </div>
       </Col>
       <Col span={8}>
-        <div className='flex gap-5'>
+        <div className='flex gap-5 justify-end'>
           {examData?.resultExam?.is_discussion &&
             <LynxButtons title='Pembahasan' className='!w-32 !px-4 ' iconType='SolutionOutlined' onClick={() => router.push(getPath('discussion', { examID: params }))} />
           }
@@ -190,10 +189,10 @@ export default function ResultExam(): React.JSX.Element {
       {
         examData?.resultExam?.detail_exam?.sections !== 0 &&
         examData?.resultExam?.detail_exam?.sections?.map((data: any, idx: number) => (
-          <Col span={8} key={idx} >
+          <Col span={6} key={idx} >
             <LynxCards className='mt-10'>
               <LynxPieChart data={data} />
-              <p className='-mt-10 text-base-color font-semibold'>{examData?.resultExam?.schedule?.title}</p>
+              <p className='-mt-10 text-base-color font-semibold'>{data?.title}</p>
               <div className='mt-2 text-base-color' >
                 <Row gutter={[0, 10]} >
                   <Col span={12}><p className='font-normal text-xs'>Jumlah Soal</p></Col>

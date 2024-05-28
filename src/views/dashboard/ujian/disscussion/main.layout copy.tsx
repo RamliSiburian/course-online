@@ -47,7 +47,6 @@ export default function Discussion() {
       const request = window.indexedDB.open('images', 1);
 
       request.onerror = function () {
-        console.log('Error opening database');
         reject('Error opening database');
       };
 
@@ -63,13 +62,11 @@ export default function Discussion() {
             const url = URL.createObjectURL(getRequest.result.blob);
             resolve(url);
           } else {
-            console.log('No data found with the specified key');
             resolve(null);
           }
         };
 
         getRequest.onerror = function () {
-          console.log('Error retrieving data');
           reject('Error retrieving data');
         };
       };

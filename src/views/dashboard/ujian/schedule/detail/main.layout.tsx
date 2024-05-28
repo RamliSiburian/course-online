@@ -55,7 +55,6 @@ export function DetailSchedule(): React.JSX.Element {
         const request = window.indexedDB.open('images', 1);
 
         request.onerror = function (event) {
-            console.log('Error opening database');
         };
 
         request.onsuccess = (event) => {
@@ -70,12 +69,10 @@ export function DetailSchedule(): React.JSX.Element {
                     return (URL.createObjectURL(getRequest.result.blob))
 
                 } else {
-                    console.log('No data found with the specified key');
                 }
             };
 
             getRequest.onerror = function (event: any) {
-                console.log('Error retrieving data');
             };
         };
     }

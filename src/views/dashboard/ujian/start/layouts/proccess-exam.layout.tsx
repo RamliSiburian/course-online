@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Checkbox, Image, Radio, Space } from 'antd';
+import { Checkbox, Divider, Image, Radio, Space } from 'antd';
 import SimpleTable from '@afx/components/common/simple-table/table.layout';
 import { LynxButtons } from '@afx/components/common/button/button';
 import { Icons } from '@afx/components/common/icons';
@@ -11,11 +11,14 @@ import { useLynxStore } from '@lynx/store/core';
 import type { GetProp, InputNumberProps } from 'antd';
 import LynxInput from '@afx/components/common/input/input';
 import LynxInputNumber from '@afx/components/common/input/input-number.layout';
+import LynxKatex from '@afx/components/common/katex-editor/katex-render.layout';
+import DetailProgressExam from './detail-progres.layout';
 
 interface IProccessExam {
     handleAnswer: (data: any, type: any, callback: (code: number) => void) => void;
     responseCode: number | undefined;
     restartExam: (sectionID: string) => void
+    result: () => void
 }
 
 export function ProccessExam(props: IProccessExam): React.JSX.Element {
@@ -32,7 +35,16 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
     const [statementOption, setStatementOption] = useState<Array<any>>([]);
     const [checkedOption, setCheckedOption] = useState<Array<any>>([]);
     const [imageUrls, setImageUrls] = useState<any>({});
+    const [questionimageUrls, setQuestionImageUrls] = useState<any>({});
     const [selectedStatements, setSelectedStatements] = useState<Array<any>>([]);
+    const [detailProgress, setDetailProgress] = useState<boolean>(false)
+
+    const isLastQuestion = () => {
+        const currentSection = question.sections[sectionsIndex];
+        const currentVintage = currentSection.vintages[vintagesIndex];
+        const isLast = questionIndex === currentVintage.questions.length - 1;
+        return isLast;
+    };
 
     useEffect(() => {
         if (props?.responseCode === 200) {
@@ -67,6 +79,26 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                     setStatementOption([]);
                 }
             })
+        } else if (trigger === 'checkbox') {
+            props?.handleAnswer(checkedOption, 'checkbox', (code: number) => {
+                if (code === 200) {
+                    if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
+                        setQuestionIndex(questionIndex + 1);
+                    } else if (question?.sections[sectionsIndex]?.vintages?.length > vintagesIndex + 1) {
+                        setVintagesIndex(vintagesIndex + 1);
+                        setQuestionIndex(0);
+                    } else if (question?.sections?.length > sectionsIndex + 1) {
+                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        setSectionIndex(sectionsIndex + 1);
+                        setVintagesIndex(0);
+                        setQuestionIndex(0);
+                    } else {
+                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                    }
+                    setCheckedOption([])
+                    setDisableNextButton(false);
+                }
+            });
         } else {
             if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.length > questionIndex + 1) {
                 setQuestionIndex(questionIndex + 1);
@@ -149,18 +181,18 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }, 3000);
     };
 
-    const handleEssay: InputNumberProps['onChange'] = (value) => {
-        console.log({ value });
-
-        props?.handleAnswer(value, 'essay', (code: number) => {
+    const handleEssay: InputNumberProps['onChange'] = (value: any, question_id?: string) => {
+        const params = {
+            answer: value,
+            question_id
+        }
+        props?.handleAnswer(params, 'essay', (code: number) => {
             if (code === 200) {
                 setDisableNextButton(false)
             }
         });
 
     };
-
-
     useEffect(() => {
         return () => {
             if (debounceTimeout.current) {
@@ -180,12 +212,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     }, [statementOption]);
 
-    useEffect(() => {
-        if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox') {
-            props?.handleAnswer(checkedOption, 'checkbox', (code: number) => { });
-        } else {
-        }
-    }, [checkedOption]);
 
     const getImage = (key: any) => {
         return new Promise((resolve, reject) => {
@@ -225,140 +251,183 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         const url = await getImage(fileName);
         setImageUrls(url);
     };
+    const fetchImagesQuestion = async (fileName: any) => {
+        const newImageUrls = {} as any;
+        const url = await getImage(fileName);
+        setQuestionImageUrls(url);
+    };
 
     useEffect(() => {
         if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null) {
             fetchImages(question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment?.filename)
-        } else {
-        }
+        } else if (question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions?.attachment?.filename !== null) {
+            fetchImagesQuestion(question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.attachment?.filename)
+        } else { }
+
     }, [vintagesIndex, sectionsIndex, questionIndex])
 
+
     return (
-        <div className='shadow-xl p-8 h-full'>
-            <div>
-                <p className='text-base-color font-semibold text-lg'><Icons size={16} type='MenuOutlined' /> &nbsp; {state?.detailSchedule?.title}</p>
-            </div>
-            {state?.formRegister?.exam?.status !== 'finish' &&
-                <div className='flex items-center justify-between mt-5'>
-                    <p className='text-base-color text-xs'>{state?.detailSchedule?.description} </p>
-                    <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? state?.formRegister?.exam?.remaind_section_duration
-                        : question?.duration} />  </p>
+        <>
+            <div className={`${detailProgress ? 'ms-[400px]' : ''} shadow-xl p-8 h-full`}>
+                <div>
+                    <p className='text-base-color font-semibold text-lg'><Icons size={16} type='MenuOutlined' onClick={() => setDetailProgress(!detailProgress)} /> &nbsp; {state?.detailSchedule?.title}</p>
                 </div>
-            }
+                {state?.formRegister?.exam?.status !== 'finish' &&
+                    <div className='flex items-center justify-between mt-5'>
+                        <p className='text-base-color text-xs'>{state?.detailSchedule?.description} </p>
+                        <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? state?.formRegister?.exam?.remaind_section_duration
+                            : question?.duration} />  </p>
+                    </div>
+                }
 
-            {
-                // state?.formRegister?.exam?.status === 'finish' ?
-                //     <div className='h-40 flex items-center justify-center flex-col'>
-                //         <p>Ujian Telah berakhir</p>
-                //         <LynxButtons disabled={false} onClick={() => { }} title="Lihat Hasil Ujian" className='!w-full mt-10' />
-                //     </div>
-                //     :
-                question?.sections?.length !== 0 && (
-                    <>
+                {
+                    // state?.formRegister?.exam?.status === 'finish' ?
+                    //     <div className='h-40 flex items-center justify-center flex-col'>
+                    //         <p>Ujian Telah berakhir</p>
+                    //         <LynxButtons disabled={false} onClick={() => { }} title="Lihat Hasil Ujian" className='!w-full mt-10' />
+                    //     </div>
+                    //     :
+                    question?.sections?.length !== 0 && (
+                        <>
 
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null &&
-                            <>
-                                {imageUrls && (
-                                    <Image alt='test' src={imageUrls} style={{ width: '200px' }} />
-                                )}
-                            </>
-                        }
-
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
-                            <>
-                                <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages {vintagesIndex + 1} </p>
-                                <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content }} />
-                            </>
-                        }
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' && (
-                            <div className='mt-5'>
-                                <div className='text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
-                                <Radio.Group onChange={handleChangeValue}>
-                                    <Space direction="vertical">
-                                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
-                                            <Radio key={option.id} value={option}>
-                                                <span className='flex items-center gap-2'>{option.option}. <div dangerouslySetInnerHTML={{ __html: option?.answer }} /></span>
-                                            </Radio>
-                                        ))}
-                                    </Space>
-                                </Radio.Group>
-                            </div>
-                        )}
-
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' && (
-                            <div className='mt-5'>
-                                <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
-                                <Checkbox.Group onChange={(v: any) => handleOptionCheckbox(v, 'checkbox')}>
-                                    <Space direction="vertical">
-                                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
-                                            <Checkbox key={option.id} value={option} >
-                                                {option.option}. {option?.answer}
-                                            </Checkbox>
-                                        ))}
-                                    </Space>
-                                </Checkbox.Group>
-                            </div>
-                        )}
-
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' && (
-                            <div className='mt-5'>
-                                <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
-                                <SimpleTable
-                                    LOADINGS={false}
-                                    minHeight={400}
-                                    pagination={false}
-                                    action={false}
-                                    dataSource={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options}
-                                    columns={[
-                                        {
-                                            title: 'Statement',
-                                            dataIndex: 'answer',
-                                            key: 'option',
-                                            align: 'center',
-                                            itemAlign: 'left',
-                                            renderType: 'string'
-                                        },
-                                        {
-                                            title:
-                                                <div className='flex items-center justify-around'>
-                                                    <p>Benar</p>
-                                                    <p>Salah</p>
-                                                </div>,
-                                            dataIndex: 'is_correct',
-                                            key: 'is_correct',
-                                            align: 'center',
-                                            render: (text: any, record: any) => (
-                                                <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record)} value={selectedStatements[record.id]}>
-                                                    <Radio value={true}></Radio>
-                                                    <Radio value={false}></Radio>
-                                                </Radio.Group>
-                                            )
-                                        }
-                                    ]}
-                                />
-                            </div>
-                        )}
-
-                        {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
-                            <div className='mt-5 flex-col gap-5 items-center'>
-                                <div className='text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
-                                <LynxInputNumber
-                                    onPressEnter={handleEssay}
-                                    size='middle' controls={false} placeholder='type your answer' standart={false} className='!w-[320px]  ' />
-                            </div>
-                        )}
-
-                        <div className='mt-10 flex gap-4'>
-                            <LynxButtons disabled={saveLoading} title="Lewati" className='!w-full' iconType='FastForwardOutlined' typeButton='primary-300' />
-                            {
-                                question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
-                                    <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('statement')} />
-                                    : <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.attachment !== null &&
+                                <>
+                                    {imageUrls && (
+                                        <Image alt='test' src={imageUrls} style={{ width: '200px' }} />
+                                    )}
+                                </>
                             }
-                        </div>
-                    </>
-                )
-            }
-        </div >
+
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content === null ? '' :
+                                <>
+                                    <p className='text-base-color font-semibold text-xs mt-5 mb-5'> Vintages {vintagesIndex + 1} </p>
+                                    <div dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.content }} />
+                                </>
+                            }
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.attachment !== null &&
+                                <div>
+                                    {questionimageUrls && (
+                                        <Image alt='test' src={questionimageUrls} style={{ width: '200px' }} />
+                                    )}
+                                </div>
+                            }
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'multiple_choice' && (
+                                <div className='mt-5'>
+                                    <div className='text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                    <Radio.Group onChange={handleChangeValue}>
+                                        <Space direction="vertical">
+                                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
+                                                <Radio key={option.id} value={option}>
+                                                    <span className='flex items-center gap-2'>{option.option}. <div dangerouslySetInnerHTML={{ __html: option?.answer }} /></span>
+                                                </Radio>
+                                            ))}
+                                        </Space>
+                                    </Radio.Group>
+                                </div>
+                            )}
+
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' && (
+                                <div className='mt-5'>
+                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                    <Checkbox.Group onChange={(v: any) => handleOptionCheckbox(v, 'checkbox')}>
+                                        <Space direction="vertical">
+                                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
+                                                <Checkbox key={option.id} value={option} >
+                                                    {option.option}. {option?.answer}
+                                                </Checkbox>
+                                            ))}
+                                        </Space>
+                                    </Checkbox.Group>
+                                </div>
+                            )}
+
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' && (
+                                <div className='mt-5'>
+                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                    <SimpleTable
+                                        LOADINGS={false}
+                                        minHeight={400}
+                                        pagination={false}
+                                        action={false}
+                                        dataSource={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options}
+                                        columns={[
+                                            {
+                                                title: 'Statement',
+                                                dataIndex: 'answer',
+                                                key: 'option',
+                                                align: 'center',
+                                                itemAlign: 'left',
+                                                renderType: 'string'
+                                            },
+                                            {
+                                                title:
+                                                    <div className='flex items-center justify-around'>
+                                                        <p>Benar</p>
+                                                        <p>Salah</p>
+                                                    </div>,
+                                                dataIndex: 'is_correct',
+                                                key: 'is_correct',
+                                                align: 'center',
+                                                render: (text: any, record: any) => (
+                                                    <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record)} value={selectedStatements[record.id]}>
+                                                        <Radio value={true}></Radio>
+                                                        <Radio value={false}></Radio>
+                                                    </Radio.Group>
+                                                )
+                                            }
+                                        ]}
+                                    />
+                                </div>
+                            )}
+
+                            {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
+                                <div className='mt-5 flex-col gap-5 items-center'>
+                                    <div className='text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                    <Divider />
+                                    <LynxKatex text={'\\lim_{x \\to 0 } \\frac{1 - \\cos 6x}{2x \\tan(\\frac{1}{3}x)}'} />
+                                    {/* <LynxKatex text={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question} /> */}
+                                    <LynxInputNumber
+                                        onPressEnter={(e: any) => handleEssay(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.id)}
+                                        size='middle' controls={false} placeholder='type your answer' standart={false} className='!w-[320px]  ' />
+                                </div>
+                            )}
+
+                            {/* button */}
+                            <div className='mt-10 flex gap-4'>
+                                <LynxButtons onClick={handleNext} disabled={saveLoading} title="Lewati" className='!w-full' iconType='FastForwardOutlined' typeButton='primary-300' />
+                                {
+                                    isLastQuestion() ? (
+                                        question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
+                                            <LynxButtons disabled={saveLoading || disableNextButton} title="Submit dan Selesai" className='!w-full' onClick={() => {
+                                                handleNext('statement')
+                                                props?.result
+                                            }} />
+                                            : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' ?
+                                                <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => {
+                                                    handleNext('checkbox')
+                                                    props?.result
+                                                }} />
+                                                : <LynxButtons disabled={saveLoading} title="Selesai" className='!w-full' onClick={props?.result} />
+                                    )
+                                        : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
+                                            <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('statement')} />
+                                            : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' ?
+                                                <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('checkbox')} />
+                                                : <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                                }
+                            </div>
+                        </>
+                    )
+                }
+            </div >
+
+            <DetailProgressExam
+                openDetail={detailProgress}
+                setOpenDetail={() => setDetailProgress(!detailProgress)}
+                question={question}
+
+            />
+        </>
     );
 }

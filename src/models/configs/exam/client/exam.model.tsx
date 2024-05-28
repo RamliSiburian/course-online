@@ -1,5 +1,5 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
-import { IReqAttachment, IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqAttachment, IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
 import { GetAnswer, GetAttachment, GetExamDiscussion, GetExamQuestion, ReStartExam, ResultExam, SaveAnswer, StartExam } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
@@ -14,7 +14,7 @@ export type IActionExam = {
     getAttachment: (data: IReqAttachment, callback: (status: number, data: any) => void) => void
     getListExamQuestion: (data: IReqExamQuestion, callback: (status: number) => void) => void
     getListExamDiscussion: (data: IReqExamQuestion) => void
-    saveAnswer: (data: IReqOption, ids: IReqSaveAnswer, callback: (code: number) => void) => void
+    saveAnswer: (data: IReqOption | IReqOptionEssay, ids: IReqSaveAnswer, callback: (code: number) => void) => void
     getAnswer: (ids: IReqSaveAnswer) => void
     StartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void
     reStartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void

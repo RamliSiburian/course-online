@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
+    "@types/katex": "^0.16.7",
     "@types/lodash": "^4.17.4",
     "@types/lodash.debounce": "^4.0.9",
     "@types/node": "20.4.1",
@@ -29,6 +30,7 @@
     "framer-motion": "^10.16.4",
     "html5-qrcode": "^2.3.8",
     "jszip": "^3.10.1",
+    "katex": "^0.16.10",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.30.1",

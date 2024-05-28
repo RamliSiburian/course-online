@@ -130,7 +130,7 @@ export default function LoginPage(): React.JSX.Element {
                                                     height={20}
                                                 />
                                             </div>
-                                            <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(0,0,255,1)] cursor-pointer flex justify-center items-center' onClick={() => console.log('tes')}>
+                                            <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-[2px_2px_5px_0px_rgba(0,0,255,1)] cursor-pointer flex justify-center items-center' onClick={() => { }}>
                                                 <Icons size={20} type='AppleOutlined' />
                                             </div>
                                             <div className='w-11 h-11 bg-[#FFF] rounded-full shadow-[2px_2px_5px_0px_rgba(0,0,0,0.1)] hover:shadow-blue-300 cursor-pointer flex justify-center items-center' onClick={() => signIn('google')}>

@@ -79,7 +79,6 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
             async getListOwnedExam(data) {
                 try {
                     const res = await GetListOwnedExam(data)
-                    console.log({ res });
 
                     const pageinfo: IpageInfo = {
                         current_page: res?.data?.current_page,

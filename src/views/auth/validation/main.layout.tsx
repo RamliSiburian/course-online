@@ -23,7 +23,6 @@ export default function ValidationView({ children }: any) {
     // useEffect(() => {
     //     const isLogin = localStorage.getItem('token')
     //     isLogin ? router.push('/dashboard') : router.push('/auth/login')
-    //     console.log({ isLogin });
 
     // }, [])
     return children

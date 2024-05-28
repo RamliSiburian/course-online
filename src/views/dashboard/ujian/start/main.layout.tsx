@@ -1,19 +1,21 @@
 import { SuccessNotif } from '@afx/components/common/notification/success'
 import { WarningNotif } from '@afx/components/common/notification/warning'
-import { IReqExamQuestion, IReqOption, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model'
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
 import JSZip from 'jszip'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { DetailStartExam } from './layouts/detail.layout'
 import { ProccessExam } from './layouts/proccess-exam.layout'
 import { RadioChangeEvent } from 'antd'
 import { debounce } from 'lodash';
 import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model'
+import getPath from '@lynx/const/router.path'
 
 export function StartExam(): React.JSX.Element {
+    const router = useRouter()
     const { examID: params }: { examID: string } = useParams() as any
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { state: globalState, useActions: globalActions } = useLynxStore<IStateGlobal, IActionGlobal>('globalState')
@@ -135,7 +137,7 @@ export function StartExam(): React.JSX.Element {
         }], true)
     }
 
-    const debouncedApiCall = debounce((data: IReqOption, ids: IReqSaveAnswer, callback: (code: number) => void) => {
+    const debouncedApiCall = debounce((data: IReqOption | IReqOptionEssay, ids: IReqSaveAnswer, callback: (code: number) => void) => {
         exam<'saveAnswer'>('saveAnswer', [data, ids, (code: number) => {
             setResponseCode(code)
             if (code === 200) {
@@ -178,8 +180,14 @@ export function StartExam(): React.JSX.Element {
                 }
             });
         } else if (type === 'essay') {
-            console.log({ e });
-
+            const paramsEssay: IReqOptionEssay = {
+                batch_answer: [e]
+            }
+            debouncedApiCall(paramsEssay, ids, (code: number) => {
+                if (code === 200) {
+                    callback(200)
+                }
+            });
         }
     }
 
@@ -199,7 +207,9 @@ export function StartExam(): React.JSX.Element {
             scheduleID: params
         }
         exam<'getResultExam'>('getResultExam', [paramsQuestion, (code: number) => {
-
+            if (code === 200) [
+                router.push(getPath('resultStart', { examID: params }))
+            ]
         }], true)
     }
     useEffect(() => {
@@ -221,7 +231,7 @@ export function StartExam(): React.JSX.Element {
 
     return (
         isStart
-            ? <ProccessExam restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
+            ? <ProccessExam result={handleResult} restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
             : <DetailStartExam result={handleResult} startExam={startExam} />
     )
 }
