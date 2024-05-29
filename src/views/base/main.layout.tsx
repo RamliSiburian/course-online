@@ -46,11 +46,18 @@ export default function Pages(props: IDashboard): React.JSX.Element {
                 {state?.statusMaximize &&
                     <SiderMenu items={items} />
                 }
-                <Content className='overflow-scroll' style={{ background: colorBgContainer }} >
+                <Content
+                    style={{
+                        // height:
+                        //     state?.statusMaximize ? '100vh' : '93vh',
+                        background: colorBgContainer,
+                        overflowX: 'hidden',
+                        overflowY: 'scroll'
+                    }}>
                     {props.children}
                 </Content>
             </Layout>
-            <Footer style={{ background: '#303030' }} >Footer</Footer>
+            {/* <Footer style={{ background: '#303030' }} >Footer</Footer> */}
         </Layout >
     )
 }

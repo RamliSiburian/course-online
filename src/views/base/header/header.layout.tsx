@@ -8,21 +8,24 @@ import { IActionAuth, IStateAuth } from '@lynx/models/user-model/auth/auth.model
 import { signOut } from 'next-auth/react';
 import LynxStorages from '@afx/utils/storage.util';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const tempMenus = ['Dashboard', 'Profil']
 
 
 function content(): React.JSX.Element {
+    const router = useRouter()
     const { useActions } = useLynxStore<IStateAuth, IActionAuth>('auth')
     const handleLogout = () => {
         useActions<'logout'>('logout', [(status: number) => {
             if (status === 200) {
-                signOut({ callbackUrl: 'http://localhost:3000/auth/login' })
+                // signOut({ callbackUrl: '/auth/login' })
                 notification.success({
                     message: 'Logout successfull',
                     duration: 1
                 })
                 LynxStorages.dropItem('ADZKIA@UTOKEN')
+                router.replace('/auth/login')
             }
         }], true)
 

@@ -14,6 +14,7 @@ export default function MainLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <SessionProvider>
       <html lang="en">

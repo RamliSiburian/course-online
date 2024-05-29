@@ -1,19 +1,14 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
 import { IReqListExam, IReqListOwnedExam } from '@afx/interfaces/exam/client/schedule.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
+import { IResPageInfo } from '@afx/interfaces/main.iface'
 import { GetDetailExam, GetListExam, FormRegitsterExam, GetListOwnedExam } from '@afx/services/exam/client/schedule.service'
 
-type IpageInfo = {
-    per_page: number
-    current_page: number
-    last_page: number
-    total: number
-}
 export type IStateExamSchedule = {
     listSchedule: Array<any>
-    pageInfo: IpageInfo
+    pageInfo: IResPageInfo
     listOwnedExam: any
-    pageInfoOwnedExam: IpageInfo
+    pageInfoOwnedExam: IResPageInfo
     detailSchedule: any
     formRegister: any
 }
@@ -29,9 +24,9 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
     model: (put, getState, useActions) => ({
         state: {
             listSchedule: [],
-            pageInfo: {} as IpageInfo,
+            pageInfo: {} as IResPageInfo,
             listOwnedExam: [],
-            pageInfoOwnedExam: {} as IpageInfo,
+            pageInfoOwnedExam: {} as IResPageInfo,
             detailSchedule: {},
             formRegister: {}
         },
@@ -39,7 +34,7 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
             async getListExam(data) {
                 try {
                     const res = await GetListExam(data)
-                    const pageinfo: IpageInfo = {
+                    const pageinfo: IResPageInfo = {
                         current_page: res?.data?.current_page,
                         per_page: res?.data?.per_page,
                         total: res?.data?.total,
@@ -80,7 +75,7 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
                 try {
                     const res = await GetListOwnedExam(data)
 
-                    const pageinfo: IpageInfo = {
+                    const pageinfo: IResPageInfo = {
                         current_page: res?.data?.current_page,
                         per_page: res?.data?.per_page,
                         total: res?.data?.total,
