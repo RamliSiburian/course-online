@@ -1,4 +1,4 @@
-import { Avatar, Col, Divider, notification, Popover, Row } from 'antd';
+import { Avatar, Col, Divider, Dropdown, MenuProps, notification, Popover, Row } from 'antd';
 import Image from 'next/image';
 import Logo from '@lynx/images/logo.png'
 import { UserOutlined } from '@ant-design/icons';
@@ -11,6 +11,24 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const tempMenus = ['Dashboard', 'Profil']
+const items: MenuProps['items'] = [
+    {
+        label: <a href="https://www.antgroup.com">1st menu item</a>,
+        key: '0'
+    },
+    {
+        label: <a href="https://www.aliyun.com">2nd menu item</a>,
+        key: '1'
+    },
+    {
+        type: 'divider'
+    },
+    {
+        label: '3rd menu item',
+        key: '3'
+    }
+];
+
 
 
 function content(): React.JSX.Element {
@@ -36,6 +54,13 @@ function content(): React.JSX.Element {
                 {tempMenus?.map((item, idx) =>
                     <li className='text-[#97999F] hover:text-base-color cursor-pointer' key={idx}>{item}</li>
                 )}
+                <li>
+                    <Dropdown menu={{ items }} trigger={['click']}>
+                        <div onClick={(e) => e.preventDefault()}>
+                            tets
+                        </div>
+                    </Dropdown>
+                </li>
                 <li className='text-[#97999F] hover:text-base-color cursor-pointer' onClick={handleLogout} >Keluar</li>
             </ul>
         </div>
