@@ -7,10 +7,10 @@ import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/clien
 import { useLynxStore } from '@lynx/store/core'
 import { Divider } from 'antd';
 import moment from 'moment';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface IBrowseUjian {
+    setKeyword: (value: string) => void
 
 }
 export default function Browse(props: IBrowseUjian): React.JSX.Element {
@@ -19,12 +19,12 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
     const loading = isLoading('getListOwnedExam') || false
 
     return (
-        <div className='shadow-2xl p-4 min-h-screen' >
+        <div className='shadow-2xl p-4 min-h-full' >
             <p className='text-base-color font-bold text-lg'>Ujian Saya</p>
             <Divider />
             <div className='flex justify-between items-center'>
                 <div className='w-[320px]'>
-                    <LynxInput prefix={<Icons type='SearchOutlined' size={18} />} placeholder='Search' standart={false} />
+                    <LynxInput prefix={<Icons type='SearchOutlined' size={18} />} placeholder='Search' standart={false} onChange={(v: any) => props?.setKeyword(v.target.value)} />
                 </div>
                 <LynxButtons onClick={() => router.replace('/page/dashboard/tryout/schedules')} title=' Lihat list ujian' size='large' />
             </div>
@@ -34,7 +34,7 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                     LOADINGS={loading}
                     dataSource={state?.listOwnedExam}
                     minHeight={500}
-                    pagination={true}
+                    pagination={false}
                     columns={[
                         {
                             key: 'id',
@@ -52,7 +52,7 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                             key: 'waktu',
                             title: 'Waktu Mengerjakan',
                             itemAlign: 'center',
-                            width: 80,
+                            width: 160,
                             align: 'center',
                             dataIndex: 'open_from',
                             renderType: 'string',
@@ -66,16 +66,16 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                             key: 'description',
                             title: 'Keterangan Ujian',
                             itemAlign: 'center',
-                            width: 80,
+                            width: 200,
                             align: 'center',
-                            dataIndex: 'description',
+                            dataIndex: 'title',
                             renderType: 'string'
                         },
                         {
                             key: 'nilai',
                             title: 'Nilai Hasil',
                             itemAlign: 'center',
-                            width: 80,
+                            width: 120,
                             align: 'center',
                             dataIndex: 'description',
                             renderType: 'string'
@@ -84,7 +84,7 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                             key: 'detail',
                             title: 'Detail',
                             itemAlign: 'center',
-                            width: 80,
+                            width: 160,
                             align: 'center',
                             render(value, record, index) {
                                 return (

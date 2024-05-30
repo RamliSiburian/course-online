@@ -26,7 +26,7 @@ export function FormRegitsterExam(id: string) {
 }
 export function GetListOwnedExam(data: IReqListOwnedExam) {
     return request<any>({
-        url: endpoint.exam.client.schedule.listOwnedExam,
+        url: `${endpoint.exam.client.schedule.listOwnedExam}?page=${data?.page}&per_page=${data?.per_page}&keyword=${data?.keyword}`,
         method: 'GET',
         service: services.examService
     })

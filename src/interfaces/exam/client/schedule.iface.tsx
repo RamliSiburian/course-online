@@ -8,4 +8,6 @@ export interface IReqListExam {
 export interface IReqListOwnedExam {
     timezone?: string
     per_page?: number
+    page?: number
+    keyword?: string
 }
