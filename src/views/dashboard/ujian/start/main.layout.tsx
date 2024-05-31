@@ -1,6 +1,6 @@
 import { SuccessNotif } from '@afx/components/common/notification/success'
 import { WarningNotif } from '@afx/components/common/notification/warning'
-import { IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqDataFinishAnswer, IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model'
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
@@ -13,6 +13,8 @@ import { RadioChangeEvent } from 'antd'
 import { debounce } from 'lodash';
 import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model'
 import getPath from '@lynx/const/router.path'
+import moment from 'moment'
+import LynxStorages from '@afx/utils/storage.util'
 
 export function StartExam(): React.JSX.Element {
     const router = useRouter()
@@ -25,6 +27,11 @@ export function StartExam(): React.JSX.Element {
     const [isAttachment, setIsAttachment] = useState<boolean>(false)
     const [isStart, setisStart] = useState<boolean>(false)
     const [responseCode, setResponseCode] = useState<number | undefined>()
+    const [user, setUser] = useState<any>(null);
+    useEffect(() => {
+        const userData = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0];
+        setUser(userData);
+    }, []);
 
     useEffect(() => {
         globalActions<'handleMaximizeFloor'>('handleMaximizeFloor', [isStart ? false : true], true)
@@ -212,6 +219,23 @@ export function StartExam(): React.JSX.Element {
             ]
         }], true)
     }
+    const handleFinish = (id: string) => {
+        const paramsQuestion: IReqExamQuestion = {
+            registerID: state?.formRegister?.exam?.id,
+            scheduleID: params
+        }
+        const sectionID: IReqDataFinishAnswer = {
+            question_section_id: id,
+            timezone: 7,
+            finish_at: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+            finish_by: user?.id
+        }
+        exam<'finishExam'>('finishExam', [paramsQuestion, sectionID, (code: number) => {
+            if (code === 200) [
+                router.push(getPath('resultStart', { examID: params }))
+            ]
+        }], true)
+    }
     useEffect(() => {
         if (isQuestion && isAttachment) {
             setisStart(true)
@@ -231,7 +255,7 @@ export function StartExam(): React.JSX.Element {
 
     return (
         isStart
-            ? <ProccessExam result={handleResult} restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
+            ? <ProccessExam finish={handleFinish} result={handleResult} restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
             : <DetailStartExam result={handleResult} startExam={startExam} />
     )
 }

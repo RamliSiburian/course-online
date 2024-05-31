@@ -1,7 +1,7 @@
-import { Avatar, Col, Divider, Dropdown, MenuProps, notification, Popover, Row } from 'antd';
+import { Avatar, Col, Collapse, CollapseProps, Divider, Dropdown, MenuProps, notification, Popover, Row } from 'antd';
 import Image from 'next/image';
 import Logo from '@lynx/images/logo.png'
-import { UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Icons } from '@afx/components/common/icons';
 import { useLynxStore } from '@lynx/store/core';
 import { IActionAuth, IStateAuth } from '@lynx/models/user-model/auth/auth.model';
@@ -11,29 +11,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const tempMenus = ['Dashboard', 'Profil']
-const items: MenuProps['items'] = [
-    {
-        label: <a href="https://www.antgroup.com">1st menu item</a>,
-        key: '0'
-    },
-    {
-        label: <a href="https://www.aliyun.com">2nd menu item</a>,
-        key: '1'
-    },
-    {
-        type: 'divider'
-    },
-    {
-        label: '3rd menu item',
-        key: '3'
-    }
-];
-
-
+const text = 'dteese'
 
 function content(): React.JSX.Element {
     const router = useRouter()
     const { useActions } = useLynxStore<IStateAuth, IActionAuth>('auth')
+
     const handleLogout = () => {
         useActions<'logout'>('logout', [(status: number) => {
             if (status === 200) {
@@ -46,23 +29,38 @@ function content(): React.JSX.Element {
                 router.replace('/auth/login')
             }
         }], true)
-
     }
+
+
+    const items: CollapseProps['items'] = [
+        {
+            key: '1',
+            label: 'Account',
+            children: <div className='text-[#97999F] p-0 -mt-4'>
+                {text}
+                <Divider className='m-0 mt-4' />
+                <div className='flex items-center justify-between hover:text-base-color' onClick={handleLogout}>
+                    <p>LogOut</p>
+                    <LogoutOutlined />
+                </div>
+            </div>,
+            extra: <SettingOutlined />,
+            showArrow: false,
+            className: 'text-[#97999F] hover:text-base-color'
+        }
+    ];
     return (
         <div>
             <ul>
                 {tempMenus?.map((item, idx) =>
-                    <li className='text-[#97999F] hover:text-base-color cursor-pointer' key={idx}>{item}</li>
+                    <li className='text-[#97999F] hover:text-base-color cursor-pointer py-1 px-4' key={idx}>{item}</li>
                 )}
-                <li>
-                    <Dropdown menu={{ items }} trigger={['click']}>
-                        <div onClick={(e) => e.preventDefault()}>
-                            tets
-                        </div>
-                    </Dropdown>
-                </li>
-                <li className='text-[#97999F] hover:text-base-color cursor-pointer' onClick={handleLogout} >Keluar</li>
             </ul>
+            <Collapse
+                ghost
+                items={items}
+                className='text-[#97999F] hover:text-base-color cursor-pointer -mt-2'
+            />
         </div>
     )
 }

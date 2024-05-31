@@ -87,9 +87,19 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
                             width: 160,
                             align: 'center',
                             render(value, record, index) {
+                                console.log({ value });
+
                                 return (
                                     <div className='flex justify-center items-center'>
-                                        <LynxButtons title="Lihat Hasil" typeButton='primary-300' onClick={() => router.push(getPath('resultStart', { examID: record?.id }))} />
+                                        {
+                                            value?.status === 'finish' ?
+                                                <LynxButtons title="Lihat Hasil" typeButton='primary' onClick={() => router.push(getPath('resultStart', { examID: record?.id }))} />
+                                                : value?.status === 'verified' ?
+                                                    <LynxButtons title="Mulai Ujian" typeButton='primary-300' onClick={() => router.push(getPath('examStart', { examID: record?.id }))} />
+                                                    : value?.status === 'start' ?
+                                                        <LynxButtons title="Lanjutkan Ujian" typeButton='primary-300' onClick={() => router.push(getPath('examStart', { examID: record?.id }))} />
+                                                        : ''
+                                        }
                                     </div>
                                 )
                             }

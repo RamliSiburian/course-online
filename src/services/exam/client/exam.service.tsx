@@ -1,4 +1,4 @@
-import { IReqAttachment, IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface';
+import { IReqAttachment, IReqDataFinishAnswer, IReqExamQuestion, IReqFinishAnswer, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface';
 import { endpoint, services } from '@afx/utils/config.endpoint';
 import request from '@afx/utils/request.util';
 
@@ -64,6 +64,15 @@ export function ResultExam(ids: IReqSaveAnswer) {
     return request<any>({
         url: endpoint.exam.client.exam.result.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
         method: 'GET',
+        service: services.examService
+    })
+}
+
+export function FinishExam(ids: IReqFinishAnswer, data: IReqDataFinishAnswer) {
+    return request<any>({
+        url: endpoint.exam.client.exam.finish.replace(':scheduleID', ids?.scheduleID).replace(':registerID', ids?.registerID),
+        method: 'POST',
+        data,
         service: services.examService
     })
 }

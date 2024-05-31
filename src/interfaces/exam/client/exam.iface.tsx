@@ -16,4 +16,14 @@ export interface IReqSaveAnswer {
     scheduleID: string
     registerID: string
 }
+export interface IReqFinishAnswer {
+    scheduleID: string
+    registerID: string
+}
+export interface IReqDataFinishAnswer {
+    finish_at: string
+    finish_by: string
+    timezone: number
+    question_section_id: string
+}
 

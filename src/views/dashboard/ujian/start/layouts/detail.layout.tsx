@@ -10,7 +10,7 @@ import { useLynxStore } from '@lynx/store/core';
 import { Col, Row } from 'antd';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface IDetailStartExam {
     startExam: () => void
@@ -23,8 +23,13 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
     const { state, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { isLoading: examLoading } = useLynxStore<IStateExam, IActionExam>('exam')
     const loadingExam = examLoading('getAttachment') || examLoading('getListExamQuestion') || false
-    const user = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0]
+    // const user = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0]
     const [openModal, setOpenModal] = useState<boolean>(false)
+    const [user, setUser] = useState<any>(null);
+    useEffect(() => {
+        const userData = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0];
+        setUser(userData);
+    }, []);
 
     return (
         <div className='shadow-xl p-8 h-full' >
@@ -56,7 +61,7 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                 <div className='mt-2 text-base-color' >
                     <Row gutter={[0, 10]} >
                         <Col span={6}><p className='font-normal text-xs'>Nama Peserta</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {user?.name}</p></Col>
+                        <Col span={18}><p className='font-normal text-xs'>: {user ? user.name : 'Loading...'}</p></Col>
                         <Col span={6}><p className='font-normal text-xs'>Total Soal</p></Col>
                         <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question} Soal</p></Col>
                         {/* <Col span={6}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>

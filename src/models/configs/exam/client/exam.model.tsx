@@ -1,7 +1,7 @@
 import { WarningNotif } from '@afx/components/common/notification/warning'
-import { IReqAttachment, IReqExamQuestion, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
+import { IReqAttachment, IReqDataFinishAnswer, IReqExamQuestion, IReqFinishAnswer, IReqOption, IReqOptionEssay, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { GetAnswer, GetAttachment, GetExamDiscussion, GetExamQuestion, ReStartExam, ResultExam, SaveAnswer, StartExam } from '@afx/services/exam/client/exam.service'
+import { FinishExam, GetAnswer, GetAttachment, GetExamDiscussion, GetExamQuestion, ReStartExam, ResultExam, SaveAnswer, StartExam } from '@afx/services/exam/client/exam.service'
 import LynxStorages from '@afx/utils/storage.util'
 import DummyQuestion from '@lynx/mock-data/question.json'
 
@@ -19,6 +19,7 @@ export type IActionExam = {
     StartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void
     reStartExam: (data: { question_section_id: string }, ids: IReqExamQuestion, callback: (code: number) => void) => void
     getResultExam: (ids: IReqSaveAnswer, callback: (code: number) => void) => void
+    finishExam: (ids: IReqFinishAnswer, data: IReqDataFinishAnswer, callback: (code: number) => void) => void
 }
 
 const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
@@ -113,10 +114,16 @@ const modelExam: IModelDefinitions<IStateExam, IActionExam> = {
                     put({
                         resultExam: res?.data
                     })
-
                 } catch (err: any) {
                     // WarningNotif({ key: 'RESULT-EXAM', message: 'Failed to load data', description: err?.messages })
-
+                }
+            },
+            async finishExam(ids, data, callback) {
+                try {
+                    const res = await FinishExam(ids, data)
+                    callback(res?.status_code)
+                } catch (err: any) {
+                    // WarningNotif({ key: 'RESULT-EXAM', message: 'Failed to load data', description: err?.messages })
                 }
             }
         }
