@@ -10,6 +10,14 @@ export function Login(data: IReqLogin) {
         method: 'POST'
     })
 }
+export function SwitchAccount(data: { accountID: string }) {
+    return request<any>({
+        url: endpoint.auth.switchAccount.replace(':accountID', data?.accountID),
+        data,
+        service: services?.auth,
+        method: 'POST'
+    })
+}
 export function LoginGoogle(data: { id: number }) {
     return request<any>({
         url: endpoint.auth.loginGoole,

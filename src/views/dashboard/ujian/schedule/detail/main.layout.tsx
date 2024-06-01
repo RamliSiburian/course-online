@@ -12,8 +12,10 @@ import { IActionPayment, IStatePayment } from '@lynx/models/payment/client/payme
 import { SuccessNotif } from '@afx/components/common/notification/success';
 import LynxCurrency from '@afx/components/common/typography/currency.layout';
 import getPath from '@lynx/const/router.path';
+import { WindowWidth } from '@afx/components/common/window-width/window-width';
 
 export function DetailSchedule(): React.JSX.Element {
+    const windowWidth: number = WindowWidth()
     const router = useRouter()
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { useActions: claimExam, isLoading } = useLynxStore<IStatePayment, IActionPayment>('payment')
@@ -45,7 +47,6 @@ export function DetailSchedule(): React.JSX.Element {
                 }
             }], true)
         } catch (err: any) {
-            console.log({ test: err?.messages });
         }
     }
 
@@ -112,10 +113,10 @@ export function DetailSchedule(): React.JSX.Element {
                 </div>
                 :
                 <Row gutter={[0, 40]}>
-                    <Col span={6}>
-                        <Image className='rounded-lg' height={300} alt="example" src="https://klik-adzkia.com/assets/assets/images/no_thumbnail/tryout.jpg" />
+                    <Col sm={24} md={12} xl={6}>
+                        <Image className='rounded-lg items-center' height={windowWidth <= 640 ? 160 : 300} alt="example" src="https://klik-adzkia.com/assets/assets/images/no_thumbnail/tryout.jpg" />
                     </Col>
-                    <Col span={18}>
+                    <Col sm={24} md={12} xl={18}>
                         <div>
                             <div className='p-4 rounded-lg shadow-md w-full'>
                                 <p className='text-base-color'>{state?.detailSchedule?.title}</p>
@@ -131,8 +132,8 @@ export function DetailSchedule(): React.JSX.Element {
                                     </Row>
                                 </div>
                             </div>
-                            <div className='w-full flex justify-between items-center mt-10'>
-                                <div>
+                            <div className='w-full md:flex justify-between items-center mt-10'>
+                                <div className=''>
                                     <p className='text-base-color'>Biaya Pendaftaran</p>
                                     <p className='text-base-color'>{state?.detailSchedule?.price === null ? 'Gratis' : <LynxCurrency value={state?.detailSchedule?.price} prefix='Rp.' />}</p>
                                 </div>
@@ -157,7 +158,7 @@ export function DetailSchedule(): React.JSX.Element {
                     <Col span={24}>
                         <div>
                             <p className='text-base-color font-semibold text-base mb-2'>Tata Tertib Ujian</p>
-                            <ol start={1} type='1' className='text-base-color'>
+                            <ol start={1} type='1' className='text-base-color text-justify'>
                                 <li>Pastikan Koneksi Internet anda stabil dan paket data anda cukup untuk mengikuti ujian.</li>
                                 <li>Pilihlah jawaban yang paling benar menurut Anda lalu tekan tombol Simpan untuk melanjutkan ke nomor soal berikutnya.</li>
                                 <li>Jika Anda masih ragu-ragu dengan jawaban soal tersebut maka Anda bisa menekan tombol Lewati untuk ke soal berikutnya.</li>

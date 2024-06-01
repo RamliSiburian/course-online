@@ -207,7 +207,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
         }));
         setCheckedOption(tempOption);
 
-        console.log({ checkedValues });
 
     };
 
@@ -296,17 +295,18 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     }, [vintagesIndex, sectionsIndex, questionIndex])
 
+
     return (
         <>
             <div className={`${detailProgress ? 'ms-[400px]' : ''} shadow-xl p-8 h-full`}>
                 <div>
                     <p className='text-base-color font-semibold text-lg'><Icons size={16} type='MenuOutlined' onClick={() => setDetailProgress(!detailProgress)} /> &nbsp; {state?.detailSchedule?.title}</p>
                 </div>
-                {state?.formRegister?.exam?.status !== 'finish' &&
+                {state?.formRegister?.exam?.status !== 'finish' || state?.formRegister?.repeatable &&
                     <div className='flex items-center justify-between mt-5'>
                         <p className='text-base-color text-xl mb-2'>{question?.sections[sectionsIndex]?.name} </p>
                         <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? Math.ceil(state?.formRegister?.exam?.remaind_section_duration)
-                            : question?.duration} />  </p>
+                            : state?.formRegister?.exam?.status === 'finish' ? Math.ceil(state?.formRegister?.exam?.remaind_section_duration) : question?.duration} />  </p>
                     </div>
                 }
 

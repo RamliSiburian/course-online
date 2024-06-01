@@ -9,7 +9,7 @@ import getPath from '@lynx/const/router.path'
 import { IActionExam, IStateExam } from '@lynx/models/exam/client/exam.model'
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
-import { Col, Row, Spin } from 'antd'
+import { Col, Row, Skeleton, Spin } from 'antd'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Latex from 'react-latex-next'
@@ -177,7 +177,7 @@ export default function ResultExam(): React.JSX.Element {
             <LynxButtons title='Pembahasan' className='!w-32 !px-4 ' iconType='SolutionOutlined' onClick={() => router.push(getPath('discussion', { examID: params }))} />
           }
           {examData?.resultExam?.repeatable &&
-            <LynxButtons title='Ulangi lagi' iconType='ReloadOutlined' className='!w-32' typeButton='danger' />
+            <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Ulangi lagi' iconType='ReloadOutlined' className='!w-32' typeButton='danger' />
           }
         </div>
       </Col>
@@ -187,35 +187,46 @@ export default function ResultExam(): React.JSX.Element {
       </Col>
 
       {
-        examData?.resultExam?.detail_exam?.sections !== 0 &&
-        examData?.resultExam?.detail_exam?.sections?.map((data: any, idx: number) => (
-          <Col span={6} key={idx} >
-            <LynxCards className='mt-10'>
-              <LynxPieChart data={data} />
-              <p className='-mt-10 text-base-color font-semibold'>{data?.title}</p>
-              <div className='mt-2 text-base-color' >
-                <Row gutter={[0, 10]} >
-                  <Col span={12}><p className='font-normal text-xs'>Jumlah Soal</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>: {examData?.resultExam?.detail_exam?.total_question}</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>Benar</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>: {data?.correct}</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>Salah</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>: {data?.wrong}</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>Dilewati</p></Col>
-                  <Col span={12}><p className='font-normal text-xs'>: {data?.skipped}</p></Col>
-                  {/* <Col span={12}><p className='font-normal text-xs'>Min Nilai</p></Col> */}
-                  {/* <Col span={12}><p className='font-normal text-xs'>: {state?.formRegister?.total_registered}/{state?.formRegister?.quota}</p></Col> */}
-                </Row>
+        loading ?
+          <div className='flex gap-8 flex-wrap mt-5' >
+            {Array.from({ length: 10 }).map((item: any, index) => {
+              return <div key={index} className='flex flex-col gap-2 items-center w-[256px] ' >
+                <Skeleton.Image active className='!w-full !h-[240px]' />
+                <Skeleton.Input active block />
+                <Skeleton.Button active block />
               </div>
-              <div>
-                {data?.is_passed ?
-                  <p className='text-[#939393] text-sm text-center mt-5'>Horee, Kamu Lulus pada Materi {examData?.resultExam?.schedule?.title}</p>
-                  : <p className='text-[#939393] text-sm text-center mt-5'>Yahh, Kamu Tidak Lulus pada Materi {examData?.resultExam?.schedule?.title}</p>
-                }
-              </div>
-            </LynxCards>
-          </Col>
-        ))
+            })
+            }
+          </div>
+          : examData?.resultExam?.detail_exam?.sections !== 0 &&
+          examData?.resultExam?.detail_exam?.sections?.map((data: any, idx: number) => (
+            <Col span={6} key={idx} >
+              <LynxCards className='mt-10'>
+                <LynxPieChart data={data} />
+                <p className='-mt-10 text-base-color font-semibold'>{data?.title}</p>
+                <div className='mt-2 text-base-color' >
+                  <Row gutter={[0, 10]} >
+                    <Col span={12}><p className='font-normal text-xs'>Jumlah Soal</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>: {examData?.resultExam?.detail_exam?.total_question}</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>Benar</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>: {data?.correct}</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>Salah</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>: {data?.wrong}</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>Dilewati</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>: {data?.skipped}</p></Col>
+                    {/* <Col span={12}><p className='font-normal text-xs'>Min Nilai</p></Col> */}
+                    {/* <Col span={12}><p className='font-normal text-xs'>: {state?.formRegister?.total_registered}/{state?.formRegister?.quota}</p></Col> */}
+                  </Row>
+                </div>
+                <div>
+                  {data?.is_passed ?
+                    <p className='text-[#939393] text-sm text-center mt-5'>Horee, Kamu Lulus pada Materi {examData?.resultExam?.schedule?.title}</p>
+                    : <p className='text-[#939393] text-sm text-center mt-5'>Yahh, Kamu Tidak Lulus pada Materi {examData?.resultExam?.schedule?.title}</p>
+                  }
+                </div>
+              </LynxCards>
+            </Col>
+          ))
       }
 
     </Row>

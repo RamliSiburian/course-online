@@ -1,6 +1,7 @@
 import { Icons } from '@afx/components/common/icons';
 import LynxInput from '@afx/components/common/input/input';
 import LynxCurrency from '@afx/components/common/typography/currency.layout';
+import { WindowWidth } from '@afx/components/common/window-width/window-width';
 import getPath from '@lynx/const/router.path';
 import { IActionExamSchedule, IStateExamSchedule } from '@lynx/models/exam/client/schedule.model'
 import { useLynxStore } from '@lynx/store/core'
@@ -12,6 +13,7 @@ interface IListSchedule {
 
 }
 export default function ListSchedule(props: IListSchedule): React.JSX.Element {
+    const windowWidth: number = WindowWidth()
     const { state, isLoading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const router = useRouter()
     const loadingListData = isLoading('getListExam') || false

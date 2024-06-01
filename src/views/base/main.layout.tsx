@@ -5,6 +5,7 @@ import SiderMenu from './sider/sider.layout';
 import Link from 'next/link';
 import { useLynxStore } from '@lynx/store/core';
 import { IActionGlobal, IStateGlobal } from '@lynx/models/global.model';
+import { WindowWidth } from '@afx/components/common/window-width/window-width';
 
 
 const { Header, Footer, Content } = Layout;
@@ -23,6 +24,7 @@ const items: MenuProps['items'] = [
 ]
 
 export default function Pages(props: IDashboard): React.JSX.Element {
+    const windowWidth: number = WindowWidth()
     const {
         token: { colorBgContainer }
     } = theme.useToken()
@@ -43,7 +45,7 @@ export default function Pages(props: IDashboard): React.JSX.Element {
                 }} ><HeaderLayout /> </Header>
             }
             <Layout className=''>
-                {state?.statusMaximize &&
+                {windowWidth > 768 && state?.statusMaximize &&
                     <SiderMenu items={items} />
                 }
                 <Content

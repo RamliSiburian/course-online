@@ -9,11 +9,12 @@ import { signOut } from 'next-auth/react';
 import LynxStorages from '@afx/utils/storage.util';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { WindowWidth } from '@afx/components/common/window-width/window-width';
 
 const tempMenus = ['Dashboard', 'Profil']
 const text = 'dteese'
 
-function content(): React.JSX.Element {
+function content(role: any): React.JSX.Element {
     const router = useRouter()
     const { useActions } = useLynxStore<IStateAuth, IActionAuth>('auth')
 
@@ -31,13 +32,36 @@ function content(): React.JSX.Element {
         }], true)
     }
 
+    const switchAccount = (id: string) => {
+        useActions<'swicthAccount'>('swicthAccount', [{ accountID: id }, (status: number) => {
+            if (status === 200) {
+                notification.success({
+                    message: 'Switch account successfull',
+                    duration: 1
+                })
+            }
+        }], true)
+    }
+
 
     const items: CollapseProps['items'] = [
         {
             key: '1',
             label: 'Account',
             children: <div className='text-[#97999F] p-0 -mt-4'>
-                {text}
+                <div>
+                    {
+                        role?.length !== 0 &&
+                        role?.map((item: any, idx: number) => (
+                            <div className='flex items-center gap-2' key={idx} onClick={() => switchAccount(item?.id)}>
+                                {item?.is_default &&
+                                    <div className='w-2 h-2 bg-[#ED7020] rounded-full' />
+                                }
+                                <p className={`${item?.is_default ? 'text-[#ED7020]' : ''} hover:text-base-color`} >{item?.types}</p>
+                            </div>
+                        ))
+                    }
+                </div>
                 <Divider className='m-0 mt-4' />
                 <div className='flex items-center justify-between hover:text-base-color' onClick={handleLogout}>
                     <p>LogOut</p>
@@ -50,11 +74,10 @@ function content(): React.JSX.Element {
         }
     ];
     return (
-        <div>
+        <div className=' max-w-[200px]'>
             <ul>
-                {tempMenus?.map((item, idx) =>
-                    <li className='text-[#97999F] hover:text-base-color cursor-pointer py-1 px-4' key={idx}>{item}</li>
-                )}
+                <li className='text-[#97999F] hover:text-base-color cursor-pointer py-1 px-4' onClick={() => router.replace('/page/dashboard')} >Dashboard</li>
+                <li className='text-[#97999F] hover:text-base-color cursor-pointer py-1 px-4' >Profile</li>
             </ul>
             <Collapse
                 ghost
@@ -72,11 +95,17 @@ function contentNotif(): React.JSX.Element {
 
 
 export default function HeaderLayout(): React.JSX.Element {
+    const windowWidth: number = WindowWidth()
     const [profile, setProfile] = useState<any>(null)
+    const [role, setRole] = useState<any>(null)
     useEffect(() => {
         const tempData = LynxStorages.getItem('ADZKIA@SIMPLEPROFILE', true, true).data[0]
+        const tempRole = LynxStorages.getItem('ADZKIA@UROLE', true, true).data[0]
         setProfile(tempData)
+        setRole(tempRole)
     }, [])
+
+
 
     return (
         <Row className=' px-6 sm:px-10 xl:px-16 w-full py-4' >
@@ -90,7 +119,9 @@ export default function HeaderLayout(): React.JSX.Element {
                             width={46}
                             height={46}
                         />
-                        <p>Klik Adzkia</p>
+                        {windowWidth > 768 &&
+                            <p>Klik Adzkia</p>
+                        }
                     </div>
                     <div className='flex items-center gap-4'>
                         <Popover placement="bottomRight" title={<div className='flex items-center justify-between'>
@@ -101,7 +132,7 @@ export default function HeaderLayout(): React.JSX.Element {
                                 <Icons type='BellOutlined' size={24} className='text-base-color font-bold' />
                             </span>
                         </Popover>
-                        <Popover placement="bottomRight" title={<div className='text-base-color text-base'>Menu</div>} content={content} arrow={false} className='flex items-center gap-2'>
+                        <Popover placement="bottomRight" title={<div className='text-base-color text-base ms-4'>Menu</div>} content={content(role)} arrow={false} className='flex items-center gap-2'>
                             <span className='text-base-color'>{profile?.name}</span>
                             <Avatar size="large" icon={<UserOutlined />} />
                         </Popover>

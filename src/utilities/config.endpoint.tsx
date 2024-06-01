@@ -13,7 +13,8 @@ export const endpoint = {
         registerGoolge: 'register-with-google',
         register: 'register',
         validation: '',
-        logout: 'logout'
+        logout: 'logout',
+        switchAccount: 'switch-account/:accountID'
     },
     client: {
         user: {

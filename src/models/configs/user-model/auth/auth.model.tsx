@@ -1,12 +1,13 @@
 import { IReqLogin, IReqRegister, IReqRegisterGoogle } from '@afx/interfaces/auth/auth.iface'
 import { IModelDefinitions } from '@afx/interfaces/global.iface'
-import { Login, LoginGoogle, Logout, Register, RegisterGoogle } from '@afx/services/user-services/auth/auth.service'
+import { Login, LoginGoogle, Logout, Register, RegisterGoogle, SwitchAccount } from '@afx/services/user-services/auth/auth.service'
 import LynxStorages from '@afx/utils/storage.util'
 import { notification } from 'antd'
 
 export type IStateAuth = {}
 export type IActionAuth = {
     login: (data: IReqLogin, callback: (status: number, user: string) => void) => void
+    swicthAccount: (data: { accountID: string }, callback: (status: number) => void) => void
     loginGoogle: (id: number, callback: (status: number, user: string) => void) => void
     register: (data: IReqRegister, callback: (status: number) => void) => void
     registerGoogle: (data: IReqRegisterGoogle, callback: (status: number, user: string) => void) => void
@@ -24,7 +25,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                     callback(res?.status_code, res?.data?.username)
                     if (res?.status_code === 200) {
                         LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
-                            .setItem('ADZKIA@UROLE', JSON.stringify(res?.data?.role[0]), true)
+                            .setItem('ADZKIA@UROLE', JSON.stringify(res?.data?.role), true)
                     } else {
                         throw new Error(res?.messages?.username[0] || res?.messages?.password)
                     }
@@ -35,6 +36,26 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
                         description: err?.messages,
                         duration: 2,
                         key: 'LOGIN'
+                    })
+                }
+            },
+            async swicthAccount(data, callback) {
+                try {
+                    const res = await SwitchAccount(data)
+
+                    callback(res?.status_code)
+                    if (res?.status_code === 200) {
+                        LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
+                    } else {
+                        throw new Error(res?.messages?.username[0] || res?.messages?.password)
+                    }
+
+                } catch (err: any) {
+                    notification.warning({
+                        message: 'Failed to load data',
+                        description: err?.messages,
+                        duration: 2,
+                        key: 'SWITCH'
                     })
                 }
             },

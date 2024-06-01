@@ -72,7 +72,7 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                         <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
                     </Row>
                     {
-                        state?.formRegister?.exam?.status === 'finish' ?
+                        state?.formRegister?.exam?.status === 'finish' && !state?.formRegister?.repeatable ?
                             <LynxButtons disabled={loadingExam} onClick={props?.result} title="Lihat Hasil Ujian" className='!w-full mt-10' />
                             : <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Mulai Ujian" className='!w-full mt-10' />
                     }

@@ -4,6 +4,7 @@ import { Flex, Input, Pagination } from 'antd'
 import { useEffect, useState } from 'react'
 import { Icons } from '../icons'
 import { IResPageInfo } from '@afx/interfaces/main.iface'
+import { WindowWidth } from '../window-width/window-width'
 
 interface PaginateCustom {
   pages: IResPageInfo
@@ -15,13 +16,14 @@ interface PaginateCustom {
 }
 
 export function LynxPagination(props: PaginateCustom): React.JSX.Element {
+  const windowWidth: number = WindowWidth()
   const [value, setValue] = useState(1)
   useEffect(() => {
     setValue(props?.pages?.current_page)
   }, [props?.pages])
   return (
     <div
-      className='bg-white w-[80%] left-[19.5%] fixed bottom-[6px] flex justify-between items-center'
+      className={`${windowWidth <= 768 ? 'bg-white w-full fixed bottom-[6px] flex justify-between items-center' : 'bg-white w-[80%] left-[19.5%] fixed bottom-[6px] flex justify-between items-center'}`}
     >
       <div className={` flex right-8 bg-white w-fit justify-between p-[14px_32px] ${props.className}`}>
         <p className="text-sm font-medium text-black">

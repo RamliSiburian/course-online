@@ -5,8 +5,10 @@ import { IReqListExam } from '@afx/interfaces/exam/client/schedule.iface';
 import ListSchedule from './browse.layout';
 import { LynxPagination } from '@afx/components/common/pagination/pagination.layout';
 import { debounce } from 'lodash';
+import { WindowWidth } from '@afx/components/common/window-width/window-width';
 
 export default function Ujian(): React.JSX.Element {
+    const windowWidth: number = WindowWidth()
     const { state, useActions } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const [pageSize, setPageSize] = useState<number>(10)
     const [page, setPage] = useState<number>(1)
@@ -28,12 +30,14 @@ export default function Ujian(): React.JSX.Element {
     return (
         <>
             <ListSchedule setKeyword={handleSearch} />
-            <LynxPagination
-                pages={state?.pageInfo}
-                setPageSize={size => setPageSize(size)}
-                pageSize={pageSize}
-                setPage={(page: number) => setPage(page)}
-            />
+            {windowWidth > 768 &&
+                <LynxPagination
+                    pages={state?.pageInfo}
+                    setPageSize={size => setPageSize(size)}
+                    pageSize={pageSize}
+                    setPage={(page: number) => setPage(page)}
+                />
+            }
         </>
     )
 }

@@ -228,7 +228,7 @@ export function StartExam(): React.JSX.Element {
             question_section_id: id,
             timezone: 7,
             finish_at: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-            finish_by: user?.id
+            finish_by: 'user'
         }
         exam<'finishExam'>('finishExam', [paramsQuestion, sectionID, (code: number) => {
             if (code === 200) [

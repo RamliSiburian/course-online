@@ -38,6 +38,6 @@ export function CountdownTimer(props: IFormatTime) {
 
   const formattedTime = convertSecondsToTime(remainingTime)
 
-  return remainingTime > 0 ? formattedTime : 'Time Out'
+  return remainingTime > 0 ? formattedTime : 0
 
 }
