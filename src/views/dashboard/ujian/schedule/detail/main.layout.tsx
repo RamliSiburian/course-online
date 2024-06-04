@@ -21,8 +21,9 @@ export function DetailSchedule(): React.JSX.Element {
     const { useActions: claimExam, isLoading } = useLynxStore<IStatePayment, IActionPayment>('payment')
     const { scheduleID: params }: { scheduleID: string } = useParams() as any
     const [openConfirm, setOpenConfirm] = useState<boolean>(false)
-    const roleUser = LynxStorages.getItem('ADZKIA@UROLE', true, true).data[0]
     const claimLoading = isLoading('claimExam') || false
+    const roleUser = LynxStorages.getItem('ADZKIA@UROLE', true, true).data[0]
+    const activeAccount = LynxStorages.getItem('ADZKIA@ACTIVEACCOUNT', true, true).data[0]
     const loading = scheduleloading('getDetailExam') || scheduleloading('getFormRegister') || false
 
     useEffect(() => {
@@ -36,7 +37,7 @@ export function DetailSchedule(): React.JSX.Element {
             paramsToClaim.set('id', state?.detailSchedule?.id)
             paramsToClaim.set('name', state?.detailSchedule?.title)
             paramsToClaim.set('type', 'tryout')
-            paramsToClaim.set('user_id', roleUser?.user_id)
+            paramsToClaim.set('user_id', activeAccount === null ? roleUser[0]?.user_id : roleUser.filter((item: any) => item?.user_id === activeAccount?.accountID))
 
             claimExam<'claimExam'>('claimExam', [paramsToClaim, (status: number) => {
                 if (status === 200) {
@@ -50,7 +51,7 @@ export function DetailSchedule(): React.JSX.Element {
         }
     }
 
-    console.log({ sdfsaf: state?.formRegister });
+    console.log({ roleUser, asdf: activeAccount === null ? roleUser[0]?.user_id : roleUser.filter((item: any) => item?.user_id === activeAccount?.accountID) });
 
     return (
         <>
