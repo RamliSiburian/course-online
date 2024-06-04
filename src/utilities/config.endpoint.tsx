@@ -74,7 +74,7 @@ export const endpoint = {
                 saveAnswer: 'schedules/:scheduleID/exam/:registerID/save',
                 answer: 'schedules/:scheduleID/exam/:registerID/answers',
                 result: 'schedules/:scheduleID/exam/:registerID/result',
-                finish: 'schedules/:scheduleID/exam/registerID/finish',
+                finish: 'schedules/:scheduleID/exam/:registerID/finish',
                 discussion: 'schedules/:scheduleID/exam/:registerID/discussion'
             }
         }

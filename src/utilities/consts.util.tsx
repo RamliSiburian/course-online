@@ -3,5 +3,7 @@ export const StoragesProperties = [
   'ADZKIA@SIMPLEPROFILE',
   'ADZKIA@MENUS',
   'ADZKIA@UROLE',
-  'ADZKIA@QUESTION'
+  'ADZKIA@QUESTION',
+  'ADZKIA@ACTIVEACCOUNT'
+
 ] as const

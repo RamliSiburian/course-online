@@ -39,8 +39,8 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
             </div>
             <div className='flex justify-between '>
                 <div>
-                    <p className='text-base-color text-lg font-semibold'>{state?.detailSchedule?.title}</p>
-                    <p className=''>{state?.detailSchedule?.description}</p>
+                    <p className='text-base-color text-sm lg:text-lg font-semibold'>{state?.detailSchedule?.title}</p>
+                    <p className='mt-2'>{state?.detailSchedule?.description}</p>
                     <div className='flex gap-2 mt-5'>
                         <LynxButtons typeButton='primary-300' size='small' title="Ujian saya" onClick={() => router.replace('/page/dashboard/tryout')} />
                         <LynxButtons size='small' title="baca Panduan" onClick={() => setOpenModal(true)} />
@@ -50,26 +50,26 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                     <Image
                         src={require('@lynx/images/list.png')}
                         alt="Adzkia"
-                        className="mr-2"
+                        className="mr-2 hidden lg:inline-block"
                         width={150}
                         height={150}
                     />
                 </div>
             </div>
-            <div>
+            <div className='mt-4'>
                 <p className='text-base-color text-base'>Detail Peserta Ujian</p>
                 <div className='mt-2 text-base-color' >
                     <Row gutter={[0, 10]} >
-                        <Col span={6}><p className='font-normal text-xs'>Nama Peserta</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {user ? user.name : 'Loading...'}</p></Col>
-                        <Col span={6}><p className='font-normal text-xs'>Total Soal</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.formRegister?.total_question} Soal</p></Col>
-                        {/* <Col span={6}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>
-                    <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.randomize === true ? 'Ya' : 'Tidak'}</p></Col> */}
-                        <Col span={6}><p className='font-normal text-xs'>Pembahasan</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.is_discussion === true ? 'Ya' : 'Tidak'}</p></Col>
-                        <Col span={6}><p className='font-normal text-xs'>Dapat Diulang</p></Col>
-                        <Col span={18}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
+                        <Col span={10}><p className='font-normal text-xs'>Nama Peserta</p></Col>
+                        <Col span={14}><p className='font-normal text-xs'>: {user ? user.name.slice(0, 20) : 'Loading...'}</p></Col>
+                        <Col span={10}><p className='font-normal text-xs'>Total Soal</p></Col>
+                        <Col span={14}><p className='font-normal text-xs'>: {state?.formRegister?.total_question} Soal</p></Col>
+                        {/* <Col span={10}><p className='font-normal text-xs'>Dapat Dilewati</p></Col>
+                    <Col span={14}><p className='font-normal text-xs'>: {state?.detailSchedule?.randomize === true ? 'Ya' : 'Tidak'}</p></Col> */}
+                        <Col span={10}><p className='font-normal text-xs'>Pembahasan</p></Col>
+                        <Col span={14}><p className='font-normal text-xs'>: {state?.detailSchedule?.is_discussion === true ? 'Ya' : 'Tidak'}</p></Col>
+                        <Col span={10}><p className='font-normal text-xs'>Dapat Diulang</p></Col>
+                        <Col span={14}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
                     </Row>
                     {
                         state?.formRegister?.exam?.status === 'finish' && !state?.formRegister?.repeatable ?

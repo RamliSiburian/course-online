@@ -192,12 +192,14 @@ export default function Discussion() {
       <Col span={24}>
         <p className='text-base-color font-bold text-xl'>Pembahasan Ujian</p>
       </Col>
-      <Col span={24}>
-        <div className='flex items-center justify-between'>
-          <div className='text-base-color mt-10'>
-            <p>{profile?.name}</p>
-            <p className='text-base font-semibold mt-1'>{state?.detailSchedule?.title}</p>
-          </div>
+      <Col xs={24} md={24} lg={12}>
+        <div className='text-base-color mt-8'>
+          <p>{profile?.name}</p>
+          <p className='text-base font-semibold mt-1'>{state?.detailSchedule?.title}</p>
+        </div>
+      </Col>
+      <Col xs={24} md={24} lg={12} >
+        <div className='flex items-center justify-end'>
           <LynxButtons title="Lihat Hasil Ujian" onClick={() => router.push(getPath('resultStart', { examID: params }))} />
         </div>
       </Col>
@@ -241,15 +243,15 @@ export default function Discussion() {
                             <div className='mt-2 text-[#477C82]'>
                               <p className='text-black'>Kunci Jawaban & Pembahasan :</p>
                               <div className='flex gap-10 '>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Kunci </p>
-                                <p>: {question?.options?.map((item: any, idx: number) => item?.is_correct && item?.option)}</p>
+                                <p className='font-bold min-w-[76px] flex-wrap'> Kunci </p>
+                                <p className='text-[12px]'>: {question?.options?.map((item: any, idx: number) => item?.is_correct && item?.option)}</p>
                               </div>
                               <div className='flex gap-10 '>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Materi </p>
-                                <p>: {section?.name}</p>
+                                <p className='font-bold min-w-[76px] flex-wrap'> Materi </p>
+                                <p className='text-left text-[12px]'>: {section?.name.slice(0, 10)}</p>
                               </div>
                               <div className=''>
-                                <p className='font-bold min-w-[100px] flex-wrap'> Pembahasan </p>
+                                <p className='font-bold min-w-[76px] flex-wrap'> Pembahasan </p>
                                 <div dangerouslySetInnerHTML={{ __html: question?.discussion_content }} />
                               </div>
                             </div>
@@ -267,6 +269,6 @@ export default function Discussion() {
           </Spin>
         </LynxCards>
       </Col>
-    </Row>
+    </Row >
   );
 }

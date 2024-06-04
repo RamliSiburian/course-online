@@ -12,7 +12,7 @@ export default function DetailProgressExam(props: IPropsDetailProgressExam): Rea
       width={400}
       title="Nomor Soal"
       placement="left"
-      closable={false}
+      // closable={false}
       onClose={props?.setOpenDetail}
       open={props?.openDetail}
       key="left"

@@ -159,25 +159,25 @@ export default function ResultExam(): React.JSX.Element {
 
   return (
     <Row gutter={[10, 10]}>
-      <Col span={24}>
+      <Col xs={24}>
         <div className='flex items-center gap-4 mb-10'>
           <Icons onClick={() => router.push(getPath('scheduleDetail', { scheduleID: params }))} style={{ color: '#2d4379', fontWeight: 'bold' }} type='ArrowLeftOutlined' size={18} />
           <p className='text-base-color font-bold text-xl'>Hasil Ujian</p>
         </div>
       </Col>
-      <Col span={16}>
+      <Col xs={24} lg={16}>
         <div className='text-base-color'>
           <p>Halo, {profile?.name}</p>
           <p className='text-base font-semibold'>Berikut hasil ujian {examData?.resultExam?.schedule?.title} kamu</p>
         </div>
       </Col>
-      <Col span={8}>
-        <div className='flex gap-5 justify-end'>
+      <Col xs={24} lg={8}>
+        <div className='w-full flex gap-5 sm:justify-between lg:justify-end'>
           {examData?.resultExam?.is_discussion &&
-            <LynxButtons title='Pembahasan' className='!w-32 !px-4 ' iconType='SolutionOutlined' onClick={() => router.push(getPath('discussion', { examID: params }))} />
+            <LynxButtons title='Pembahasan' className='!w-full lg:!w-32 !px-4 ' iconType='SolutionOutlined' onClick={() => router.push(getPath('discussion', { examID: params }))} />
           }
           {examData?.resultExam?.repeatable &&
-            <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Ulangi lagi' iconType='ReloadOutlined' className='!w-32' typeButton='danger' />
+            <LynxButtons onClick={() => router.push(getPath('examStart', { examID: params }))} title='Ulangi lagi' iconType='ReloadOutlined' className='!w-full lg:!w-32' typeButton='danger' />
           }
         </div>
       </Col>
@@ -200,14 +200,14 @@ export default function ResultExam(): React.JSX.Element {
           </div>
           : examData?.resultExam?.detail_exam?.sections !== 0 &&
           examData?.resultExam?.detail_exam?.sections?.map((data: any, idx: number) => (
-            <Col span={6} key={idx} >
+            <Col xs={24} md={12} key={idx} >
               <LynxCards className='mt-10'>
                 <LynxPieChart data={data} />
                 <p className='-mt-10 text-base-color font-semibold'>{data?.title}</p>
                 <div className='mt-2 text-base-color' >
                   <Row gutter={[0, 10]} >
                     <Col span={12}><p className='font-normal text-xs'>Jumlah Soal</p></Col>
-                    <Col span={12}><p className='font-normal text-xs'>: {examData?.resultExam?.detail_exam?.total_question}</p></Col>
+                    <Col span={12}><p className='font-normal text-xs'>: {data?.correct + data?.wrong + data?.skipped}</p></Col>
                     <Col span={12}><p className='font-normal text-xs'>Benar</p></Col>
                     <Col span={12}><p className='font-normal text-xs'>: {data?.correct}</p></Col>
                     <Col span={12}><p className='font-normal text-xs'>Salah</p></Col>

@@ -12,6 +12,7 @@ interface ModalCustom {
     content?: React.JSX.Element | React.FC | string
     className?: any
     loading?: boolean
+    closeIcon?: boolean
 }
 
 export function LynxModal(props: ModalCustom): React.JSX.Element {
@@ -25,7 +26,7 @@ export function LynxModal(props: ModalCustom): React.JSX.Element {
             footer={false}
             className={props.className}
             width={props?.width || 350}
-
+            closable={props?.closeIcon}
         >
             {props.content as any}
         </Modal>

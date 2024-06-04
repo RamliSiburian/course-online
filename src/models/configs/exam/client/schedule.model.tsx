@@ -74,7 +74,7 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
             async getListOwnedExam(data) {
                 try {
                     const res = await GetListOwnedExam(data)
-
+                    const tempData = res?.data?.data?.filter((item: any) => item?.status !== 'decline' && item)
                     const pageinfo: IResPageInfo = {
                         current_page: res?.data?.current_page,
                         per_page: res?.data?.per_page,
@@ -83,7 +83,7 @@ const modelSchedule: IModelDefinitions<IStateExamSchedule, IActionExamSchedule> 
 
                     }
                     put({
-                        listOwnedExam: res?.data?.data,
+                        listOwnedExam: tempData,
                         pageInfoOwnedExam: pageinfo
                     })
 

@@ -15,6 +15,10 @@ interface ILynxStorages {
 }
 
 export default abstract class LynxStorages {
+  static dropAll() {
+    globalThis?.window?.localStorage?.clear()
+    return true
+  }
   static dropItem(key: (typeof StoragesProperties)[number]) {
     localStorage.removeItem(key)
     return true

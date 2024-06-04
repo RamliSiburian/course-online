@@ -295,17 +295,18 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     }, [vintagesIndex, sectionsIndex, questionIndex])
 
+    console.log({ dd: question, sectionsIndex });
 
     return (
         <>
             <div className={`${detailProgress ? 'ms-[400px]' : ''} shadow-xl p-8 h-full`}>
                 <div>
-                    <p className='text-base-color font-semibold text-lg'><Icons size={16} type='MenuOutlined' onClick={() => setDetailProgress(!detailProgress)} /> &nbsp; {state?.detailSchedule?.title}</p>
+                    <p className='flex items-center gap-2 text-base-color font-semibold lg:text-lg'><Icons size={16} type='MenuOutlined' onClick={() => setDetailProgress(!detailProgress)} />  {state?.detailSchedule?.title}</p>
                 </div>
                 {state?.formRegister?.exam?.status !== 'finish' || state?.formRegister?.repeatable &&
-                    <div className='flex items-center justify-between mt-5'>
-                        <p className='text-base-color text-xl mb-2'>{question?.sections[sectionsIndex]?.name} </p>
-                        <p className='text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? Math.ceil(state?.formRegister?.exam?.remaind_section_duration)
+                    <div className='lg:flex lg:items-center lg:justify-between mt-5'>
+                        <p className='text-base-color text-sm lg:text-xl mb-2'>{question?.sections[sectionsIndex]?.name} </p>
+                        <p className=' text-base-color text-xs'>Akan berakhir dalam <CountdownTimer initialMinutes={state?.formRegister?.exam?.status === 'start' ? Math.ceil(state?.formRegister?.exam?.remaind_section_duration)
                             : state?.formRegister?.exam?.status === 'finish' ? Math.ceil(state?.formRegister?.exam?.remaind_section_duration) : question?.duration} />  </p>
                     </div>
                 }
@@ -362,7 +363,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                             {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' && (
                                 <Spin spinning={saveLoading} >
                                     <div className='mt-5'>
-                                        <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                        <p className='text-sm lg:text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
                                         <Checkbox.Group onChange={(v: any) => handleOptionCheckbox(v, 'checkbox')} value={['44d4c424-87c1-4524-9566-7b8bc7741cf2']}>
                                             <Space direction="vertical">
                                                 {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.options.map((option: any) => (
@@ -378,7 +379,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
                             {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' && (
                                 <div className='mt-5'>
-                                    <p className='text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
+                                    <p className='text-sm lg:text-lg text-base-color'>{question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question}</p>
                                     <SimpleTable
                                         LOADINGS={saveLoading}
                                         minHeight={400}
@@ -392,7 +393,8 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                                 key: 'option',
                                                 align: 'center',
                                                 itemAlign: 'left',
-                                                renderType: 'string'
+                                                renderType: 'string',
+                                                width: 200
                                             },
                                             {
                                                 title:
@@ -402,6 +404,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                                     </div>,
                                                 dataIndex: 'is_correct',
                                                 key: 'is_correct',
+                                                width: 200,
                                                 align: 'center',
                                                 render: (text: any, record: any) => (
                                                     <Radio.Group className='flex items-center justify-around' onChange={(e: any) => handleStatement(e, record)} value={selectedStatements[record.id]}>
@@ -417,13 +420,13 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
                             {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
                                 <div className='mt-5 flex-col gap-5 items-center'>
-                                    <div className='text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                    <div className='text-sm lg:text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
                                     <Divider />
                                     <LynxKatex text={'\\lim_{x \\to 0 } \\frac{1 - \\cos 6x}{2x \\tan(\\frac{1}{3}x)}'} />
-                                    {/* <LynxKatex text={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question} /> */}
                                     <LynxInputNumber
+                                        disabled={saveLoading}
                                         onPressEnter={(e: any) => handleEssay(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.id)}
-                                        size='middle' controls={false} placeholder='type your answer' standart={false} className='!w-[320px] mt-4  ' />
+                                        size='middle' controls={false} placeholder='type your answer' standart={false} className='w-full lg:w-[320px] mt-4  ' />
                                 </div>
                             )}
 
@@ -438,17 +441,17 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                                                 props?.result
                                             }} />
                                             : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' ?
-                                                <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => {
+                                                <LynxButtons disabled={disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => {
                                                     handleNext('checkbox')
                                                     props?.result
                                                 }} />
                                                 : <LynxButtons disabled={finishLoading} title="Selesai" className='!w-full' onClick={() => props?.finish(question?.sections[sectionsIndex]?.id)} />
                                     )
                                         : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'statement' ?
-                                            <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('statement')} />
+                                            <LynxButtons disabled={disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('statement')} />
                                             : question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'checkbox' ?
-                                                <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('checkbox')} />
-                                                : <LynxButtons disabled={saveLoading || disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
+                                                <LynxButtons disabled={disableNextButton} title="Selanjutnya" className='!w-full' onClick={() => handleNext('checkbox')} />
+                                                : <LynxButtons disabled={disableNextButton} title="Selanjutnya" className='!w-full' onClick={handleNext} />
                                 }
                             </div>
                         </>

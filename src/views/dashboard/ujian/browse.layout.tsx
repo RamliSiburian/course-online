@@ -19,6 +19,8 @@ export default function Browse(props: IBrowseUjian): React.JSX.Element {
     const router = useRouter()
     const { state, isLoading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const loading = isLoading('getListOwnedExam') || false
+    console.log({ sfd: state?.listOwnedExam });
+
 
     return (
         <>
