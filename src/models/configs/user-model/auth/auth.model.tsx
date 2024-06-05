@@ -45,6 +45,7 @@ const modelAuth: IModelDefinitions<IStateAuth, IActionAuth> = {
 
                     callback(res?.status_code)
                     if (res?.status_code === 200) {
+                        LynxStorages.dropItem('ADZKIA@UTOKEN')
                         LynxStorages.setItem('ADZKIA@UTOKEN', res?.data?.token)
                             .setItem('ADZKIA@ACTIVEACCOUNT', JSON.stringify(data), true)
                     } else {

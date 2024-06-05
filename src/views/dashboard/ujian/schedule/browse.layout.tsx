@@ -19,12 +19,6 @@ export default function ListSchedule(props: IListSchedule): React.JSX.Element {
     const router = useRouter()
     const loadingListData = isLoading('getListExam') || false
     const loading = isLoading('getDetailExam') || false
-    // const handleDetail = (id: string) => {
-    //     useActions<'getDetailExam'>('getDetailExam', [id], true)
-    //     // router.replace('/page/dashboard/tryout/schedules/detail')
-    //     router.replace(getPath('scheduleDetail, {scheduleID: id}'))
-    // }
-
     return (
         <>
             {

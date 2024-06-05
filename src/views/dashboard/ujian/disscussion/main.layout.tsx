@@ -236,8 +236,8 @@ export default function Discussion() {
                             </div>
                             {question?.options?.map((option: any, idxO: number) => (
                               <div key={idxO} className='flex gap-2'>
-                                <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? 'text-red-700' : 'text-base-color'}>{String.fromCharCode(idxO + 65)}.</p>
-                                <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? 'text-red-700' : 'text-base-color'}>{option?.option} {section?.scoring_type === 'option_base' && `Point : ${option?.point}`}</p>
+                                <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? '#ED7020' : 'text-base-color'}>{String.fromCharCode(idxO + 65)}.</p>
+                                <p className={examData?.answers?.find((ans: any) => ans.option_id === option.id) ? '#ED7020' : 'text-base-color'}>{option?.option} {section?.scoring_type === 'option_base' && `Point : ${option?.point}`}</p>
                               </div>
                             ))}
                             <div className='mt-2 text-[#477C82]'>

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 interface IDetailStartExam {
     startExam: () => void
     result: () => void
+    reStartExam: () => void
 }
 
 export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
@@ -72,8 +73,8 @@ export function DetailStartExam(props: IDetailStartExam): React.JSX.Element {
                         <Col span={14}><p className='font-normal text-xs'>: {state?.detailSchedule?.repeatable === true ? 'Ya' : 'Tidak'}</p></Col>
                     </Row>
                     {
-                        state?.formRegister?.exam?.status === 'finish' && !state?.formRegister?.repeatable ?
-                            <LynxButtons disabled={loadingExam} onClick={props?.result} title="Lihat Hasil Ujian" className='!w-full mt-10' />
+                        state?.formRegister?.exam?.status === 'finish' && state?.formRegister?.repeatable ?
+                            <LynxButtons disabled={loadingExam} onClick={props?.reStartExam} title="Ulangi Ujian" className='!w-full mt-10' />
                             : <LynxButtons disabled={loadingExam} onClick={props?.startExam} title="Mulai Ujian" className='!w-full mt-10' />
                     }
                 </div>

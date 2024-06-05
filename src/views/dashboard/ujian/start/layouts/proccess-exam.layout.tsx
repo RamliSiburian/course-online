@@ -17,7 +17,7 @@ import DetailProgressExam from './detail-progres.layout';
 interface IProccessExam {
     handleAnswer: (data: any, type: any, callback: (code: number) => void) => void;
     responseCode: number | undefined;
-    restartExam: (sectionID: string) => void
+    nextSection: (sectionID: string) => void
     result: () => void
     finish: (id: string) => void
 }
@@ -100,12 +100,12 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                         setVintagesIndex(vintagesIndex + 1);
                         setQuestionIndex(0);
                     } else if (question?.sections?.length > sectionsIndex + 1) {
-                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
                         setSectionIndex(sectionsIndex + 1);
                         setVintagesIndex(0);
                         setQuestionIndex(0);
                     } else {
-                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
                     }
                     setDisableNextButton(true);
                     setStatementOption([]);
@@ -120,12 +120,12 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                         setVintagesIndex(vintagesIndex + 1);
                         setQuestionIndex(0);
                     } else if (question?.sections?.length > sectionsIndex + 1) {
-                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
                         setSectionIndex(sectionsIndex + 1);
                         setVintagesIndex(0);
                         setQuestionIndex(0);
                     } else {
-                        props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                        props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
                     }
                     setCheckedOption([])
                     setDisableNextButton(false);
@@ -138,12 +138,12 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
                 setVintagesIndex(vintagesIndex + 1);
                 setQuestionIndex(0);
             } else if (question?.sections?.length > sectionsIndex + 1) {
-                props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
                 setSectionIndex(sectionsIndex + 1);
                 setVintagesIndex(0);
                 setQuestionIndex(0);
             } else {
-                props?.restartExam(question?.sections[sectionsIndex + 1]?.id)
+                props?.nextSection(question?.sections[sectionsIndex + 1]?.id)
             }
         }
         setDisableNextButton(true)
@@ -152,7 +152,7 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     useEffect(() => {
         if (state?.formRegister?.exam?.status === 'verified') {
-            props?.restartExam(question?.sections[0]?.id)
+            props?.nextSection(question?.sections[0]?.id)
         } else { }
     }, [state?.formRegister])
 
@@ -295,7 +295,6 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
     }, [vintagesIndex, sectionsIndex, questionIndex])
 
-    console.log({ dd: question, sectionsIndex });
 
     return (
         <>
@@ -420,9 +419,9 @@ export function ProccessExam(props: IProccessExam): React.JSX.Element {
 
                             {question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions !== null && question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.type === 'essay' && (
                                 <div className='mt-5 flex-col gap-5 items-center'>
-                                    <div className='text-sm lg:text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
-                                    <Divider />
-                                    <LynxKatex text={'\\lim_{x \\to 0 } \\frac{1 - \\cos 6x}{2x \\tan(\\frac{1}{3}x)}'} />
+                                    {/* <div className='text-sm lg:text-lg text-base-color' dangerouslySetInnerHTML={{ __html: question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question }} />
+                                    <Divider /> */}
+                                    <LynxKatex text={question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.question} />
                                     <LynxInputNumber
                                         disabled={saveLoading}
                                         onPressEnter={(e: any) => handleEssay(e, question?.sections[sectionsIndex]?.vintages[vintagesIndex]?.questions[questionIndex]?.id)}

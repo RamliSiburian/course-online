@@ -3,6 +3,7 @@ export interface IReqListExam {
     per_page?: number
     page?: number
     keyword?: string
+    type_id: string
 }
 
 export interface IReqListOwnedExam {

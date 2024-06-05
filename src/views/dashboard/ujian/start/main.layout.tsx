@@ -21,11 +21,13 @@ export function StartExam(): React.JSX.Element {
     const { examID: params }: { examID: string } = useParams() as any
     const { state, useActions: schedules, isLoading: scheduleloading } = useLynxStore<IStateExamSchedule, IActionExamSchedule>('schedule')
     const { state: globalState, useActions: globalActions } = useLynxStore<IStateGlobal, IActionGlobal>('globalState')
+    const question = LynxStorages.getItem('ADZKIA@QUESTION', true, true).data[0];
 
     const { useActions: exam, isLoading: examLoading } = useLynxStore<IStateExam, IActionExam>('exam')
     const [isQuestion, setIsQuestion] = useState<boolean>(false)
     const [isAttachment, setIsAttachment] = useState<boolean>(false)
     const [isStart, setisStart] = useState<boolean>(false)
+    const [isReStart, setIsReStart] = useState<boolean>(false)
     const [responseCode, setResponseCode] = useState<number | undefined>()
     const [user, setUser] = useState<any>(null);
     useEffect(() => {
@@ -207,6 +209,10 @@ export function StartExam(): React.JSX.Element {
         }], true)
 
     }
+    const handleReStartExam = () => {
+        startExam()
+        setIsReStart(true)
+    }
 
     const handleResult = () => {
         const paramsQuestion: IReqExamQuestion = {
@@ -246,6 +252,21 @@ export function StartExam(): React.JSX.Element {
     }, [isQuestion, isAttachment])
 
     useEffect(() => {
+        if (isQuestion && isAttachment && isReStart) {
+            const paramsQuestion: IReqExamQuestion = {
+                registerID: state?.formRegister?.exam?.id,
+                scheduleID: params
+            }
+            exam<'reStartExam'>('reStartExam', [{ question_section_id: question?.sections[0]?.id }, paramsQuestion, (code: number) => {
+                setisStart(true)
+            }], true)
+        } else {
+            setisStart(false)
+        }
+
+    }, [isQuestion, isAttachment, isReStart])
+
+    useEffect(() => {
         if (state?.formRegister?.exam?.status === 'finish') {
 
         } else { }
@@ -255,7 +276,7 @@ export function StartExam(): React.JSX.Element {
 
     return (
         isStart
-            ? <ProccessExam finish={handleFinish} result={handleResult} restartExam={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
-            : <DetailStartExam result={handleResult} startExam={startExam} />
+            ? <ProccessExam finish={handleFinish} result={handleResult} nextSection={handleStartExam} responseCode={responseCode} handleAnswer={handleSaveAnswer} />
+            : <DetailStartExam reStartExam={handleReStartExam} result={handleResult} startExam={startExam} />
     )
 }

@@ -22,7 +22,9 @@ export default function Ujian(): React.JSX.Element {
         const params: IReqListExam = {
             per_page: pageSize,
             keyword,
-            page
+            page,
+            type_id: 'cpns'
+
         }
         useActions<'getListExam'>('getListExam', [params], true)
     }, [page, pageSize, keyword])

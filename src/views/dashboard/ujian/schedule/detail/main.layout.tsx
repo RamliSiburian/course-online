@@ -37,7 +37,7 @@ export function DetailSchedule(): React.JSX.Element {
             paramsToClaim.set('id', state?.detailSchedule?.id)
             paramsToClaim.set('name', state?.detailSchedule?.title)
             paramsToClaim.set('type', 'tryout')
-            paramsToClaim.set('user_id', activeAccount === null ? roleUser[0]?.user_id : roleUser.filter((item: any) => item?.user_id === activeAccount?.accountID))
+            paramsToClaim.set('user_id', roleUser[0]?.user_id)
 
             claimExam<'claimExam'>('claimExam', [paramsToClaim, (status: number) => {
                 if (status === 200) {
@@ -47,12 +47,10 @@ export function DetailSchedule(): React.JSX.Element {
                     setOpenConfirm(false)
                 }
             }], true)
+
         } catch (err: any) {
         }
     }
-
-    console.log({ roleUser, asdf: activeAccount === null ? roleUser[0]?.user_id : roleUser.filter((item: any) => item?.user_id === activeAccount?.accountID) });
-
     return (
         <>
             {windowWidth > 640 ?

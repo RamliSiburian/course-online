@@ -2,7 +2,6 @@ import { LynxButtons } from '@afx/components/common/button/button'
 import { LynxCards } from '@afx/components/common/card/card'
 import LynxPieChart from '@afx/components/common/charts/pie'
 import { Icons } from '@afx/components/common/icons'
-import LynxKatexEditor from '@afx/components/common/katex-editor/katex-editor'
 import { IReqExamQuestion, IReqSaveAnswer } from '@afx/interfaces/exam/client/exam.iface'
 import LynxStorages from '@afx/utils/storage.util'
 import getPath from '@lynx/const/router.path'
@@ -154,7 +153,6 @@ export default function ResultExam(): React.JSX.Element {
       }
     }], true)
   }
-
 
 
   return (
